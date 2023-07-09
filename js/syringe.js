@@ -5,7 +5,7 @@ function create_json(med, checked){
     if(checked){
         medicines[med] = {
             verification:null,
-            dilution:0,
+            dilution:-1,
             injection:0,
             way:null
         }
@@ -77,7 +77,7 @@ function createtbl() {
         let row_2_data_4 = document.createElement('td');
         row_2_data_4.style.textAlign = "center";
         //下面這邊要刪
-        if (medicines[medicine_keys[i]]['dilution'] == 0){
+        if (medicines[medicine_keys[i]]['dilution'] < 0){
             row_2_data_4.innerHTML = '尚未輸入';
             // row_2_data_4.innerHTML = '<button name="delution_amount" button style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(6);Getbutton_id(6, '+i+'); Getbutton_id(3, '+i+')">稀釋</button>';
         }
@@ -129,6 +129,7 @@ function JumpToPage(page) {
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
             document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = true;
             break;
         case 1:
             document.getElementById("page0").hidden = true;
@@ -136,6 +137,7 @@ function JumpToPage(page) {
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
             document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = true;
             break;
         case 2:
             document.getElementById("page0").hidden = true;
@@ -143,6 +145,7 @@ function JumpToPage(page) {
             document.getElementById("page2").hidden = false;
             document.getElementById("page3").hidden = true;
             document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = true;
             break;
         case 3:
             document.getElementById("page0").hidden = true;
@@ -150,6 +153,7 @@ function JumpToPage(page) {
             document.getElementById("page2").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page3").hidden = false;
+            document.getElementById("page7").hidden = true;
             break;
         case 6:
             document.getElementById("page0").hidden = true;
@@ -157,6 +161,15 @@ function JumpToPage(page) {
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
             document.getElementById("page6").hidden = false;
+            document.getElementById("page7").hidden = true;
+            break;
+        case 7:
+            document.getElementById("page0").hidden = true;
+            document.getElementById("page1").hidden = true;
+            document.getElementById("page2").hidden = true;
+            document.getElementById("page3").hidden = true;
+            document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = false;
             break;
     }
     

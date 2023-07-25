@@ -62,11 +62,12 @@ $(function(){
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
                 console.log(data_value);
+                console.log(data_value['barcode']);
                 $.getJSON('https://fritingo.ddns.net/api/_patient', {
                 barcode: data_value['barcode']
                 }, function(data) {
                 console.log(data);
-                var resp = JSON.parse(data)
+                var resp = data
                 $('.ODF_value')[0].innerText = resp['info'];
                 var img = document.getElementById('barcode_scanner');
                 img.src="pic/ok1.jpeg";

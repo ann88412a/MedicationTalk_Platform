@@ -64,7 +64,7 @@ $(function(){
                     console.log(data_value);
                     console.log(data_value['barcode']);
                     
-                    if (data_value['patient_info']){
+
                     $.getJSON('https://fritingo.ddns.net/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
@@ -76,15 +76,15 @@ $(function(){
                     $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
                     }
                     });
-                    }
-                    
-                    else if (data_value['medicine_info']){
-                            data_value = JSON.parse(data[1]);
-                            console.log(document.getElementsByName("verification_button_id").value);
-                            medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
-                            createtbl(); 
-                            JumpToPage(6); 
-                        }
+
+
+                    // else if (data_value['medicine_info']){
+                    //         data_value = JSON.parse(data[1]);
+                    //         console.log(document.getElementsByName("verification_button_id").value);
+                    //         medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                    //         createtbl(); 
+                    //         JumpToPage(6); 
+                    //     }
 
             
                 // if (data_value['patient_info']){

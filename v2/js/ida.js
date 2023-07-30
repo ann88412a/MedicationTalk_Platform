@@ -63,25 +63,26 @@ $(function(){
                 var data_value = JSON.parse(data[1]);
                 console.log(data_value);
                 console.log(data_value['barcode']);
-                if (data_value['patient_info']){
-                $.getJSON('https://fritingo.ddns.net/api/_patient', {
-                barcode: data_value['barcode']
-                }, function(data) {
-                console.log(data);
-                var resp = data
-                $('.ODF_value')[0].innerText = resp['info'];
-                var img = document.getElementById('barcode_scanner');
-                img.src="pic/ok1.jpeg";
-                $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-             });
-            }
-                else if (data_value['medicine_info']){
+                if (data_value['medicine_info']){
                     data_value = JSON.parse(data[1]);
                     console.log(document.getElementsByName("verification_button_id").value);
                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
                     createtbl(); 
                     JumpToPage(6); 
                 }
+                else{
+                    $.getJSON('https://fritingo.ddns.net/api/_patient', {
+                    barcode: data_value['barcode']
+                    }, function(data) {
+                    console.log(data);
+                    var resp = data
+                    $('.ODF_value')[0].innerText = resp['info'];
+                    var img = document.getElementById('barcode_scanner');
+                    img.src="pic/ok1.jpeg";
+                    $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+                    });
+                }
+                
                 // if (data_value['patient_info']){
                 //     $('.ODF_value')[0].innerText = data_value['patient_info'];
                 //     var img = document.getElementById('barcode_scanner');
@@ -129,7 +130,7 @@ $(function(){
             if(data[0] == client_uid){
                 medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
                 createtbl();
-                JumpToPage(0);
+                JumpToPage(3);
             }
         }
 

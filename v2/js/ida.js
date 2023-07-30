@@ -63,6 +63,7 @@ $(function(){
                 var data_value = JSON.parse(data[1]);
                 console.log(data_value);
                 console.log(data_value['barcode']);
+
                 if (data_value['medicine_info']){
                     data_value = JSON.parse(data[1]);
                     console.log(document.getElementsByName("verification_button_id").value);

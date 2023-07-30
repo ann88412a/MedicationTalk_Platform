@@ -1,5 +1,6 @@
 var medicines = {};
 var med_order;
+var syringe_volume_type;
 
 function create_json(med, checked){
     if(checked){
@@ -239,6 +240,9 @@ function GetOption(p){
     else if(p==1){
         // medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = 'barcode';
     }
+    else if(p==7){ // 針筒劑量
+        syringe_volume_type = $("select[name='syringe_type']").val();
+    }
 
     console.log(medicines[medicine_keys[0]]);
     console.log(medicines[medicine_keys[1]]);
@@ -252,5 +256,5 @@ function Barcode(on_off){
 
 
 function Syringe_recognition(){
-    dan.push('Syringe-I',[client_uid,'Device_Demo', $("select[name='syringe_type']").val(), 1]);
+    dan.push('Syringe-I',[client_uid,'Device_Demo', syringe_volume_type, 1]);
 }

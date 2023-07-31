@@ -1799,6 +1799,18 @@
 
 
                     <div id="page6" hidden>
+                        <font style="font-weight:bold;">注射空針樣式:</font>
+                                <select name="syringe_type" style="font-size:36px;">
+                                    <option value="">--請選擇您欲辨識之空針樣式--</option>
+                                    <option value="1 ml">1 ml</option>
+                                    <option value="3 ml">3 ml</option>
+                                    <option value="5 ml">5 ml</option>
+                                    <option value="10 ml">10 ml</option>
+                                    <option value="others">其他</option>
+                                </select>
+                        <br>
+                        <br>
+
                         <input type="hidden" name="dilution_button_id" value="-1">
                         <h1 style="line-height: 20%;">
                             稀釋總量輸入
@@ -1824,7 +1836,7 @@
                     <div id="page2" hidden>
                         <div>
                             <!-- <form method="post" onsubmit="if($('select[name=syringe_type] option').filter(':selected').val()==''){alert('請選擇注射空針樣式!');return false;}"> -->
-                                <font style="font-weight:bold;">注射空針樣式:</font>
+                                <!-- <font style="font-weight:bold;">注射空針樣式:</font>
                                 <select name="syringe_type" style="font-size:36px;">
                                     <option value="">--請選擇您欲辨識之空針樣式--</option>
                                     <option value="1 ml">1 ml</option>
@@ -1832,7 +1844,7 @@
                                     <option value="5 ml">5 ml</option>
                                     <option value="10 ml">10 ml</option>
                                     <option value="others">其他</option>
-                                </select>
+                                </select> -->
                                 <input type="hidden" name="injection_button_id" value="-1">
                                 <!-- <input type="hidden" name="barcode_scan_state" value="0">
                                 <input type="hidden" name="injection_info_state" value="0">

@@ -41,7 +41,7 @@
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.0.1/html5-qrcode.min.js"></script> -->
         <!-- <script src="js/html5-qrcode.min.js"></script> -->
         <!-- <script src="https://unpkg.com/html5-qrcode"></script> -->
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
         <!-- css -->
         <link href="css/slide.css" rel="stylesheet">
         <!-- <link href="css/html5-qrcode-css.css" rel="stylesheet"> -->
@@ -193,7 +193,6 @@
                         <button name="patient_barcode" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" display:align="center" onclick="check_bt('barcode')">請掃描病人手圈</button>
                         <br>
                         <p class="patient_barcode_hint" align="center" style="font-size: 24;"></p>
-                        <p class="barcode_value" align="center" style="font-size: 24;" ></p>
                                     
                     </div>
                         
@@ -1747,6 +1746,9 @@
 
 
                     <div id="page0">
+                        <font style="font-weight:bold; font-size: 1.8em; background-color: yellow;">指引 : 請點選「驗證」，全數驗證完畢再點選送出</font>
+                        <br>
+                        <br>
                         <div id="medtable"></div>
                         <br>
                         <!-- <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;">上傳結果</button> -->
@@ -1755,18 +1757,55 @@
                     </div>
             
                     <div id="page1" hidden>
-                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="JumpToPage(7);Barcode(0)">無barcode藥品請點此</button>
+                        <style>
+                            .button-style {
+                              color: white;
+                              font-family: verdana;
+                              font-size: 36px;
+                              border-radius: 20px;
+                              background-color: rgb(24, 201, 24);
+                              width: 300px; /* 调整按钮宽度 */
+                              height: 120px; /* 调整按钮高度 */
+                            }
+                        </style>
+
+                        <br><br>
+                        <button class="button-style" onclick="JumpToPage(4);Barcode(1)">有條碼 請點此</button>
+                        <br>
+                        <br>
+                        <button class="button-style" onclick="JumpToPage(7)">無條碼 請點此</button>
                         <h1>
                         <h1>
-                        <img style="width:100%;" src="./images/scanning.jpg"><br>
+                        <!-- <img style="width:100%;" src="./images/scanning.jpg"><br> -->
                         <br>
                         <input type="hidden" name="verification_button_id" value="-1">
                         <!-- <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="JumpToPage(0)">確認</button> -->
                         
-                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(0);Barcode(0)">取消</button>
+                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(0);Barcode(0)">上一步</button>
                     </div>
 
+                    <div id="page4" hidden>        
+                        <img style="width:100%;" src="./images/scanning.jpg"><br>
+                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(1);Barcode(0)">上一步</button>
+                    </div>
+                    
+
+                
                     <div id="page7" hidden>
+                        <style>
+                            .image-container {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center; /* 垂直居中 */
+                                margin-right: 20px;
+                            }
+
+                            .image-container input[type="radio"] {
+                              width: 30px; /* 調整選項圓圈的寬度 */
+                              height: 30px; /* 調整選項圓圈的高度 */
+                            }
+                        </style>
+
                         <div class="image-container">
                             <input type="radio" name="image" id="image1" />
                             <img class="image" src="./images/drug_pics/17S014.jpg" alt="Medicine" />
@@ -1783,8 +1822,9 @@
                         </div>
                         <br>
                         <br>
+                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(1)">上一步</button>
                         <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="JumpToPage(6)">下一步</button>
-                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(1)">取消</button>
+                        
                         <script>
                             var imageRadios = document.querySelectorAll('input[name="image"]');
                             for (var i = 0; i < imageRadios.length; i++) {
@@ -1793,6 +1833,8 @@
                                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = this.id;
                                 });
                             }
+
+                            
                         </script>
                     </div>
 
@@ -1800,32 +1842,7 @@
 
 
                     <div id="page6" hidden>
-                        <input type="hidden" name="dilution_button_id" value="-1">
-                        <h1 style="line-height: 20%;">
-                            稀釋總量輸入
-                        </h1>
-                        <span class="tipicontext">
-                            <font style="font-weight:bold;">稀釋總量輸入流程:</font>
-                            <div style="margin-left: 1em;">
-                                <br>請在下方稀釋劑用量欄位輸入本次稀釋劑用量。<br>
-                                <br>若無需稀釋，請輸入"0"。<br>
-                                <input name = "syringe_diluent_value" size="3" style="font-size:18px"; value="0">     /ml</input>
-                                <br>將稀釋劑以輸入的量，注入藥瓶中。 <br>
-                                <br>點擊下方<font style="background-color: green">"下一步"</font>按鈕跳至下一功能。<br>
-                                <!-- <button style="float: right; background-color: #4CAF50;" onclick="JumpToPage(2);GetOption(6)" >下一步</button> -->
-                                <h1>
-                                <h1>
-                                <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');Barcode(1)">上一步</button>
-                                <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="JumpToPage(2);GetOption(6)">下一步</button>
-                            </div>
-                        </span>
-                    </div>
-
-
-                    <div id="page2" hidden>
-                        <div>
-                            <!-- <form method="post" onsubmit="if($('select[name=syringe_type] option').filter(':selected').val()==''){alert('請選擇注射空針樣式!');return false;}"> -->
-                                <font style="font-weight:bold;">注射空針樣式:</font>
+                        <font style="font-weight:bold;">注射空針樣式:</font>
                                 <select name="syringe_type" style="font-size:36px;">
                                     <option value="">--請選擇您欲辨識之空針樣式--</option>
                                     <option value="1 ml">1 ml</option>
@@ -1834,13 +1851,55 @@
                                     <option value="10 ml">10 ml</option>
                                     <option value="others">其他</option>
                                 </select>
+                        <br>
+                        <br>
+
+                        <input type="hidden" name="dilution_button_id" value="-1">
+                        <font style="font-weight:bold; font-size: 1.5em; background-color: yellow;">輸入稀釋溶液總量(ml)
+                            <br>輸入流程:<br>
+                            1. 請在下面方框輸入本次稀釋溶液總量(ml)<br>
+                        </font>
+
+                        
+                        <br>若無需稀釋，請輸入"0"。<br>
+                        <input name = "syringe_diluent_value" size="3" style="font-size:18px"; value="0">     /ml</input>
+                        <br>
+                        <br>
+                        <font style="font-weight:bold; font-size: 1.5em; background-color: yellow;">2. 請您實際使用空針，抽取稀釋溶液總量(ml)後，注入藥瓶中
+                            <br>3. 空針抽取要給病人的劑量 (ml)<br>
+                            4. 以上皆完成後，請按下一步<br>
+                        </font>
+                        <!-- <button style="float: right; background-color: #4CAF50;" onclick="JumpToPage(2);GetOption(6)" >下一步</button> -->
+                        <h1>
+                        <h1>
+                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');Barcode(1)">上一步</button>
+                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="GetOption(6);enableButton()">下一步</button>
+  
+                    </div>
+
+
+                    <div id="page2" hidden>
+                        <div>
+                            <!-- <form method="post" onsubmit="if($('select[name=syringe_type] option').filter(':selected').val()==''){alert('請選擇注射空針樣式!');return false;}"> -->
+                                <!-- <font style="font-weight:bold;">注射空針樣式:</font>
+                                <select name="syringe_type" style="font-size:36px;">
+                                    <option value="">--請選擇您欲辨識之空針樣式--</option>
+                                    <option value="1 ml">1 ml</option>
+                                    <option value="3 ml">3 ml</option>
+                                    <option value="5 ml">5 ml</option>
+                                    <option value="10 ml">10 ml</option>
+                                    <option value="others">其他</option>
+                                </select> -->
                                 <input type="hidden" name="injection_button_id" value="-1">
                                 <!-- <input type="hidden" name="barcode_scan_state" value="0">
                                 <input type="hidden" name="injection_info_state" value="0">
                                 <input type="hidden" name="add_new_state" value="0">
                                 <input type="hidden" name="syringe_diluent_state" value="0"> -->
                                 <hr>
-                                *點擊<font style="background-color: #4CAF50">"下一步"</font>按鈕後開始辨識。
+
+                                <!-- *點擊<font style="background-color: #4CAF50">"下一步"</font>按鈕後開始辨識。 -->
+                                <font style="font-weight:bold; font-size: 1.8em; background-color: yellow;">確認依照圖片放置完畢後，點「下一步」開始辨識</font>
+
                                 <img style="width:100%;" src="./images/HW_V2_with_syringe.png"><br>
                                 <hr>
                                 <!-- <button style="float: right; background-color: #4CAF50;" onclick="Syringe_recognition()" >下一步</button> -->
@@ -1863,22 +1922,31 @@
                                   button.classList.add('disabled-button');
                                   button.innerHTML = '辨識中';
                                 }
+
+                                function enableButton() {
+                                    var button = document.getElementById("recognition");
+                                    button.disabled = false;
+                                    button.classList.remove('disabled-button');
+                                    button.innerHTML = '下一步';
+                                    }
                             </script>
 
                             <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: #f44336;" onclick="JumpToPage(6)">上一步</button>
                             <button id="recognition" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="Syringe_recognition();disableButton()">下一步</button>
+                            
                         </div>
                     </div>
             
                     <div id="page3" hidden>
-                        <div class="tab">
+                        <!-- <div class="tab">
                             <button class="tablinks" id="BT_IV_IVD_IVP" onclick="tabSW(event, 'IV_IVD_IVP'); document.getElementById('radio_injection_info_site').checked=true;">IV、IVD、IVP 選項</button>
                             <button class="tablinks" id="BT_IM_SC_ID" onclick="tabSW(event, 'IM_SC_ID')">IM、SC、ID 選項</button>
-                        </div>
+                        </div> -->
+                        
                         <script>
-                            document.addEventListener("DOMContentLoaded", function(event) {
-                                document.getElementById("BT_IV_IVD_IVP").click();
-                            });
+                            // document.addEventListener("DOMContentLoaded", function(event) {
+                            //     document.getElementById("BT_IV_IVD_IVP").click();
+                            // });
                             function injection_info_onsubmit_check(){
                                 var __iinjection_info_val = $('input[name=injection_info]:checked').val()
                                 var __injection_info_site_val = $('input[name=injection_info_site]:checked').val()
@@ -1894,9 +1962,26 @@
                                     return true;
                                 }
                             }
+
+                            // 讓上一步按鈕的onlcick function改變
+                            function changeBackButtonFunction() {
+                                var backButton = document.getElementById("back_page");
+                                backButton.onclick = function() {
+                                    document.getElementById("IM_SC_ID_button").style.display = "block";
+                                    document.getElementById("IV_IVD_IVP_button").style.display = "block";
+
+                                    var tabs = document.getElementsByClassName("tabcontent");
+                                    for (var i = 0; i < tabs.length; i++) {
+                                        tabs[i].style.display = "block"; // 隱藏所有內容
+                                    }
+                                    console.log('aaa')
+                                };
+                            }
+
+
                         </script>
                         <!-- <form method="post"  onsubmit="return injection_info_onsubmit_check();"> -->
-                            <div style="position:relative; width:100%;">
+                            <!-- <div style="position:relative; width:100%;">
                                 <div id="IV_IVD_IVP" class="tabcontent">
                                     <img style="width:100%;" src="./images/IV_IVD_IVP.png">
                                     <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:43.6%; left:22%;" name="injection_info" value="加點滴袋內">
@@ -1924,7 +2009,71 @@
                                     <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:22.95%; left:71.50%;" name="injection_info_site" value="右前臂"> 
                                 </div>
             
-                            </div><br><hr>
+                            </div><br><hr> -->
+
+                            <style>
+                                .tabcontent {
+                                  display: none; /* 初始狀態下隱藏內容 */
+                                }
+                            </style>
+                            
+                            <script>
+                                function showTab(tabName) {
+                                  var tabs = document.getElementsByClassName("tabcontent");
+                                  for (var i = 0; i < tabs.length; i++) {
+                                    tabs[i].style.display = "none"; // 隱藏所有內容
+                                  }
+                                  
+                                  document.getElementById(tabName).style.display = "block"; // 顯示所選内容
+
+                                  if (tabName === "IV_IVD_IVP") {
+                                    document.getElementById("IM_SC_ID_button").style.display = "none";
+                                    document.getElementById("IV_IVD_IVP_button").style.display = "none";
+                                    } 
+                                  else if (tabName === "IM_SC_ID") {
+                                    document.getElementById("IM_SC_ID_button").style.display = "none";
+                                    document.getElementById("IV_IVD_IVP_button").style.display = "none";
+                                  }
+                                }
+                            </script>
+
+                            
+                            <div style="position:relative; width:100%;">
+                                <button id="IV_IVD_IVP_button" class="button-style" onclick="showTab('IV_IVD_IVP')">IV, IVD, IVP<br>請點此</button>
+                                <br><br>
+                                <button id="IM_SC_ID_button" class="button-style" onclick="showTab('IM_SC_ID')">IM, SC, ID<br>請點此</button>
+                                <br><br>
+                                <div id="IV_IVD_IVP" class="tabcontent">
+                                    <img style="width:100%;" src="./images/IV_IVD_IVP.png">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:43.6%; left:22%;" name="injection_info" value="加點滴袋內">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:62.5%; left:20.5%;" name="injection_info" value="IVD">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:42.3%; left:86%;" name="injection_info" value="IVP">
+                                    <input type="radio" style="display:none;" id="radio_injection_info_site" name="injection_info_site" value="-"> 
+                                  </div>
+                                  
+                                  <div id="IM_SC_ID" class="tabcontent">
+                                    <img style="width:100%;" src="./images/IM_SC_ID_NEW.png">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:68.5%; left:21.5%;" name="injection_info" value="肌肉注射">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:81.2%; left:21.5%;" name="injection_info" value="皮下注射">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:92.7%; left:21.5%;" name="injection_info" value="皮內注射">
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:15.8%; left:26.70%;" name="injection_info_site" value="肩峰下三橫指"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:21.31%; left:25.8%;" name="injection_info_site" value="手肘"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:26.97%; left:26.35%;" name="injection_info_site" value="手背"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:21.30%; left:33.75%;" name="injection_info_site" value="右上腹"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:24.42%; left:33.88%;" name="injection_info_site" value="右下腹"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:21.30%; left:38.95%;" name="injection_info_site" value="左上腹"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:24.42%; left:39.15%;" name="injection_info_site" value="左下腹"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:27.60%; left:40.95%;" name="injection_info_site" value="左前腿"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:24.95%; left:63.08%;" name="injection_info_site" value="左上臀"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:27.15%; left:63.08%;" name="injection_info_site" value="左下臀"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:24.95%; left:66.65%;" name="injection_info_site" value="右上臀"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:27.10%; left:66.65%;" name="injection_info_site" value="右下臀"> 
+                                    <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:22.95%; left:71.50%;" name="injection_info_site" value="右前臂"> 
+                                  </div>
+                            </div>
+
+
+                            <br><br>
                             <input type="hidden" name="way_button_id" value="-1">
                             <!-- <input type="hidden" name="barcode_scan_state" value="0">
                             <input type="hidden" name="syringe_scan_state" value="0">
@@ -1933,8 +2082,8 @@
                             <!-- <button name="injection_info_state" style="float: right; background-color: #4CAF50;" onclick="GetOption(3);JumpToPage(0)">下一步</button> -->
                             
                         <!-- </form> -->
-                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(2)">上一步</button>
-                        <button style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="GetOption(3);JumpToPage(0)">完成</button>
+                        <button button id="back_page" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(2);enableButton()">上一步</button>
+                        <button button id="finish" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="GetOption(3);JumpToPage(0)">完成</button>
                         <!-- <button style="float:left; color: white; background-color: #f44336;" onclick="JumpToPage(0)">取  消</button> -->
                     </div>
                             
@@ -2006,10 +2155,10 @@
                                 <div id="resp-table-body" style="font-family:verdana;font-size:26px;color: black;">
                                     <div class="resp-table-row" style="font-family:verdana;font-size:28px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             回想一下<br>剛剛的情境
                                         </div>
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             您給藥是否正確
                                         </div>
                                         <div class="table-body-cell150">
@@ -2027,11 +2176,11 @@
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
-                                            1. 您記得剛才病人的「<b style="color: #228de5;">姓名</b>」與「<b style="color: #228de5;">出生年月日</b>」嗎? 
+                                        <div class="table-body-cell100">
+                                            1. 您記得您剛「<b style="color: #228de5;">辨識病人身份</b>」的方式嗎?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '1 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '1 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">要辨識出</b>」病人身份錯誤
@@ -2042,17 +2191,17 @@
                                         </div>
 
                                         <div class="table-body-cell300">
-                                            <p id = 'paitent r' style="color: gray;">理由test理由test理由test理由test理由test</p>
-                                            <font style="color: #f44336;">★ 給藥之前，一定要先核對患者身份。<br><font style="background-color: yellow;">正確身份辨識方式</font>為，詢問對方的「姓名」與「出生年月日</font>
+                                            <p id = 'paitent r' style="color: gray;"></p>
+                                            <font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             2. 您記得剛才有給病人服用「<b style="color: #228de5;">Dilantin</b>」這顆藥物嗎?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '2 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '2 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b>不能給</b>」Dilantin
@@ -2064,17 +2213,17 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '2 r' style="color: gray;"></p> 
-                                            <p id = '2 r 2' style="color: gray;">理由test理由test理由test理由test理由test</p>
-                                            <font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，下Dilatrend 和 Dilantin乍看前面的英文字很像，因此需要小心辨識！</font>
+                                            <p id = '2 r 2' style="color: gray;"></p>
+                                            <font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Dila</font>trend 和 <font style="text-decoration:underline;">Dila</font>ntin乍看前面的英文字很像，因此需要小心辨識！</font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             3. 您記得 Requip F.C 的「<b style="color: #228de5;">劑量</b>」嗎? 
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '3 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '3 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」Requip F.C 
@@ -2086,17 +2235,17 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '3 r' style="color: gray;"></p> 
-                                            <p id = '3 r 3' style="color: gray;">理由test理由test理由test理由test理由test</p>
+                                            <p id = '3 r 3' style="color: gray;"></p>
                                             <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">單顆劑量</font>!</font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             4. Millisrol您是「<b style="color: #228de5;">靜脈推注IV push</b>」給嗎?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '4 img' src="./pic/wrong_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '4 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」Millisrol 
@@ -2108,7 +2257,7 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '4 r' style="color: gray;"></p> 
-                                            <p id = '4 r 4' style="color: gray;">理由test理由test理由test</p>
+                                            <p id = '4 r 4' style="color: gray;"></p>
                                             <font style="color: #f44336;">
                                             ★ <font style="background-color: yellow;">有些心血管藥物和濃度高的藥物不能直接靜脈推注IV push</font>，可能會造成嚴重低血壓或血管壞死等問題<br>
                                             ★ 當藥物途徑為靜脈滴注IV drip，我們要特別注意是要用<b>精密輸液套 (IV bag)</b> 還是<b>點滴幫浦儀器 (IV pump)</b></font>
@@ -2116,11 +2265,11 @@
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             5. 您記得 Repaglinide 的給藥「<b style="color: #228de5;">時間</b>」嗎?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '5 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '5 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」Repaglinide 
@@ -2133,7 +2282,7 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '5 r' style="color: gray;"></p> 
-                                            <p id = '5 r 5' style="color: gray;">理由test理由test</p>
+                                            <p id = '5 r 5' style="color: gray;"></p>
                                             <font style="color: #f44336;">
                                             ★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下時間是否吻合</font>。
                                             血糖藥有分<b>飯前</b>給或<b>飯後</b>給，服用Repaglinide需要確認患者是否在吃「第一口飯之前」，尤其老年族群給飯前血糖藥後，要提醒與確認他有進食，以免血糖過低！</font>
@@ -2141,11 +2290,11 @@
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             6. 您知道 Transamin 的「<b style="color: #228de5;">作用</b>」嗎? 
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '6 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '6 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」Transamin 
@@ -2157,17 +2306,17 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '6 r' style="color: gray;"></p> 
-                                            <p id = '6 r 6' style="color: gray;">理由test理由test</p>
-                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者有臨床上服用該藥物的適應症</font>
+                                            <p id = '6 r 6' style="color: gray;"></p>
+                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             7. 給藥前，您有先確認病人的「<b style="color: #228de5;">過敏史</b>」嗎? 您知道 Ampicillin 是盤尼西林類的藥物嗎?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '7 img' src="./pic/wrong_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '7 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」Ampicillin
@@ -2186,11 +2335,11 @@
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             8. 您知道 Bokey 的「<b style="color: #228de5;">作用</b>」嗎? 
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '8 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '8 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">要給</b>」Bokey
@@ -2202,17 +2351,17 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '8 r' style="color: gray;"></p> 
-                                            <p id = '8 r 8' style="color: gray;">理由test理由test理由test理由test</p>
-                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者有臨床上服用該藥物的適應症，並且執行給藥醫囑 </font>
+                                            <p id = '8 r 8' style="color: gray;"></p>
+                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             9. 您知道Simvahexal(Zocor)的「<b style="color: #228de5;">作用</b>」嗎? 
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '9 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '9 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">要給</b>」Simvahexal
@@ -2224,17 +2373,17 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '9 r' style="color: gray;"></p> 
-                                            <p id = '9 r 9' style="color: gray;">理由test理由test理由test理由test理由test</p>
-                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者有臨床上服用該藥物的適應症，並且執行給藥醫囑 </font>
+                                            <p id = '9 r 9' style="color: gray;"></p>
+                                            <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑 </font>
                                         </div>
                                     </div>
                                     <div class="resp-table-row" style="font-family:verdana;font-size:26px;color: black;"> 
 
-                                        <div class="table-body-cell150">
+                                        <div class="table-body-cell100">
                                             10. 您知道甚麼是「<b style="color: #228de5;">藥物-藥物交互作用</b>」 (drug-drug interaction, <font style="color: #228de5;">DDI</font>)?
                                         </div>
-                                        <div class="table-body-cell150">
-                                            <img id = '10 img' src="./pic/ok_w.png" width="72" background-color: transparent/> 
+                                        <div class="table-body-cell100">
+                                            <img id = '10 img' src="" width="72" background-color: transparent/> 
                                         </div>
                                         <div class="table-body-cell150">
                                             「<b style="color: #228de5;">不能給</b>」 FLU-D (Fluconazole)
@@ -2246,7 +2395,7 @@
 
                                         <div class="table-body-cell300">
                                             <p id = '10 r' style="color: gray;"></p> 
-                                            <p id = '10 r 10' style="color: gray;">理由test理由test理由test理由test理由test</p>
+                                            <p id = '10 r 10' style="color: gray;"></p>
                                             <font style="color: #f44336;">★ 藥物-藥物交互作用(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>
                                         </div>
                                     </div>

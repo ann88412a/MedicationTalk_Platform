@@ -6,7 +6,7 @@ function create_json(med, checked){
         medicines[med] = {
             verification:null,
             dilution:-1,
-            injection:0,
+            injection:-1,
             way:null
         }
     }
@@ -67,10 +67,10 @@ function createtbl() {
         let row_2_data_3 = document.createElement('td');
         row_2_data_3.style.textAlign = "center";
         if (medicines[medicine_keys[i]]['verification'] != null){
-            row_2_data_3.innerHTML = "已掃描";
+            row_2_data_3.innerHTML = "已掃描";'<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+')">驗證</button>';
         }
         else{
-            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');Barcode(1)">驗證</button>';
+            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+')">驗證</button>';
             row_2_data_3.style.textAlign = "center";
         }
         
@@ -87,7 +87,7 @@ function createtbl() {
 
         let row_2_data_5 = document.createElement('td');
         row_2_data_5.style.textAlign = "center";
-        if (medicines[medicine_keys[i]]['injection']==0){
+        if (medicines[medicine_keys[i]]['injection']<0){
             row_2_data_5.innerHTML = '尚未辨識';
         }
         else{
@@ -128,6 +128,7 @@ function JumpToPage(page) {
             document.getElementById("page1").hidden = true;
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
             break;
@@ -136,6 +137,7 @@ function JumpToPage(page) {
             document.getElementById("page1").hidden = false;
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
             break;
@@ -144,6 +146,7 @@ function JumpToPage(page) {
             document.getElementById("page1").hidden = true;
             document.getElementById("page2").hidden = false;
             document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
             break;
@@ -151,15 +154,26 @@ function JumpToPage(page) {
             document.getElementById("page0").hidden = true;
             document.getElementById("page1").hidden = true;
             document.getElementById("page2").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page3").hidden = false;
             document.getElementById("page7").hidden = true;
             break;
+        case 4:
+            document.getElementById("page0").hidden = true;
+            document.getElementById("page1").hidden = true;
+            document.getElementById("page2").hidden = true;
+            document.getElementById("page4").hidden = false;
+            document.getElementById("page6").hidden = true;
+            document.getElementById("page3").hidden = true;
+            document.getElementById("page7").hidden = true;
+            break;    
         case 6:
             document.getElementById("page0").hidden = true;
             document.getElementById("page1").hidden = true;
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = false;
             document.getElementById("page7").hidden = true;
             break;
@@ -168,12 +182,28 @@ function JumpToPage(page) {
             document.getElementById("page1").hidden = true;
             document.getElementById("page2").hidden = true;
             document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = false;
             break;
     }
     
 }
+
+
+// function JumpToPage(page) {
+//     const pageIds = ["page0", "page1", "page2", "page3", "page4", "page6", "page7"];
+
+//     for (let i = 0; i < pageIds.length; i++) {
+//         const element = document.getElementById(pageIds[i]);
+//         if (i === page) {
+//             element.hidden = false;
+//         } else {
+//             element.hidden = true;
+//         }
+//     }
+// }
+
 
 
 
@@ -232,9 +262,28 @@ function GetOption(p){
         }       
     }
     else if(p==6){
-        medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['dilution'] = $('input[name="syringe_diluent_value"]').val();
-        // console.log($('input[name="syringe_diluent_value"]').val());
+        // 防呆功能
+        var selectElement = document.getElementsByName("syringe_type")[0];
+        var selectedValue = selectElement.value;
 
+        var inputValue = document.getElementsByName("syringe_diluent_value")[0].value;
+        // 使用正则表达式检查输入值是否为整数
+        var isInteger = /^\d+$/.test(inputValue);
+
+        if (selectedValue === "") {
+            alert("尚未選擇空針樣式!");
+        }
+        else if (!isInteger){
+            alert("請輸入稀釋數值!");
+        }
+        else{
+            JumpToPage(2);
+        }
+
+
+        medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['dilution'] = $('input[name="syringe_diluent_value"]').val();
+
+        // console.log($('input[name="syringe_diluent_value"]').val());
     }
     else if(p==1){
         // medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = 'barcode';
@@ -253,4 +302,5 @@ function Barcode(on_off){
 
 function Syringe_recognition(){
     dan.push('Syringe-I',[client_uid,'Device_Demo', $("select[name='syringe_type']").val(), 1]);
+    // enableButton();
 }

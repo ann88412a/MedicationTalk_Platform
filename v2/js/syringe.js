@@ -67,10 +67,35 @@ function createtbl() {
         let row_2_data_3 = document.createElement('td');
         row_2_data_3.style.textAlign = "center";
         if (medicines[medicine_keys[i]]['verification'] != null){
-            row_2_data_3.innerHTML = "已掃描";'<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+')">驗證</button>';
+            row_2_data_3.innerHTML = "已掃描<br>";
+
+            let button = document.createElement('button');
+            button.innerHTML = "重新驗證藥物"; // 設置按鈕的文本
+            button.name = "syringe_verification";
+            button.style.color = "white";
+            button.style.fontFamily = "verdana";
+            button.style.fontSize = "18px";
+            button.style.borderRadius = "10px";
+            button.style.backgroundColor = "orange";
+            button.style.textAlign = "center";
+            
+            // 添加點擊事件處理程序
+            button.addEventListener('click', function() {
+                i-=1;
+                JumpToPage(1);
+                Getbutton_id(1, i);
+                Getbutton_id(2, i);
+                Getbutton_id(6, i);
+                Getbutton_id(3, i);
+                ChangeTitle(1);
+                console.log(i);
+            });
+
+            // 將按鈕添加到 row_2_data_3 元素中
+            row_2_data_3.appendChild(button);
         }
         else{
-            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+')">驗證</button>';
+            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');ChangeTitle(1)">驗證</button>';
             row_2_data_3.style.textAlign = "center";
         }
         
@@ -121,6 +146,39 @@ function createtbl() {
 window.addEventListener("load",createtbl);
 
 
+function ChangeTitle(i) {
+    var nobarElement = document.getElementById("title");
+
+    switch(i){
+        case 0:
+            nobarElement.innerHTML = "指示 4<br>開始給針劑";
+            break;
+        case 1:
+            nobarElement.innerHTML = "指示 5<br>確認藥瓶上有無條碼";
+            break;
+        case 2:
+            nobarElement.innerHTML = "指示 6<br>拿掃描機<br>掃藥瓶上的條碼";
+            break;
+        case 3:
+            nobarElement.innerHTML = "指示 6<br>點選你的藥物";
+            break;
+        case 4:
+            nobarElement.innerHTML = "指示 7<br>選擇空針與開始稀釋藥物";
+            break;
+        case 5:
+            nobarElement.innerHTML = "指示 8<br>將抽取好給病人劑量的針具依照圖示放入辨識盒";
+            break;
+        case 6:
+            nobarElement.innerHTML = "指示 9<br>進行注射";
+            break;
+        case 7:
+            nobarElement.innerHTML = "指示 9<br>選取給藥途徑";
+            break;
+    }
+
+}
+
+
 function JumpToPage(page) {
     switch(page){
         case 0:
@@ -131,6 +189,8 @@ function JumpToPage(page) {
             document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;
         case 1:
             document.getElementById("page0").hidden = true;
@@ -140,6 +200,8 @@ function JumpToPage(page) {
             document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;
         case 2:
             document.getElementById("page0").hidden = true;
@@ -149,6 +211,8 @@ function JumpToPage(page) {
             document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;
         case 3:
             document.getElementById("page0").hidden = true;
@@ -158,6 +222,8 @@ function JumpToPage(page) {
             document.getElementById("page6").hidden = true;
             document.getElementById("page3").hidden = false;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;
         case 4:
             document.getElementById("page0").hidden = true;
@@ -167,6 +233,8 @@ function JumpToPage(page) {
             document.getElementById("page6").hidden = true;
             document.getElementById("page3").hidden = true;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;    
         case 6:
             document.getElementById("page0").hidden = true;
@@ -176,6 +244,8 @@ function JumpToPage(page) {
             document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = false;
             document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
             break;
         case 7:
             document.getElementById("page0").hidden = true;
@@ -185,46 +255,57 @@ function JumpToPage(page) {
             document.getElementById("page4").hidden = true;
             document.getElementById("page6").hidden = true;
             document.getElementById("page7").hidden = false;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = true;
+            break;
+
+        case 8:
+            document.getElementById("page0").hidden = true;
+            document.getElementById("page1").hidden = true;
+            document.getElementById("page2").hidden = true;
+            document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
+            document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = false;
+            document.getElementById("page9").hidden = true;
+            break;
+
+        case 9:
+            document.getElementById("page0").hidden = true;
+            document.getElementById("page1").hidden = true;
+            document.getElementById("page2").hidden = true;
+            document.getElementById("page3").hidden = true;
+            document.getElementById("page4").hidden = true;
+            document.getElementById("page6").hidden = true;
+            document.getElementById("page7").hidden = true;
+            document.getElementById("page8").hidden = true;
+            document.getElementById("page9").hidden = false;
             break;
     }
     
 }
 
 
-// function JumpToPage(page) {
-//     const pageIds = ["page0", "page1", "page2", "page3", "page4", "page6", "page7"];
-
-//     for (let i = 0; i < pageIds.length; i++) {
-//         const element = document.getElementById(pageIds[i]);
-//         if (i === page) {
-//             element.hidden = false;
-//         } else {
-//             element.hidden = true;
-//         }
-//     }
-// }
-
-
 
 
 
 function tabSW(evt, tab_ID) {
-// 声明所有变量
 var i, tabcontent, tablinks;
 
-// 使用 class="tabcontent" 获取所有元素并隐藏它们
+// 使用 class="tabcontent" 獲取所有元素並隱藏它們
 tabcontent = document.getElementsByClassName("tabcontent");
 for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
 }
 
-// 获取所有带有 class="tablinks" 的元素并删除类 "active"
+// 獲取所有帶有 class="tablinks" 的元素並删除類 "active"
 tablinks = document.getElementsByClassName("tablinks");
 for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
 }
 
-// 显示当前选项卡，并添加"活动"选项卡 类到打开选项卡的按钮
+// 顯示當前選項卡，並添加"活動"選項卡 類到打開選項卡的按鈕
 document.getElementById(tab_ID).style.display = "block";
 evt.currentTarget.className += " active";
 }
@@ -253,13 +334,28 @@ function GetOption(p){
     if(p==2){
         // medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'].push($("select[name='syringe_type']").val());
     }
-    else if(p==3){
-        if($('input[name=injection_info_site]:checked').val()!='-'){
-            medicines[medicine_keys[document.getElementsByName("way_button_id").value]]['way'] = [$('input[name=injection_info]:checked').val(), $('input[name=injection_info_site]:checked').val()]; 
+    else if(p==8){
+        if ($('input[name=injection_info]:checked').val()){
+            medicines[medicine_keys[document.getElementsByName("way_button_id").value]]['way'] = [$('input[name=injection_info]:checked').val()]; 
+            JumpToPage(0);
+            ChangeTitle(0);
         }
         else{
-            medicines[medicine_keys[document.getElementsByName("way_button_id").value]]['way'] = [$('input[name=injection_info]:checked').val()]; 
-        }       
+            alert('請選擇針劑給藥途徑!');
+        }
+    }       
+    else if(p==9){
+        if ($('input[name=injection_info]:checked').val()==undefined){
+            alert('請選擇注射部位!');
+        }
+        else if ($('input[name=injection_info_site]:checked').val()==undefined){
+            alert('請選擇注射角度!');
+        }
+        else{
+            medicines[medicine_keys[document.getElementsByName("way_button_id").value]]['way'] = [$('input[name=injection_info]:checked').val(), $('input[name=injection_info_site]:checked').val()]; 
+            JumpToPage(0);
+            ChangeTitle(0);
+        }
     }
     else if(p==6){
         // 防呆功能
@@ -267,7 +363,7 @@ function GetOption(p){
         var selectedValue = selectElement.value;
 
         var inputValue = document.getElementsByName("syringe_diluent_value")[0].value;
-        // 使用正则表达式检查输入值是否为整数
+        // 使用正則表達式檢查輸入值是否為整數
         var isInteger = /^\d+$/.test(inputValue);
 
         if (selectedValue === "") {

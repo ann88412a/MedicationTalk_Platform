@@ -69,7 +69,8 @@ $(function(){
                     console.log(document.getElementsByName("verification_button_id").value);
                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
                     createtbl(); 
-                    JumpToPage(6); 
+
+                    JumpToPage(6);
                 }
                 else{
                     $.getJSON('https://fritingo.ddns.net/api/_patient', {
@@ -131,6 +132,7 @@ $(function(){
             if(data[0] == client_uid){
                 medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
                 createtbl();
+                ChangeTitle(6);
                 JumpToPage(3);
             }
         }

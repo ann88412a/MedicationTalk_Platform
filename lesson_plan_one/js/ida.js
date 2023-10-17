@@ -2,16 +2,10 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Dilatrend': -1,
-                    'Dilantin': -1,
-                    'Requip': -1,
-                    'Requip1': -1,
-                    'Repaglinide': -1,
-                    'Transamin': -1,
-                    'Bokey': -1,
-                    'Zocor': -1,
-                    'FLU': -1,};
-
+var pill_detect = { 'Aspirin': -1,
+                    'Tulip': -1,
+                    'Clopidogrel': -1,};
+//TODO
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
                         "CEFAZOLIN INJECTION 1GM 'C.C.P.'": -1,

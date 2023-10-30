@@ -1,6 +1,6 @@
 # MedicationTalk Platform
 
-執行在: https://fritingo.github.io/MedicationTalk_Platform/
+執行在: https://ann88412a.github.io/MedicationTalk_Platform/
 
 # 操作說明
 ### Homepage

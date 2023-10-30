@@ -1,6 +1,6 @@
 # MedicationTalk Platform
 
-執行在: https://ann88412a.github.io/MedicationTalk_Platform/
+執行在: (https://ann88412a.github.io/MedicationTalk_Platform/lesson_plan_one/)
 
 # 操作說明
 ### Homepage

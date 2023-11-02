@@ -131,7 +131,7 @@ $(function(){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
-                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
                 createtbl();
                 ChangeTitle(6);
                 JumpToPage(3);

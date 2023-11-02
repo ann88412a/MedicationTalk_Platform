@@ -34,7 +34,8 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://1.iottalk.tw');
+        csmapi.set_endpoint ('https://class.iottalk.tw');
+        
         var profile = {
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
@@ -70,7 +71,7 @@ $(function(){
                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
                     createtbl(); 
 
-                    JumpToPage(6);
+                    JumpToPage(5);
                 }
                 else{
                     $.getJSON('https://fritingo.ddns.net/api/_patient', {

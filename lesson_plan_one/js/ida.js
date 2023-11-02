@@ -2,10 +2,16 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Aspirin': -1,
-                    'Tulip': -1,
-                    'Clopidogrel': -1,};
-//TODO
+var pill_detect = { 'Dilatrend': -1,
+                    'Dilantin': -1,
+                    'Requip': -1,
+                    'Requip1': -1,
+                    'Repaglinide': -1,
+                    'Transamin': -1,
+                    'Bokey': -1,
+                    'Zocor': -1,
+                    'FLU': -1,};
+
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
                         "CEFAZOLIN INJECTION 1GM 'C.C.P.'": -1,
@@ -29,6 +35,7 @@ console.log(client_uid);
 
 $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
+        
         var profile = {
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
@@ -63,10 +70,11 @@ $(function(){
                     console.log(document.getElementsByName("verification_button_id").value);
                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
                     createtbl(); 
-                    JumpToPage(6); 
+
+                    JumpToPage(5);
                 }
                 else{
-                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                    $.getJSON('https://fritingo.ddns.net/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
                     console.log(data);
@@ -123,8 +131,9 @@ $(function(){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
-                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
                 createtbl();
+                ChangeTitle(6);
                 JumpToPage(3);
             }
         }

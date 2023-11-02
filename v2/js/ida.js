@@ -35,6 +35,7 @@ console.log(client_uid);
 
 $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
+        
         var profile = {
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
@@ -69,10 +70,11 @@ $(function(){
                     console.log(document.getElementsByName("verification_button_id").value);
                     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
                     createtbl(); 
-                    JumpToPage(6); 
+
+                    JumpToPage(5);
                 }
                 else{
-                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                    $.getJSON('https://fritingo.ddns.net/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
                     console.log(data);
@@ -129,8 +131,9 @@ $(function(){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
-                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
                 createtbl();
+                ChangeTitle(6);
                 JumpToPage(3);
             }
         }

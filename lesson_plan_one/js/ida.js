@@ -73,7 +73,7 @@ $(function(){
                     JumpToPage(5);
                 }
                 else{
-                    $.getJSON('https://fritingo.ddns.net/api/_patient', {
+                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
                     console.log(data);

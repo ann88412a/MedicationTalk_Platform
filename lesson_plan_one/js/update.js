@@ -311,7 +311,7 @@ function check_bt(f){
     else if(f === 'history'){
         loading_text = document.getElementById('history_loading')
         loading_text.style.display = "block";
-        $.getJSON('https://medictalk.ddns.net/api/_history', {
+        $.getJSON('https://cddns.net/api/_history', {
             user_id: document.getElementById('history_v').value
             }, function(data) {
                 console.log(data);

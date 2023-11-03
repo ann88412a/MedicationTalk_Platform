@@ -2,10 +2,16 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Aspirin': -1,
-                    'Tulip': -1,
-                    'Clopidogrel': -1,};
-//TODO
+var pill_detect = { 'Dilatrend': -1,
+                    'Dilantin': -1,
+                    'Requip': -1,
+                    'Requip1': -1,
+                    'Repaglinide': -1,
+                    'Transamin': -1,
+                    'Bokey': -1,
+                    'Zocor': -1,
+                    'FLU': -1,};
+
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
                         "CEFAZOLIN INJECTION 1GM 'C.C.P.'": -1,
@@ -28,7 +34,7 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://1.iottalk.tw');
+        csmapi.set_endpoint ('https://class.iottalk.tw/');
         var profile = {
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],

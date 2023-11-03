@@ -167,7 +167,7 @@ function check_page(n){
         reason = [];
         if (pill_detect['Dilatrend'] == -1){ // if get value it will not be -1 -> usually nothing is 0
             var img = document.getElementById('pill_odf');
-            img.src="pic/wrong.jpeg";
+            img.src = "pic/wrong.jpeg";
             // console.log(pill_detect)
         }
 
@@ -179,7 +179,7 @@ function check_page(n){
             if (reason[i] == "" || reason[i] == " "){
                 empty_textbox = 1;
                 var img = document.getElementById('pill_text');
-                img.src="pic/wrong.jpeg";
+                img.src = "pic/wrong.jpeg";
                 break;
             }
         }
@@ -193,7 +193,7 @@ function check_page(n){
                 if (reason[i] == "" || reason[i] == " "){
                     empty_textbox = 1;
                     var img = document.getElementById('pill_text');
-                    img.src="pic/wrong.jpeg";
+                    img.src = "pic/wrong.jpeg";
                     break;
                 }
             }   

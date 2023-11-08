@@ -11,7 +11,7 @@ var pill_detect = { 'Dilatrend': -1,
                     'Bokey': -1,
                     'Zocor': -1,
                     'FLU': -1,};
-
+//TODO
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
                         "CEFAZOLIN INJECTION 1GM 'C.C.P.'": -1,

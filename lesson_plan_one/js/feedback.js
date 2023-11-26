@@ -71,10 +71,8 @@ function feedback(){
     var img3 = document.getElementById('3 img');
      
     if (!document.getElementById('check2').checked){
-        r3r = '您不給 Requip F.C 0.25mg/tab 的理由：' + document.getElementById('Requip F.C 0.25mg/tab r no').value;
-        reason.push(document.getElementById('Requip F.C 0.25mg/tab r no').value);
-        cognition.push(1);
-        if (pill_detect['Requip'] == 0 && pill_detect['Requip1'] == 0){
+        cognition.push(1); // 實際藥物需要300mg 但實際藥丸只有225mg
+        if (pill_detect['Plavix'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
             correctness.push(1);
@@ -90,10 +88,11 @@ function feedback(){
     }else{
         cognition.push(0);
         img3.src="pic/wrong_w.png";
-        r3 = '您給 Requip F.C 0.25mg/tab 的理由：' + document.getElementById('Requip F.C 0.25mg/tab r').value;
+        r3 = '您給 Plavix (Clopidogrel) 75mg/tab 的理由：' + document.getElementById('Plavix (Clopidogrel) 75mg/tab r').value;
         document.getElementById('3 r').innerHTML = r3;
+        r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Requip F.C 0.25mg/tab r').value);
+        reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r').value);
     
     }
 
@@ -101,8 +100,8 @@ function feedback(){
     // 4
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check3').checked){
-        r4r = '您不給 Millisrol inj 5mg/10ml/amp 的理由：' + document.getElementById('Millisrol inj 5mg/10ml/amp r no').value;
-        reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
+        // r4r = '您不給 Millisrol inj 5mg/10ml/amp 的理由：' + document.getElementById('Millisrol inj 5mg/10ml/amp r no').value;
+        // reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
         cognition.push(1);
         if (syringe_value["MILLISROL INJECTION"][0] == 0 && wrong_syringe - syringe_value["MILLISROL INJECTION"][0] == 0){
             score = score + 1;
@@ -132,8 +131,8 @@ function feedback(){
     var img5 = document.getElementById('5 img');
     
     if (!document.getElementById('check4').checked){
-        r5r = '您不給 Repaglinide 1mg/tab 的理由：' + document.getElementById('Repaglinide 1mg/tab r no').value;
-        reason.push(document.getElementById('Repaglinide 1mg/tab r no').value);
+        // r5r = '您不給 Repaglinide 1mg/tab 的理由：' + document.getElementById('Repaglinide 1mg/tab r no').value;
+        // reason.push(document.getElementById('Repaglinide 1mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Repaglinide'] == 0){
             score = score + 1;
@@ -162,8 +161,8 @@ function feedback(){
     var img6 = document.getElementById('6 img');
     
     if (!document.getElementById('check5').checked){
-        r6r = '您不給 Transamin 250mg/tab 的理由：' + document.getElementById('Transamin 250mg/tab r no').value;
-        reason.push(document.getElementById('Transamin 250mg/tab r no').value);
+        // r6r = '您不給 Transamin 250mg/tab 的理由：' + document.getElementById('Transamin 250mg/tab r no').value;
+        // reason.push(document.getElementById('Transamin 250mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Transamin'] == 0){
             score = score + 1;
@@ -191,41 +190,39 @@ function feedback(){
     var img7 = document.getElementById('7 img');
 
     if (!document.getElementById('check6').checked){
-        r7r = '您不給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r no').value;
-        reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r no').value);
+        // r7r = '您不給 Aspirin 100mg/tab 的理由：' + document.getElementById('Aspirin 100mg/tab r no').value;
+        // reason.push(document.getElementById('Aspirin 100mg/tab r no').value);
         cognition.push(1);
-        if (wrong_syringe == 0){
+        if (pill_detect['Aspirin'] == 0){
             score = score + 1;
-            img7.src="pic/ok_w.png";
+            img6.src="pic/ok_w.png";
             correctness.push(1);
 
         }else{
             img7.src="pic/wrong_w.png";
             r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
-
         }
-        document.getElementById('7 r 7').innerHTML = r7r;
 
+        document.getElementById('7 r 7').innerHTML = r7r;
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
-        r7 = '您給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r').value;
+        r7 = '您給 Aspirin 100mg/tab 的理由：' + document.getElementById('Aspirin 100mg/tab r').value;
         document.getElementById('7 r').innerHTML = r7;
+        r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r').value);
-    
+        reason.push(document.getElementById('Aspirin 100mg/tab r').value);
     }
-
 
     // 8
     var img8 = document.getElementById('8 img');
     
-    if (document.getElementById('check7').checked ){
-        r8 = '您給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r').value;
-        reason.push(document.getElementById('Bokey 100mg/tab r').value);
+    if (document.getElementById('check7').checked){
+        // r8 = '您給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r').value;
+        // reason.push(document.getElementById('Bokey 100mg/tab r').value);
         cognition.push(1);
-        if (pill_detect['Bokey'] == 1){
+        if (pill_detect['Tulip'] == 1){
             score = score + 1;
             img8.src="pic/ok_w.png";
             correctness.push(1);
@@ -234,17 +231,17 @@ function feedback(){
             img8.src="pic/wrong_w.png";
             r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
-
         }
 
         document.getElementById('8 r').innerHTML = r8;
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
-        r8r = '您不給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r no').value;
+        r8r = '您不給 Tulip 20mg/tab 的理由：' + document.getElementById('Tulip 20mg/tab r no').value;
         document.getElementById('8 r 8').innerHTML = r8r;
+        r8 = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
-        reason.push(document.getElementById('Bokey 100mg/tab r no').value);
+        reason.push(document.getElementById('Tulip 20mg/tab r no').value);
     }
 
 

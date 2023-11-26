@@ -34,108 +34,108 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://class.iottalk.tw');
-        var profile = {
-		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
-			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'Platform',
-		    // 'd_name': 'Platform_Demo_anna',
-        };
+    csmapi.set_endpoint ('https://class.iottalk.tw');
+    var profile = {
+        'dm_name': 'Medication',          
+        'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
+        'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
+        'd_name': 'Platform',
+        // 'd_name': 'Platform_Demo_anna',
+    };
 
-		// idf
-        function Barcode_I(data){
-            // $('.ODF_value')[0].innerText=data[0];
-         }
-
-        function Pill_Detect_I(data){
-            // $('.ODF_value')[0].innerText=data[0];
-         }
-
-        function Syringe_I(data){
+    // idf
+    function Barcode_I(data){
         // $('.ODF_value')[0].innerText=data[0];
         }
 
-        // odf
-        function Barcode_Result_O(data){
-            console.log('Barcode_Result_O', data);
-            if (data[0] == client_uid){
-                var data_value = JSON.parse(data[1]);
-                console.log(data_value);
-                console.log(data_value['barcode']);
+    function Pill_Detect_I(data){
+        // $('.ODF_value')[0].innerText=data[0];
+        }
 
-                if (data_value['medicine_info']){
-                    data_value = JSON.parse(data[1]);
-                    console.log(document.getElementsByName("verification_button_id").value);
-                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
-                    createtbl(); 
+    function Syringe_I(data){
+    // $('.ODF_value')[0].innerText=data[0];
+    }
 
-                    JumpToPage(5);
-                }
-                else{
-                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
-                    barcode: data_value['barcode']
-                    }, function(data) {
-                    console.log(data);
-                    var resp = data
-                    $('.ODF_value')[0].innerText = resp['info'];
-                    var img = document.getElementById('barcode_scanner');
-                    img.src="pic/ok1.jpeg";
-                    $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-                    });
-                }
+    // odf
+    function Barcode_Result_O(data){
+        console.log('Barcode_Result_O', data);
+        if (data[0] == client_uid){
+            var data_value = JSON.parse(data[1]);
+            console.log(data_value);
+            console.log(data_value['barcode']);
+
+            if (data_value['medicine_info']){
+                data_value = JSON.parse(data[1]);
+                console.log(document.getElementsByName("verification_button_id").value);
+                medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                createtbl(); 
+
+                JumpToPage(5);
+            }
+            else{
+                $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                barcode: data_value['barcode']
+                }, function(data) {
+                console.log(data);
+                var resp = data
+                $('.ODF_value')[0].innerText = resp['info'];
+                var img = document.getElementById('barcode_scanner');
+                img.src="pic/ok1.jpeg";
+                $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+                });
+            }
+            
+            // if (data_value['patient_info']){
+            //     $('.ODF_value')[0].innerText = data_value['patient_info'];
+            //     var img = document.getElementById('barcode_scanner');
+            //     img.src="pic/ok1.jpeg";
+            //     $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+            // }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                 
-                // if (data_value['patient_info']){
-                //     $('.ODF_value')[0].innerText = data_value['patient_info'];
-                //     var img = document.getElementById('barcode_scanner');
-                //     img.src="pic/ok1.jpeg";
-                //     $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-                // }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                    
-                // else if (data_value['medicine_info']){
-                //     data_value = JSON.parse(data[1]);
-                //     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
-                //     createtbl(); 
-                //     JumpToPage(0); 
-                // }
+            // else if (data_value['medicine_info']){
+            //     data_value = JSON.parse(data[1]);
+            //     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+            //     createtbl(); 
+            //     JumpToPage(0); 
+            // }
+        }
+        
+    }
+
+    function Pill_Detect_Result_O(data){
+        
+        if (output_pill_bt > 0 && data[0] == client_uid){
+                var img = document.getElementById('pill_odf');
+                img.src="pic/ok1.jpeg";
+
+                pill_detect['Dilatrend'] = data[1];
+                pill_detect['Dilantin'] = data[8];
+                pill_detect['Requip'] = data[2];
+                pill_detect['Requip1'] = data[9];
+                pill_detect['Repaglinide'] = data[3];
+                pill_detect['Transamin'] = data[4];
+                pill_detect['Bokey'] = data[5];
+                pill_detect['Zocor'] = data[6];
+                pill_detect['FLU'] = data[7];
+                $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
+
+                syringe_block = document.getElementById('syringe block');
+                syringe_block.style.display = "block";
+
             }
-            
+        
+    }
+
+    function Syringe_Result_O(data){
+        console.log('Syringe_Result_O', data);
+        console.log('Syringe_Result_O', data[2]);
+        if(data[0] == client_uid){
+            medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
+            createtbl();
+            ChangeTitle(6);
+            JumpToPage(3);
         }
-
-        function Pill_Detect_Result_O(data){
-            
-            if (output_pill_bt > 0 && data[0] == client_uid){
-                    var img = document.getElementById('pill_odf');
-                    img.src="pic/ok1.jpeg";
-
-                    pill_detect['Dilatrend'] = data[1];
-                    pill_detect['Dilantin'] = data[8];
-                    pill_detect['Requip'] = data[2];
-                    pill_detect['Requip1'] = data[9];
-                    pill_detect['Repaglinide'] = data[3];
-                    pill_detect['Transamin'] = data[4];
-                    pill_detect['Bokey'] = data[5];
-                    pill_detect['Zocor'] = data[6];
-                    pill_detect['FLU'] = data[7];
-                    $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
-
-                    syringe_block = document.getElementById('syringe block');
-                    syringe_block.style.display = "block";
-
-                }
-            
-        }
-
-        function Syringe_Result_O(data){
-            console.log('Syringe_Result_O', data);
-            console.log('Syringe_Result_O', data[2]);
-            if(data[0] == client_uid){
-                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
-                createtbl();
-                ChangeTitle(6);
-                JumpToPage(3);
-            }
-        }
+    }
 
         
 
@@ -144,11 +144,9 @@ $(function(){
         
       
 /*******************************************************************/                
-        function ida_init(){
-	    console.log(profile.d_name);
-	}
-        var ida = {
-            'ida_init': ida_init,
-        }; 
-        dai(profile,ida);     
+    function ida_init(){
+        console.log(profile.d_name);
+    }
+    var ida = {'ida_init': ida_init, }; 
+    dai(profile,ida);     
 });

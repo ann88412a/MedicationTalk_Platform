@@ -82,22 +82,23 @@ function createtbl() {
             button.style.textAlign = "center";
             
             // 添加點擊事件處理程序
-            button.addEventListener('click', function() {
-                i-=1;
-                JumpToPage(1);
-                Getbutton_id(1, i);
-                Getbutton_id(2, i);
-                Getbutton_id(6, i);
-                Getbutton_id(3, i);
-                ChangeTitle(1);
-                console.log(i);
-            });
+            button.addEventListener('click', (function(index) {
+                return function(){
+                    JumpToPage(1);
+                    Getbutton_id(1, index);
+                    Getbutton_id(2, index);
+                    Getbutton_id(3, index);
+                    Getbutton_id(6, index);
+                    ChangeTitle(1);
+                    console.log(index);
+                };
+            })(i));
 
             // 將按鈕添加到 row_2_data_3 元素中
             row_2_data_3.appendChild(button);
         }
         else{
-            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');ChangeTitle(1)">驗證</button>';
+            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');ChangeTitle(1);test('+i+');">驗證</button>';
             row_2_data_3.style.textAlign = "center";
         }
         
@@ -146,6 +147,11 @@ function createtbl() {
 window.addEventListener("load",createtbl);
 
 
+function test(i){
+    console.log(i);
+}
+
+
 function ChangeTitle(i) {
     var nobarElement = document.getElementById("title");
 
@@ -178,113 +184,6 @@ function ChangeTitle(i) {
 
 }
 
-
-// function JumpToPage(page) {
-//     switch(page){
-//         case 0:
-//             document.getElementById("page0").hidden = false;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-//         case 1:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = false;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-//         case 2:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = false;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-//         case 3:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = false;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-//         case 4:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = false;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;    
-//         case 5:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = false;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-//         case 6:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = false;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = true;
-//             break;
-
-//         case 7:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = false;
-//             document.getElementById("page8").hidden = true;
-//             break;
-
-//         case 8:
-//             document.getElementById("page0").hidden = true;
-//             document.getElementById("page1").hidden = true;
-//             document.getElementById("page2").hidden = true;
-//             document.getElementById("page3").hidden = true;
-//             document.getElementById("page4").hidden = true;
-//             document.getElementById("page5").hidden = true;
-//             document.getElementById("page6").hidden = true;
-//             document.getElementById("page7").hidden = true;
-//             document.getElementById("page8").hidden = false;
-//             break;
-//     }
-    
-// }
 
 function JumpToPage(page) {
     for (let i = 0; i <= 8; i++) {

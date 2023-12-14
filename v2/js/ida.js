@@ -73,7 +73,7 @@ $(function(){
                     JumpToPage(5);
                 }
                 else{
-                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                    $.getJSON(domain_name_url + '/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
                     console.log(data);

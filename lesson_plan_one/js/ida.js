@@ -74,7 +74,7 @@ $(function(){
                 }
                 else{
                     //http://140.113.110.21:1215
-                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                    $.getJSON(domain_name_url + '/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
                     console.log(data);

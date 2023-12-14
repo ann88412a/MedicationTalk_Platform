@@ -11,7 +11,7 @@ var pill_detect = { 'Dilatrend': -1,
                     'Bokey': -1,
                     'Zocor': -1,
                     'FLU': -1,};
-//TODO
+
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
                         "CEFAZOLIN INJECTION 1GM 'C.C.P.'": -1,
@@ -43,99 +43,100 @@ $(function(){
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
-    // idf
-    function Barcode_I(data){
+		// idf
+        function Barcode_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+         }
+
+        function Pill_Detect_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+         }
+
+        function Syringe_I(data){
         // $('.ODF_value')[0].innerText=data[0];
         }
 
-    function Pill_Detect_I(data){
-        // $('.ODF_value')[0].innerText=data[0];
-        }
+        // odf
+        function Barcode_Result_O(data){
+            console.log('Barcode_Result_O', data);
+            if (data[0] == client_uid){
+                var data_value = JSON.parse(data[1]);
+                console.log(data_value);
+                console.log(data_value['barcode']);
 
-    function Syringe_I(data){
-    // $('.ODF_value')[0].innerText=data[0];
-    }
+                if (data_value['medicine_info']){
+                    data_value = JSON.parse(data[1]);
+                    console.log(document.getElementsByName("verification_button_id").value);
+                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                    createtbl(); 
 
-    // odf
-    function Barcode_Result_O(data){
-        console.log('Barcode_Result_O', data);
-        if (data[0] == client_uid){
-            var data_value = JSON.parse(data[1]);
-            console.log(data_value);
-            console.log(data_value['barcode']);
-
-            if (data_value['medicine_info']){
-                data_value = JSON.parse(data[1]);
-                console.log(document.getElementsByName("verification_button_id").value);
-                medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
-                createtbl(); 
-
-                JumpToPage(5);
-            }
-            else{
-                $.getJSON('https://medictalk.ddns.net/api/_patient', {
-                barcode: data_value['barcode']
-                }, function(data) {
-                console.log(data);
-                var resp = data
-                $('.ODF_value')[0].innerText = resp['info'];
-                var img = document.getElementById('barcode_scanner');
-                img.src="pic/ok1.jpeg";
-                $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-                });
+                    JumpToPage(5);
+                }
+                else{
+                    //http://140.113.110.21:1215
+                    $.getJSON('https://medictalk.ddns.net/api/_patient', {
+                    barcode: data_value['barcode']
+                    }, function(data) {
+                    console.log(data);
+                    var resp = data
+                    $('.ODF_value')[0].innerText = resp['info'];
+                    var img = document.getElementById('barcode_scanner');
+                    img.src="pic/ok1.jpeg";
+                    $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+                    });
+                }
+                
+                // if (data_value['patient_info']){
+                //     $('.ODF_value')[0].innerText = data_value['patient_info'];
+                //     var img = document.getElementById('barcode_scanner');
+                //     img.src="pic/ok1.jpeg";
+                //     $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+                // }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    
+                // else if (data_value['medicine_info']){
+                //     data_value = JSON.parse(data[1]);
+                //     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                //     createtbl(); 
+                //     JumpToPage(0); 
+                // }
             }
             
-            // if (data_value['patient_info']){
-            //     $('.ODF_value')[0].innerText = data_value['patient_info'];
-            //     var img = document.getElementById('barcode_scanner');
-            //     img.src="pic/ok1.jpeg";
-            //     $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-            // }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                
-            // else if (data_value['medicine_info']){
-            //     data_value = JSON.parse(data[1]);
-            //     medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
-            //     createtbl(); 
-            //     JumpToPage(0); 
-            // }
         }
-        
-    }
 
-    function Pill_Detect_Result_O(data){
-        
-        if (output_pill_bt > 0 && data[0] == client_uid){
-                var img = document.getElementById('pill_odf');
-                img.src="pic/ok1.jpeg";
+        function Pill_Detect_Result_O(data){
+            
+            if (output_pill_bt > 0 && data[0] == client_uid){
+                    var img = document.getElementById('pill_odf');
+                    img.src="pic/ok1.jpeg";
 
-                pill_detect['Dilatrend'] = data[1];
-                pill_detect['Dilantin'] = data[8];
-                pill_detect['Requip'] = data[2];
-                pill_detect['Requip1'] = data[9];
-                pill_detect['Repaglinide'] = data[3];
-                pill_detect['Transamin'] = data[4];
-                pill_detect['Bokey'] = data[5];
-                pill_detect['Zocor'] = data[6];
-                pill_detect['FLU'] = data[7];
-                $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
+                    pill_detect['Dilatrend'] = data[1];
+                    pill_detect['Dilantin'] = data[8];
+                    pill_detect['Requip'] = data[2];
+                    pill_detect['Requip1'] = data[9];
+                    pill_detect['Repaglinide'] = data[3];
+                    pill_detect['Transamin'] = data[4];
+                    pill_detect['Bokey'] = data[5];
+                    pill_detect['Zocor'] = data[6];
+                    pill_detect['FLU'] = data[7];
+                    $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
 
-                syringe_block = document.getElementById('syringe block');
-                syringe_block.style.display = "block";
+                    syringe_block = document.getElementById('syringe block');
+                    syringe_block.style.display = "block";
 
+                }
+            
+        }
+
+        function Syringe_Result_O(data){
+            console.log('Syringe_Result_O', data);
+            console.log('Syringe_Result_O', data[2]);
+            if(data[0] == client_uid){
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
+                createtbl();
+                ChangeTitle(6);
+                JumpToPage(3);
             }
-        
-    }
-
-    function Syringe_Result_O(data){
-        console.log('Syringe_Result_O', data);
-        console.log('Syringe_Result_O', data[2]);
-        if(data[0] == client_uid){
-            medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
-            createtbl();
-            ChangeTitle(6);
-            JumpToPage(3);
         }
-    }
 
         
 
@@ -144,9 +145,11 @@ $(function(){
         
       
 /*******************************************************************/                
-    function ida_init(){
-        console.log(profile.d_name);
-    }
-    var ida = {'ida_init': ida_init, }; 
-    dai(profile,ida);     
+        function ida_init(){
+	    console.log(profile.d_name);
+	}
+        var ida = {
+            'ida_init': ida_init,
+        }; 
+        dai(profile,ida);     
 });

@@ -2,7 +2,7 @@
 
 // start
 window.alert("介面介紹\n ‘檢定：填完學號、姓名並按下開始檢定’ \n ‘左上角🔍：分析學習紀錄’ \n ’右上角圖示：操作說明‘");
-var domain_name_url = 'https://6606b1fefcc60f1a88a7e70702d4c6f0.serveo.net'
+var domain_name_url = 'https://medictalk.ddns.net'
 // page1
 
 const idf_id = document.getElementById('IDF_ID');

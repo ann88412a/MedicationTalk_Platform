@@ -222,7 +222,7 @@ function Getbutton_id(page_type, button_id){
     else if (page_type=='6'){ //稀釋
         document.getElementsByName("dilution_button_id").value = button_id;
     }
-    else if(page_type=='1'){
+    else if(page_type=='1'){ //條碼or圖片
         document.getElementsByName("verification_button_id").value = button_id;
     }
 

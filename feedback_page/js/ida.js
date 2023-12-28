@@ -1,5 +1,5 @@
  $(function(){
-        csmapi.set_endpoint ('https://1.iottalk.tw');
+        csmapi.set_endpoint ('https://class.iottalk.tw');
         var mac_addr = 'c3ad38d013c8';
         var profile = {
 		    'dm_name': 'medical_feedback',          

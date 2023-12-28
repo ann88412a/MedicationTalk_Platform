@@ -34,7 +34,7 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://1.iottalk.tw');
+        csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
@@ -62,16 +62,29 @@ $(function(){
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
                 console.log(data_value);
-                $.getJSON('https://fritingo.ddns.net/api/_patient', {
-                barcode: data_value['barcode']
-                }, function(data) {
-                console.log(data);
-                var resp = JSON.parse(data)
-                $('.ODF_value')[0].innerText = resp['info'];
-                var img = document.getElementById('barcode_scanner');
-                img.src="pic/ok1.jpeg";
-                $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
-             });
+                console.log(data_value['barcode']);
+
+                if (data_value['medicine_info']){
+                    data_value = JSON.parse(data[1]);
+                    console.log(document.getElementsByName("verification_button_id").value);
+                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                    createtbl(); 
+
+                    JumpToPage(5);
+                }
+                else{
+                    $.getJSON(domain_name_url + '/api/_patient', {
+                    barcode: data_value['barcode']
+                    }, function(data) {
+                    console.log(data);
+                    var resp = data
+                    $('.ODF_value')[0].innerText = resp['info'];
+                    var img = document.getElementById('barcode_scanner');
+                    img.src="pic/ok1.jpeg";
+                    $('.patient_barcode_hint')[0].innerText = "★ 辨識完成請繼續執行下一步＾＿＾";
+                    });
+                }
+                
                 // if (data_value['patient_info']){
                 //     $('.ODF_value')[0].innerText = data_value['patient_info'];
                 //     var img = document.getElementById('barcode_scanner');
@@ -117,9 +130,10 @@ $(function(){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
-                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
                 createtbl();
-                JumpToPage(0);
+                ChangeTitle(6);
+                JumpToPage(3);
             }
         }
 

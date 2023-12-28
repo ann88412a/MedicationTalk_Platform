@@ -1,13 +1,15 @@
 // 制定回饋規則 打分機制
 
 function feedback(){
-    console.log(syringe_value);
-    var wrong_syringe = 0;
-    for (const [key, value] of Object.entries(syringe_value)) {
-        if (value[0] != 0){
-            wrong_syringe = wrong_syringe + 1;
-        }
-      }
+    console.log(medicines)
+
+    // console.log(syringe_value);
+    // var wrong_syringe = 0;
+    // for (const [key, value] of Object.entries(syringe_value)) {
+    //     if (value[0] != 0){
+    //         wrong_syringe = wrong_syringe + 1;
+    //     }
+    //   }
 
     var score = 0;
     

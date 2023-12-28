@@ -4,6 +4,7 @@
 window.alert("介面介紹\n ‘檢定：填完學號、姓名並按下開始檢定’ \n ‘左上角🔍：分析學習紀錄’ \n ’右上角圖示：操作說明‘");
 
 // page1
+var domain_name_url = "https://8d3667f032ae8b4497e61b83817581c3.serveo.net"
 
 const idf_id = document.getElementById('IDF_ID');
 idf_id.addEventListener('change', function (e) {
@@ -204,59 +205,67 @@ function check_page(n){
                 img.src="pic/ok1.jpeg";
     
                 pills_num = Object.values(pill_detect)
-                $.post("https://fritingo.ddns.net/api/_sheet_user", {  id: document.getElementById('IDF_ID').value,
+                $.post(domain_name_url + "/api/_sheet_user", {  id: document.getElementById('IDF_ID').value,
                                                                         name: document.getElementById('IDF_name').value,
+                }, function(){
+                    $.post(domain_name_url + "/api/_sheet_pill", {  pill_name_id: 1,
+                                                                            pills_1: pills_num[0],
+                                                                            pills_2: pills_num[1],
+                                                                            pills_3: pills_num[2],
+                                                                            pills_4: pills_num[3],
+                                                                            pills_5: pills_num[4],
+                                                                            pills_6: pills_num[5],
+                                                                            pills_7: pills_num[6],
+                                                                            pills_8: pills_num[7],
+                                                                            pills_9: pills_num[8],
+                                                                            pic: client_uid,
+                    }, function(){
+                        $.post(domain_name_url + "/api/_sheet_feedback", {  reason_1: reason[0],
+                                                                                    reason_2: reason[1],
+                                                                                    reason_3: reason[2],
+                                                                                    reason_4: reason[3],
+                                                                                    reason_5: reason[4],
+                                                                                    reason_6: reason[5],
+                                                                                    reason_7: reason[6],
+                                                                                    reason_8: reason[7],
+                                                                                    reason_9: reason[8],
+                                                                                    reason_10: reason[9],
+                        }, function(){
+                            $.post(domain_name_url + "/api/_sheet_cognition", { patient_barcode: patient_barcode,
+                                                                                        student_cognition_1: cognition[0],
+                                                                                        student_cognition_2: cognition[1],
+                                                                                        student_cognition_3: cognition[2],
+                                                                                        student_cognition_4: cognition[3],
+                                                                                        student_cognition_5: cognition[4],
+                                                                                        student_cognition_6: cognition[5],
+                                                                                        student_cognition_7: cognition[6],
+                                                                                        student_cognition_8: cognition[7],
+                                                                                        student_cognition_9: cognition[8],
+                                                                                        student_cognition_10: cognition[9],                                 
+                            }, function(){
+                                $.post(domain_name_url + "/api/_sheet_record", {  id: document.getElementById('IDF_ID').value,
+                                                                                            ans_1: correctness[0],
+                                                                                            ans_2: correctness[1],
+                                                                                            ans_3: correctness[2],
+                                                                                            ans_4: correctness[3],
+                                                                                            ans_5: correctness[4],
+                                                                                            ans_6: correctness[5],
+                                                                                            ans_7: correctness[6],
+                                                                                            ans_8: correctness[7],
+                                                                                            ans_9: correctness[8],
+                                                                                            ans_10: correctness[9],
+                                })
+                            })
+                        })
+                    })
                 })  
 
-                $.post("https://fritingo.ddns.net/api/_sheet_pill", {  pills_1: pills_num[0],
-                                                                    pills_2: pills_num[1],
-                                                                    pills_3: pills_num[2],
-                                                                    pills_4: pills_num[3],
-                                                                    pills_5: pills_num[4],
-                                                                    pills_6: pills_num[5],
-                                                                    pills_7: pills_num[6],
-                                                                    pills_8: pills_num[7],
-                                                                    pills_9: pills_num[8],
-                                                                    pic: client_uid,
-                })
+                
 
-                $.post("https://fritingo.ddns.net/api/_sheet_feedback", {  reason_1: reason[0],
-                                                                    reason_2: reason[1],
-                                                                    reason_3: reason[2],
-                                                                    reason_4: reason[3],
-                                                                    reason_5: reason[4],
-                                                                    reason_6: reason[5],
-                                                                    reason_7: reason[6],
-                                                                    reason_8: reason[7],
-                                                                    reason_9: reason[8],
-                                                                    reason_10: reason[9],
-                })
+                
 
-                $.post("https://fritingo.ddns.net/api/_sheet_cognition", {    patient_barcode: patient_barcode,
-                                                                                student_cognition_1: cognition[0],
-                                                                                student_cognition_2: cognition[1],
-                                                                                student_cognition_3: cognition[2],
-                                                                                student_cognition_4: cognition[3],
-                                                                                student_cognition_5: cognition[4],
-                                                                                student_cognition_6: cognition[5],
-                                                                                student_cognition_7: cognition[6],
-                                                                                student_cognition_8: cognition[7],
-                                                                                student_cognition_9: cognition[8],
-                                                                                student_cognition_10: cognition[9],                                 
-                })
-
-                $.post("https://fritingo.ddns.net/api/_sheet_record", {  id: document.getElementById('IDF_ID').value,
-                                                                    ans_1: correctness[0],
-                                                                    ans_2: correctness[1],
-                                                                    ans_3: correctness[2],
-                                                                    ans_4: correctness[3],
-                                                                    ans_5: correctness[4],
-                                                                    ans_6: correctness[5],
-                                                                    ans_7: correctness[6],
-                                                                    ans_8: correctness[7],
-                                                                    ans_9: correctness[8],
-                                                                    ans_10: correctness[9],
-                })
+                
+                
 
                 plusSlides(1);
             }
@@ -267,7 +276,8 @@ function check_page(n){
     }
     else if(n === 4){
         console.log('analysis');
-        $.getJSON('https://fritingo.ddns.net/api/_level', {
+        //$.getJSON('http://140.113.110.21:1215/api/_level', {
+        $.getJSON(domain_name_url + '/api/_level', {
             }, function(data) {
                 console.log(data);
                 console.log('search level');
@@ -311,7 +321,7 @@ function check_bt(f){
     else if(f === 'history'){
         loading_text = document.getElementById('history_loading')
         loading_text.style.display = "block";
-        $.getJSON('https://fritingo.ddns.net/api/_history', {
+        $.getJSON(domain_name_url + '/api/_history', {
             user_id: document.getElementById('history_v').value
             }, function(data) {
                 console.log(data);
@@ -334,7 +344,7 @@ function check_bt(f){
     else if(f === 'time'){
         loading_text = document.getElementById('time_loading')
         loading_text.style.display = "block";
-        $.getJSON('https://fritingo.ddns.net/api/_time_total', {
+        $.getJSON(domain_name_url + '/api/_time_total', {
             
             start_date: moment(document.getElementById('start_date').value).format('YYYY-MM-DD HH:MM:SS'),
             end_date: moment(document.getElementById('end_date').value).format('YYYY-MM-DD HH:MM:SS')

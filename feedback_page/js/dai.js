@@ -74,14 +74,14 @@ const dai = function (profile, ida) {
     //     console.log('deregister:', result);
     // }
 
-    // function deregister () {
-    //     dan.deregister(deregisterCallback);
-    // }
+    function deregister () {
+        dan.deregister(deregisterCallback);
+    }
 
-    // window.onunload = deregister;
-    // window.onbeforeunload = deregister;
-    // window.onclose = deregister;
-    // window.onpagehide = deregister;
+    window.onunload = deregister;
+    window.onbeforeunload = deregister;
+    window.onclose = deregister;
+    window.onpagehide = deregister;
 
     dan.init(push, pull, csmapi.get_endpoint(), mac_addr, profile, init_callback);
 };

@@ -103,8 +103,8 @@ function feedback(){
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
         cognition.push(1);
 
-        if (1==1){ //test
-            score = score + 1;
+        if (1==1){   //this is a test
+            score += 1;
             img4.src="pic/ok_w.png";
             correctness.push(1);
 

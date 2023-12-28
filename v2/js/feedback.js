@@ -102,7 +102,7 @@ function feedback(){
         r4r = '您不給 Millisrol inj 5mg/10ml/amp 的理由：' + document.getElementById('Millisrol inj 5mg/10ml/amp r no').value;
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
         cognition.push(1);
-        if (syringe_value["MILLISROL INJECTION"][0] == 0 && wrong_syringe - syringe_value["MILLISROL INJECTION"][0] == 0){
+        if (1==1){
             score = score + 1;
             img4.src="pic/ok_w.png";
             correctness.push(1);

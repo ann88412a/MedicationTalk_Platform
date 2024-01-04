@@ -4,7 +4,7 @@
 window.alert("介面介紹\n ‘檢定：填完學號、姓名並按下開始檢定’ \n ‘左上角🔍：分析學習紀錄’ \n ’右上角圖示：操作說明‘");
 
 // page1
-var domain_name_url = "https://bcc1887adcd82ce41d170794f9d71cac.serveo.net"
+var domain_name_url = "https://f8e0098613adece1fbce1b790b133e36.serveo.net"
 
 const idf_id = document.getElementById('IDF_ID');
 idf_id.addEventListener('change', function (e) {

@@ -1,6 +1,26 @@
 var medicines = {};
 var med_order;
- 
+var way_dic = {
+    "Add to IV bag" : "加在點滴袋內",
+    "IVD" : "IVD",
+    "IVP" : "IVP",
+    "intramuscular injection" : "肌肉注射",
+    "subcutaneous injection" : "皮下注射",
+    "intradermal injection": "皮內注射",
+    "Three fingers below the acromion" : "肩峰下三橫指",
+    "elbow" : "手肘",
+    "back of hand" : "手背",
+    "right upper abdomen" : "右上腹",
+    "right lower abdomen" : "右下腹",
+    "left upper abdomen" : "左上腹",
+    "left lower abdomen" : "左下腹",
+    "left upper hip" : "左上臀",
+    "left lower hip" : "左下臀",
+    "right upper hip" : "右上臀",
+    "lower right hip" : "右下臀",
+    "forearm:" : "前臂"
+};
+
 
 function create_json(med, checked){
     if(checked){
@@ -126,7 +146,7 @@ function createtbl() {
         
         var way_result = ""
         if (medicines[medicine_keys[i]]['way'] != null){
-            row_2_data_6.innerHTML = medicines[medicine_keys[i]]['way'];
+            row_2_data_6.innerHTML = way_dic[medicines[medicine_keys[i]]['way'][0]] + "," + way_dic[medicines[medicine_keys[i]]['way'][1]];
             row_2_data_6.style.textAlign = "center";
         }
         else{

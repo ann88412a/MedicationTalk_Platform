@@ -161,6 +161,7 @@ $(function(){
                     }
                 }
                 else{
+                    medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
                     enableButton('recognition_1');
                     var fontElement = document.getElementById("show_syringe_volume1");
                     fontElement.innerHTML = "針劑辨識數值 : " + data[2].toString() + " ml";

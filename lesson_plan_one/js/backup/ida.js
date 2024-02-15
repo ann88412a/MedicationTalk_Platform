@@ -73,6 +73,7 @@ $(function(){
                     JumpToPage(5);
                 }
                 else{
+                    //http://140.113.110.21:1215
                     $.getJSON(domain_name_url + '/api/_patient', {
                     barcode: data_value['barcode']
                     }, function(data) {
@@ -130,46 +131,10 @@ $(function(){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
-                var Syringe_number = parseInt(medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['syringe_num']);
-                // medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
-
-                if(Syringe_number==2){
-                    var button = document.getElementById('recognition_2');
-                    if(button.value=='unclicked'){
-                        medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
-                        createtbl();
-                        enableButton('recognition_1');
-                        var fontElement1 = document.getElementById("show_syringe_volume1");
-                        fontElement1.innerHTML = "第1支針 - 辨識數值 : " + data[2].toString() + " ml";
-                        //顯示第二支針劑的文字和按鈕
-                        var button = document.getElementById('recognition_2');
-                        button.style.display = "block";
-                        var fontElement2 = document.getElementById("show_syringe_volume2");
-                        fontElement2.style.display = "block";
-                        console.log("第1支針辨識完成");
-                    }
-                    else{
-                        medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
-                        enableButton('recognition_2');
-                        createtbl();
-                        var fontElement = document.getElementById("show_syringe_volume2");
-                        fontElement.innerHTML = "第2支針 - 辨識數值 : " + data[2].toString() + " ml";
-                        enableButton("next_step");
-                        clickCheck('recognition_1');
-                        clickCheck('recognition_2');
-                        console.log("第2支針辨識完成");
-                    }
-                }
-                else{
-                    medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
-                    enableButton('recognition_1');
-                    var fontElement = document.getElementById("show_syringe_volume1");
-                    fontElement.innerHTML = "針劑辨識數值 : " + data[2].toString() + " ml";
-                    createtbl();
-                    var button = document.getElementById("next_step");
-                    button.disabled = false;
-                    console.log("辨識完成");
-                }
+                medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
+                createtbl();
+                ChangeTitle(6);
+                JumpToPage(3);
             }
         }
 

@@ -1,6 +1,26 @@
 var medicines = {};
 var med_order;
- 
+var way_dic = {
+    "Add to IV bag" : "加在點滴袋內",
+    "IVD" : "IVD",
+    "IVP" : "IVP",
+    "intramuscular injection" : "肌肉注射",
+    "subcutaneous injection" : "皮下注射",
+    "intradermal injection": "皮內注射",
+    "Three fingers below the acromion" : "肩峰下三橫指",
+    "elbow" : "手肘",
+    "back of hand" : "手背",
+    "right upper abdomen" : "右上腹",
+    "right lower abdomen" : "右下腹",
+    "left upper abdomen" : "左上腹",
+    "left lower abdomen" : "左下腹",
+    "left upper hip" : "左上臀",
+    "left lower hip" : "左下臀",
+    "right upper hip" : "右上臀",
+    "lower right hip" : "右下臀",
+    "forearm" : "前臂"
+};
+
 
 function create_json(med, checked){
     if(checked){
@@ -9,7 +29,8 @@ function create_json(med, checked){
             dilution:-1,
             injection:-1,
             way:null,
-            after_dilution:null
+            after_dilution:null,
+            syringe_num:-1
         }
     }
     else{
@@ -126,7 +147,12 @@ function createtbl() {
         
         var way_result = ""
         if (medicines[medicine_keys[i]]['way'] != null){
-            row_2_data_6.innerHTML = medicines[medicine_keys[i]]['way'];
+            if (medicines[medicine_keys[i]]['way'].length>1){
+                row_2_data_6.innerHTML = way_dic[medicines[medicine_keys[i]]['way'][0]] + "," + way_dic[medicines[medicine_keys[i]]['way'][1]];
+            }
+            else{
+                row_2_data_6.innerHTML = way_dic[medicines[medicine_keys[i]]['way'][0]];
+            }
             row_2_data_6.style.textAlign = "center";
         }
         else{
@@ -222,7 +248,7 @@ function Getbutton_id(page_type, button_id){
     else if (page_type=='6'){ //稀釋
         document.getElementsByName("dilution_button_id").value = button_id;
     }
-    else if(page_type=='1'){
+    else if(page_type=='1'){ //條碼or圖片
         document.getElementsByName("verification_button_id").value = button_id;
     }
 
@@ -258,14 +284,20 @@ function GetOption(p){
     }
     else if(p==6){
         // 防呆功能
-        var selectElement = document.getElementsByName("syringe_type")[0];
-        var selectedValue = selectElement.value;
+        var selectElement1 = document.getElementsByName("syringe_num")[0];
+        var selectedValue1 = selectElement1.value;
+
+        var selectElement2 = document.getElementsByName("syringe_type")[0];
+        var selectedValue2 = selectElement2.value;
 
         var inputValue = document.getElementsByName("syringe_diluent_value")[0].value;
         // 使用正則表達式檢查輸入值是否為整數
         var isInteger = /^\d+$/.test(inputValue);
 
-        if (selectedValue === "") {
+        if (selectedValue1 == ""){
+            alert("尚未選擇欲使用針筒數量!");
+        }
+        else if (selectedValue2 == "") {
             alert("尚未選擇空針樣式!");
         }
         else if (!isInteger){
@@ -277,12 +309,12 @@ function GetOption(p){
 
 
         medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['dilution'] = $('input[name="syringe_diluent_value"]').val();
-
+        medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['syringe_num'] = $('select[name="syringe_num"]').val();
         // console.log($('input[name="syringe_diluent_value"]').val());
     }
 
-    console.log(medicines[medicine_keys[0]]);
-    console.log(medicines[medicine_keys[1]]);
+    // console.log(medicines[medicine_keys[0]]);
+    // console.log(medicines[medicine_keys[1]]);
 
     createtbl();
     }

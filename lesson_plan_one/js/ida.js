@@ -10,7 +10,10 @@ var pill_detect = { 'Dilatrend': -1,
                     'Transamin': -1,
                     'Bokey': -1,
                     'Zocor': -1,
-                    'FLU': -1,};
+                    'FLU': -1,
+                    'Plavix':-1,
+                    'Aspirin':-1,
+                    'Tulip':-1,};
 
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,

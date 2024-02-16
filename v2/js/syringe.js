@@ -4,6 +4,7 @@ var way_dic = {
     "Add to IV bag" : "加在點滴袋內",
     "IVD" : "IVD",
     "IVP" : "IVP",
+    "IVPUMP" : "IVPUMP",
     "intramuscular injection" : "肌肉注射",
     "subcutaneous injection" : "皮下注射",
     "intradermal injection": "皮內注射",
@@ -198,7 +199,7 @@ function ChangeTitle(i) {
             nobarElement.innerHTML = "指示 7<br>選擇空針與開始稀釋藥物";
             break;
         case 5:
-            nobarElement.innerHTML = "指示 8<br>將抽取好給病人劑量的針具依照圖示放入辨識盒";
+            nobarElement.innerHTML = "指示 8<br>判斷針劑數值";
             break;
         case 6:
             nobarElement.innerHTML = "指示 9<br>進行注射";

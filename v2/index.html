@@ -1961,8 +1961,19 @@
                             <hr>
 
                             <!-- *點擊<font style="background-color: #4CAF50">"下一步"</font>按鈕後開始辨識。 -->
-                            <font style="font-weight:bold; font-size: 1.8em; background-color: yellow;">請記得將藥丸放置平台抽取出來，<br>確認依照圖片放置完畢後，點選「辨識」按鈕開始辨識，<br>完成後再按「下一步」</font>
-
+                            <font style="font-weight:bold; font-size: 2.5em; background-color: yellow;">「不用實際稀釋藥物」<br></font>
+                            <font style="font-weight:bold; font-size: 1.8em;">
+                                <div style="text-align: left;">
+                                    <span style="background-color: yellow;">
+                                        執行步驟（1）-（5）:<br>
+                                        （1）抽取出藥丸盒 <br> 
+                                        （2）取要的空針，將活塞直接拉到要給病人的數值（刻度）<br> 
+                                        （3）將該空針依照圖示放入平台凹槽中 <br>
+                                        （4）點選「辨識」按鈕<br>
+                                        （5）等待辨識出數值後，再按下一步
+                                    </span>
+                                </div>
+                            </font>
                             <img style="width:100%;" src="./images/HW_V2_with_syringe.png"><br>
 
                             
@@ -2098,9 +2109,10 @@
                         <div style="position:relative; width:100%;">
                             <div id="IV_IVD_IVP" class="tabcontent">
                                 <img style="width:100%;" src="./images/IV_IVD_IVP.png">
-                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:40.2%; left:22%;" name="injection_info" value="Add to IV bag">
-                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:58%; left:20.5%;" name="injection_info" value="IVD">
-                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:39.8%; left:86%;" name="injection_info" value="IVP">
+                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:41.2%; left:22%;" name="injection_info" value="Add to IV bag">
+                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:59%; left:20.5%;" name="injection_info" value="IVD">
+                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:29%; left:85.9%;" name="injection_info" value="IVP">
+                                <input type="radio" style="position: absolute; width:2.5%; height:2.5%; top:65.6%; left:78.9%;" name="injection_info" value="IVPUMP">
                                 <input type="radio" style="display:none;" id="radio_injection_info_site" name="injection_info_site" value="-"> 
                                 
                                 <br><br>
@@ -2593,7 +2605,7 @@
     </div>
     
     <!-- The dots/circles -->
-    <div style="text-align:center; display: none;">
+    <div style="text-align:center; display: block;">
         <span class="dot" onclick="currentSlide(1)"></span> 
         <span class="dot" onclick="currentSlide(2)"></span> 
         <span class="dot" onclick="currentSlide(3)"></span> 

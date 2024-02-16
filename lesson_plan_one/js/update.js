@@ -182,6 +182,7 @@ function check_page(n){
             var img = document.getElementById('pill_odf');
             img.src="pic/wrong.jpeg";
             // console.log(pill_detect)
+            console.log('003');
         }
 
         feedback();
@@ -193,6 +194,7 @@ function check_page(n){
                 empty_textbox = 1;
                 var img = document.getElementById('pill_text');
                 img.src="pic/wrong.jpeg";
+                console.log('002');
                 break;
             }
         }
@@ -207,6 +209,7 @@ function check_page(n){
                     empty_textbox = 1;
                     var img = document.getElementById('pill_text');
                     img.src="pic/wrong.jpeg";
+                    console.log('001');
                     break;
                 }
             }   

@@ -2,18 +2,9 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Dilatrend': -1,
-                    'Dilantin': -1,
-                    'Requip': -1,
-                    'Requip1': -1,
-                    'Repaglinide': -1,
-                    'Transamin': -1,
-                    'Bokey': -1,
-                    'Zocor': -1,
-                    'FLU': -1,
-                    'Plavix':-1,
-                    'Aspirin':-1,
-                    'Tulip':-1,};
+var pill_detect = { 'Aspirin': -1,
+                    'Tulip': -1,
+                    'Clopidogrel': -1,};
 
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
@@ -27,7 +18,7 @@ var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "ROLIKAN INJECTION (SODIUM BICARBONATE)": -1,
                         "SODIUM BICARBONATE INJECTION 'CHI SHENG'": -1,
                         "Sirolac IV Injection 30 mg/ml 'ASTAR'": -1,};
-var patient_barcode = '1234567890ABC'
+var patient_barcode = '1234567890AAA'
 var cognition = []
 
 var client_uid = (Math.random() + 1).toString(36).substring(7) + (Math.random() + Math.random()).toString(36).substring(8);
@@ -42,7 +33,7 @@ $(function(){
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
 			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'Platform',
+		    'd_name': 'PlatformPlan1',
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
@@ -111,15 +102,15 @@ $(function(){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";
 
-                    pill_detect['Dilatrend'] = data[1];
-                    pill_detect['Dilantin'] = data[8];
-                    pill_detect['Requip'] = data[2];
-                    pill_detect['Requip1'] = data[9];
-                    pill_detect['Repaglinide'] = data[3];
-                    pill_detect['Transamin'] = data[4];
-                    pill_detect['Bokey'] = data[5];
-                    pill_detect['Zocor'] = data[6];
-                    pill_detect['FLU'] = data[7];
+                    pill_detect['Aspirin'] = data[1];
+                    // pill_detect['none5'] = data[8];
+                    pill_detect['Tulip'] = data[2];
+                    // pill_detect['none6'] = data[9];
+                    pill_detect['Clopidogrel'] = data[3];
+                    // pill_detect['none1'] = data[4];
+                    // pill_detect['none2'] = data[5];
+                    // pill_detect['none3'] = data[6];
+                    // pill_detect['none4'] = data[7];
                     $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
 
                     syringe_block = document.getElementById('syringe block');

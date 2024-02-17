@@ -70,7 +70,7 @@ function feedback(){
         r3r = '您不給 Plavix (Clopidogrel) 75mg/tab 的理由：' + document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value;
         reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value);
         cognition.push(1); // 實際藥物需要300mg 但實際藥丸只有225mg
-        if (pill_detect['Plavix'] == 0){
+        if (pill_detect['Clopidogrel'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
             correctness.push(1);

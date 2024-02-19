@@ -1871,6 +1871,9 @@
                                 for (var i = 0; i < imageRadios.length; i++) {
                                     if (imageRadios[i].checked) {
                                         selectedImage = true;
+                                        console.log('選取的圖片為:', this.id);
+                                        medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = this.id;
+                                    
                                         break;
                                     }
                                 }
@@ -1883,12 +1886,12 @@
                                 }
                             }
 
-                            for (var i = 0; i < imageRadios.length; i++) {
-                                imageRadios[i].addEventListener('change', function() {
-                                    console.log('選取的圖片為:', this.id);
-                                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = this.id;
-                                });
-                            }
+                            // for (var i = 0; i < imageRadios.length; i++) {
+                            //     imageRadios[i].addEventListener('change', function() {
+                            //         console.log('選取的圖片為:', this.id);
+                            //         medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = this.id;
+                            //     });
+                            // }
 
 
 
@@ -1902,7 +1905,7 @@
                     <div id="page5" hidden>
 
                         <font style="font-weight:bold; font-size: 1.5em; background-color: yellow;">1.總共使用的瓶數:</font>
-                                <select name="syringe_type" style="font-size:32px;">
+                                <select name="syringe_bottle_num" style="font-size:32px;">
                                     <option value="">--請選擇您欲辨識之瓶數--</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -2120,7 +2123,7 @@
                                 <input type="radio" style="display:none;" id="radio_injection_info_site" name="injection_info_site" value="-"> 
                                 
                                 <br><br>
-                                <button button id="back_page" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(3);enableButton('recognition_1');enableButton('recognition_2');ChangeTitle(5)">上一步</button>
+                                <button button id="back_page" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(3);enableButton('recognition_1');enableButton('recognition_2');ChangeTitle(6)">上一步</button>
                                 <button button id="finish" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="GetOption(8)">完成</button>
                             </div>
                         </div>
@@ -2173,7 +2176,7 @@
                         </div><br><hr>
                         <input type="hidden" name="way_button_id" value="-1">
                         <br><br>
-                            <button button id="back_page" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(3);enableButton('recognition_1');enableButton('recognition_2');ChangeTitle(5)">上一步</button>
+                            <button button id="back_page" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: red;" onclick="JumpToPage(3);enableButton('recognition_1');enableButton('recognition_2');ChangeTitle(6)">上一步</button>
                             <button button id="finish" style="color: white;font-family:verdana;font-size:36px;border-radius: 10px;background-color: green;" onclick="GetOption(9)">完成</button>
                     </div>
 
@@ -2566,7 +2569,7 @@
     </div>
     
     <!-- The dots/circles -->
-    <div style="text-align:center; display: block;">
+    <div style="text-align:center; display: blcok;">
         <span class="dot" onclick="currentSlide(1)"></span> 
         <span class="dot" onclick="currentSlide(2)"></span> 
         <span class="dot" onclick="currentSlide(3)"></span> 

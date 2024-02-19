@@ -178,7 +178,7 @@ function check_page(n){
     else if(n === 3){
         correctness = [];
         reason = [];
-        if (pill_detect['Dilatrend'] == -1){ // if get value it will not be -1 -> usually nothing is 0
+        if (pill_detect['Tulip'] == -1){ // if get value it will not be -1 -> usually nothing is 0
             var img = document.getElementById('pill_odf');
             img.src="pic/wrong.jpeg";
             // console.log(pill_detect)
@@ -213,9 +213,9 @@ function check_page(n){
                     break;
                 }
             }   
-            // console.log(pill_detect);
+            console.log(pill_detect);
     
-            if (empty_textbox == 0 && pill_detect['Dilatrend'] != -1){
+            if (empty_textbox == 0 && pill_detect['Tulip'] != -1){
                 var img = document.getElementById('pill_text');
                 img.src="pic/ok1.jpeg";
     
@@ -227,12 +227,12 @@ function check_page(n){
                                                                             pills_1: pills_num[0],
                                                                             pills_2: pills_num[1],
                                                                             pills_3: pills_num[2],
-                                                                            // pills_4: pills_num[3],
-                                                                            // pills_5: pills_num[4],
-                                                                            // pills_6: pills_num[5],
-                                                                            // pills_7: pills_num[6],
-                                                                            // pills_8: pills_num[7],
-                                                                            // pills_9: pills_num[8],
+                                                                            pills_4: 0,
+                                                                            pills_5: 0,
+                                                                            pills_6: 0,
+                                                                            pills_7: 0,
+                                                                            pills_8: 0,
+                                                                            pills_9: 0,
                                                                             pic: client_uid,
                     }, function(){
                         $.post(domain_name_url + "/api/_sheet_feedback", {  reason_1: reason[0],

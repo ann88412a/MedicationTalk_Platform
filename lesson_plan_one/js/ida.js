@@ -55,8 +55,9 @@ $(function(){
             console.log('Barcode_Result_O', data);
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
+                console.log(data_value);
+                console.log(data_value['barcode']);
                 
-
                 if (data_value['medicine_info']){
                     data_value = JSON.parse(data[1]);
                     // console.log("data_value is:", data_value['medicine_info']);

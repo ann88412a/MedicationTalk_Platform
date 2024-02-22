@@ -55,15 +55,16 @@ $(function(){
             console.log('Barcode_Result_O', data);
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
-                console.log(data_value);
-                console.log(data_value['barcode']);
+                
 
                 if (data_value['medicine_info']){
                     data_value = JSON.parse(data[1]);
-                    console.log(document.getElementsByName("verification_button_id").value);
-                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                    // console.log("data_value is:", data_value['medicine_info']);
+                    // console.log(document.getElementsByName("verification_button_id").value);
+                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'];
                     createtbl(); 
-
+                    
+                    // console.log(data_value['medicine_info'][0]);
                     JumpToPage(5);
                 }
                 else{
@@ -141,6 +142,7 @@ $(function(){
                         var fontElement2 = document.getElementById("show_syringe_volume2");
                         fontElement2.style.display = "block";
                         console.log("第1支針辨識完成");
+                        // console.log(data);
                     }
                     else{
                         medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
@@ -152,6 +154,7 @@ $(function(){
                         clickCheck('recognition_1');
                         clickCheck('recognition_2');
                         console.log("第2支針辨識完成");
+                        // console.log(data);
                     }
                 }
                 else{

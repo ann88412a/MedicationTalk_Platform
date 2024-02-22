@@ -255,7 +255,7 @@ function feedback(){
         r9r = '您給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r').value;
         reason.push(document.getElementById('Heparin 25000units/vail r').value);
         cognition.push(1);
-        if (medicines['Heparin 25000units/vail']['verification']!=null && 0.75<=medicines['Heparin 25000units/vail']['injection'] && medicines['Heparin 25000units/vail']['injection']<=0.85 && medicines['Heparin 25000units/vail']['way'][0]=='IVP' && medicines['Heparin 25000units/vail']['dilution']=="0"){ 
+        if (medicines['Heparin 25000units/vail']['verification']=='4710031297121' && 0.75<=medicines['Heparin 25000units/vail']['injection'] && medicines['Heparin 25000units/vail']['injection']<=0.85 && medicines['Heparin 25000units/vail']['way'][0]=='IVP' && medicines['Heparin 25000units/vail']['dilution']=="0"){ 
             score = score + 1;
             img9.src="pic/ok_w.png";
             correctness.push(1);

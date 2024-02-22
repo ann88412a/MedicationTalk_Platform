@@ -328,6 +328,9 @@ function check_bt(f){
         
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
     }
+    else if(f === 'medicine_info'){
+        dan.push('Barcode-I', [client_uid, 'plan1_Device_Demo', 'syringe', true]);
+    }
     else if(f === 'pill'){
         dan.push('Pill_Detect-I', [client_uid, 'plan1_Device_Demo', true]);
         output_pill_bt = output_pill_bt + 1;

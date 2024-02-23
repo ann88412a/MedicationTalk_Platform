@@ -1854,7 +1854,7 @@
                         </div>
                         <br>
                         <div class="image-container">
-                            <input type="radio" name="image" id="Dupin_image" />
+                            <input type="radio" name="image" id="KCL_image" />
                             <img class="image" src="./images/drug_pics/KCL.jpg" alt="Pill Case" />
                         </div>
                         <br>
@@ -1871,8 +1871,8 @@
                                 for (var i = 0; i < imageRadios.length; i++) {
                                     if (imageRadios[i].checked) {
                                         selectedImage = true;
-                                        console.log('選取的圖片為:', this.id);
-                                        medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = this.id;
+                                        console.log(imageRadios[i].id);
+                                        medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = imageRadios[i].id;
                                     
                                         break;
                                     }

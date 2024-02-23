@@ -67,7 +67,7 @@ $(function(){
                 if (data_value['medicine_info']){
                     data_value = JSON.parse(data[1]);
                     console.log(document.getElementsByName("verification_button_id").value);
-                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'][0];
+                    medicines[medicine_keys[document.getElementsByName("verification_button_id").value]]['verification'] = data_value['medicine_info'];
                     createtbl(); 
 
                     JumpToPage(5);

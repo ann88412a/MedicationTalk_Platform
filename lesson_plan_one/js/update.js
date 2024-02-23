@@ -269,6 +269,11 @@ function check_page(n){
                                                                                             ans_8: correctness[7],
                                                                                             ans_9: correctness[8],
                                                                                             ans_10: correctness[9],
+                                },function(){
+                                    $.post(domain_name_url + "/api/_sheet_syringe", { id: document.getElementById('IDF_ID').value,
+                                                                                lesson: 1,
+                                                                                record: JSON.stringify(medicines),
+                                    })
                                 })
                             })
                         })

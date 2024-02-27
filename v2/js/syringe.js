@@ -196,10 +196,10 @@ function ChangeTitle(i) {
             nobarElement.innerHTML = "指示 6<br>點選你的藥物";
             break;
         case 4:
-            nobarElement.innerHTML = "指示 7<br>選擇空針與開始稀釋藥物";
+            nobarElement.innerHTML = "指示 7<br>輸入瓶數、空針與稀釋溶液量";
             break;
         case 5:
-            nobarElement.innerHTML = "指示 8<br>判斷針劑數值";
+            nobarElement.innerHTML = "指示 8<br>系統判斷針劑數值";
             break;
         case 6:
             nobarElement.innerHTML = "指示 9<br>進行注射";

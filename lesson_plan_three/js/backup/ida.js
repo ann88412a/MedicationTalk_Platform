@@ -2,15 +2,12 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Concor': -1,
-                    'Isoptin 40mg/tab': -1,
-                    'Sandimmunneoral': -1,
-                    'Nexium': -1,
-                    'Lipitor': -1,
-                    'Spironolactone': -1,
-                    'Metformin': -1,
-                    'Isoptin 240mg/tab': -1,
-                    'Cardilo': -1,};
+var pill_detect = { 'Apno 30mg/tab': -1,
+                    'Sennoside': -1,
+                    'Paramol': -1,
+                    'Primperan': -1,
+                    'Peace': -1,
+                    'Lanpo 30mg/tab': -1,};
 
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,

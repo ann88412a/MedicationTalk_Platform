@@ -2,9 +2,15 @@
 
 var output_patient_barcode_bt = 0;
 var output_pill_bt = 0;
-var pill_detect = { 'Aspirin': -1,
-                    'Tulip': -1,
-                    'Clopidogrel': -1,};
+var pill_detect = { 'Concor': -1,
+                    'Isoptin 40mg/tab': -1,
+                    'Sandimmunneoral': -1,
+                    'Nexium': -1,
+                    'Lipitor': -1,
+                    'Spironolactone': -1,
+                    'Metformin': -1,
+                    'Isoptin 240mg/tab': -1,
+                    'Cardilo': -1,};
 
 var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "AMPOLIN INJECTION 500MG": -1,
@@ -18,7 +24,7 @@ var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "ROLIKAN INJECTION (SODIUM BICARBONATE)": -1,
                         "SODIUM BICARBONATE INJECTION 'CHI SHENG'": -1,
                         "Sirolac IV Injection 30 mg/ml 'ASTAR'": -1,};
-var patient_barcode = '1234567890AAA'
+var patient_barcode = '1234567890ABC'
 var cognition = []
 
 var client_uid = (Math.random() + 1).toString(36).substring(7) + (Math.random() + Math.random()).toString(36).substring(8);
@@ -33,7 +39,7 @@ $(function(){
 		    'dm_name': 'Medication',          
 			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
 			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'PlatformPlan1',
+		    'd_name': 'PlatformPlan2',
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
@@ -104,15 +110,17 @@ $(function(){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";
 
-                    pill_detect['Aspirin'] = data[1];
-                    // pill_detect['none5'] = data[8];
-                    pill_detect['Tulip'] = data[2];
-                    // pill_detect['none6'] = data[9];
-                    pill_detect['Clopidogrel'] = data[3];
-                    // pill_detect['none1'] = data[4];
-                    // pill_detect['none2'] = data[5];
-                    // pill_detect['none3'] = data[6];
-                    // pill_detect['none4'] = data[7];
+                    pill_detect['Concor'] = data[1];
+                    pill_detect['Isoptin 40mg/tab'] = data[2];
+                    pill_detect['Sandimmunneoral'] = data[3];
+                    pill_detect['Nexium'] = data[4];
+                    pill_detect['Lipitor'] = data[5];
+                    pill_detect['Spironolactone'] = data[6];
+                    pill_detect['Metformin'] = data[7];
+                    pill_detect['Isoptin 240mg/tab'] = data[8];
+                    pill_detect['Cardilo'] = data[9];
+
+                    
                     $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
 
                     syringe_block = document.getElementById('syringe block');

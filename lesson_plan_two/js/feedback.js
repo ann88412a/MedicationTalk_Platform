@@ -40,7 +40,7 @@ function feedback(){
         // r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
         reason.push(document.getElementById('Concor 5mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Cardilo'] == 0){ 
+        if (pill_detect['Cardilo'] == 0 && pill_detect['Concor'] == 0){ 
             score = score + 1;
             img2.src="pic/ok_w.png";
             correctness.push(1);
@@ -69,7 +69,7 @@ function feedback(){
         // r3r = '您不給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r no').value;
         reason.push(document.getElementById('Isoptin 40 mg/tab r no').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
-        if (pill_detect['Isoptin 240mg/tab'] == 0){
+        if (pill_detect['Isoptin 40mg/tab'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
             correctness.push(1);

@@ -36,11 +36,11 @@ function feedback(){
 
     // 2
     var img2 = document.getElementById('2 img');
-    if (!document.getElementById('check5').checked){
-        r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
+    if (!document.getElementById('check1').checked){
+        // r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
         reason.push(document.getElementById('Concor 5mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Concor'] == 0){ 
+        if (pill_detect['Lanpo 30mg/tab'] == 0 ){ 
             score = score + 1;
             img2.src="pic/ok_w.png";
             correctness.push(1);
@@ -56,21 +56,21 @@ function feedback(){
     }else{
         cognition.push(0);
         img2.src="pic/wrong_w.png";
-        r2 = '您給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r').value;
+        r2 = '您給 Lanpo 30mg/tab 的理由：' + document.getElementById('Lanpo 30mg/tab r').value;
         document.getElementById('2 r').innerHTML = r2;
         correctness.push(0);
-        reason.push(document.getElementById('Concor 5mg/tab r').value);
+        reason.push(document.getElementById('Lanpo 30mg/tab r').value);
     
     }
     
     // 3
     var img3 = document.getElementById('3 img');
     r3r = ''
-    if (!document.getElementById('check4').checked){
+    if (!document.getElementById('check2').checked){
         // r3r = '您不給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r no').value;
-        reason.push(document.getElementById('Isoptin 40 mg/tab r no').value);
+        reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
-        if (pill_detect['Isoptin 240mg/tab'] == 0){
+        if (pill_detect['Progesterone 25mg/ml'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
             correctness.push(1);
@@ -87,19 +87,19 @@ function feedback(){
     }else{
         cognition.push(0);
         img3.src="pic/wrong_w.png";
-        r3 = '您給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r').value;
+        r3 = '您給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r').value;
         document.getElementById('3 r').innerHTML = r3;
         r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Isoptin 40 mg/tab r').value);
+        reason.push(document.getElementById('Progesterone 25mg/ml r').value);
     }
 
 
     // 4
     var img4 = document.getElementById('4 img');
-    if (!document.getElementById('check1').checked){
-        r4r = '您不給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r no').value;
-        reason.push(document.getElementById('Amikacin 250mg/vail r no').value);
+    if (!document.getElementById('check3').checked){
+        // r4r = '您不給 Clexane 60 U/ syringe 的理由：' + document.getElementById('Clexane 60 U/ syringe r no').value;
+        reason.push(document.getElementById('Clexane 60 U/ syringe r no').value);
         cognition.push(1);
         if (1==1){ 
             score = score + 1;
@@ -117,10 +117,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img4.src="pic/wrong_w.png";
-        r4 = '您給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r').value;
+        r4 = '您給 Clexane 60 U/ syringe 的理由：' + document.getElementById('Clexane 60 U/ syringe r').value;
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
-        reason.push(document.getElementById('Amikacin 250mg/vail r').value);
+        reason.push(document.getElementById('Clexane 60 U/ syringe r').value);
     
     }
 
@@ -128,9 +128,9 @@ function feedback(){
     // 5
     var img5 = document.getElementById('5 img');
     
-    if (!document.getElementById('check3').checked){
-        r5r = '您不給 Spironolactone 25mg/tab 的理由：' + document.getElementById('Spironolactone 25mg/tab r no').value;
-        reason.push(document.getElementById('Spironolactone 25mg/tab r no').value);
+    if (!document.getElementById('check4').checked){
+        // r5r = '您不給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r no').value;
+        reason.push(document.getElementById('Sennoside 12mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Spironolactone'] == 0){ 
             score = score + 1;
@@ -148,10 +148,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img5.src="pic/wrong_w.png";
-        r5 = '您給 Spironolactone 25mg/tab 的理由：' + document.getElementById('Spironolactone 25mg/tab r').value;
+        r5 = '您給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r').value;
         document.getElementById('5 r').innerHTML = r5;
         correctness.push(0);
-        reason.push(document.getElementById('Spironolactone 25mg/tab r').value);
+        reason.push(document.getElementById('Sennoside 12mg/tab r').value);
     
     }
 
@@ -159,9 +159,9 @@ function feedback(){
     // 6
     var img6 = document.getElementById('6 img');
     
-    if (!document.getElementById('check2').checked){
-        r6r = '您不給 Metformin 500mg/tab 的理由：' + document.getElementById('Metformin 500mg/tab r no').value;
-        reason.push(document.getElementById('Metformin 500mg/tab r no').value);
+    if (!document.getElementById('check5').checked){
+        // r6r = '您不給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r no').value;
+        reason.push(document.getElementById('Peace 2.5mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Metformin'] == 0){ 
             score = score + 1;
@@ -179,10 +179,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img6.src="pic/wrong_w.png";
-        r6 = '您給 Metformin 500mg/tab 的理由：' + document.getElementById('Metformin 500mg/tab r').value;
+        r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
         document.getElementById('6 r').innerHTML = r6;
         correctness.push(0);
-        reason.push(document.getElementById('Metformin 500mg/tab r').value);
+        reason.push(document.getElementById('Peace 2.5mg/tab r').value);
     
     }
 
@@ -190,9 +190,9 @@ function feedback(){
     // 7 
     var img7 = document.getElementById('7 img');
     r7r = ''
-    if (!document.getElementById('check9').checked){
-        // r7r = '您不給 Keto 30mg/amp 的理由：' + document.getElementById('Keto 30mg/amp r no').value;
-        reason.push(document.getElementById('Keto 30mg/amp r no').value);
+    if (!document.getElementById('check6').checked){
+        // r7r = '您不給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r no').value;
+        reason.push(document.getElementById('Ocillina 500mg/vail r no').value);
         cognition.push(1);
         if (1==1){
             score = score + 1;
@@ -210,19 +210,19 @@ function feedback(){
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
-        r7 = '您給 Keto 30mg/amp 的理由：' + document.getElementById('Keto 30mg/amp r').value;
+        r7 = '您給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r').value;
         document.getElementById('7 r').innerHTML = r7;
         r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Keto 30mg/amp r').value);
+        reason.push(document.getElementById('Ocillina 500mg/vail r').value);
     }
 
     // 8
     var img8 = document.getElementById('8 img');
     r8 = ''
-    if (document.getElementById('check6').checked){
-        // r8 = '您給 Nexium 40mg/tab 的理由：' + document.getElementById('Nexium 40mg/tab r').value;
-        reason.push(document.getElementById('Nexium 40mg/tab r').value);
+    if (document.getElementById('check8').checked){
+        // r8 = '您給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
+        reason.push(document.getElementById('Paramol 500mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Nexium'] == 1){
             score = score + 1;
@@ -240,11 +240,11 @@ function feedback(){
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
-        r8r = '您不給 Nexium 40mg/tab 的理由：' + document.getElementById('Nexium 40mg/tab r').value;
+        r8r = '您不給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
         document.getElementById('8 r 8').innerHTML = r8r;
         r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
-        reason.push(document.getElementById('Nexium 40mg/tab r no').value);
+        reason.push(document.getElementById('Paramol 500mg/tab r no').value);
     }
 
 
@@ -252,8 +252,8 @@ function feedback(){
     var img9 = document.getElementById('9 img');
     
     if (document.getElementById('check7').checked){
-        r9r = '您給 Lipitor 20mg/tab 的理由：' + document.getElementById('Lipitor 20mg/tab r').value;
-        reason.push(document.getElementById('Lipitor 20mg/tab r').value);
+        // r9r = '您給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r').value;
+        reason.push(document.getElementById('Primperan 5 mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Lipitor'] == 1){ 
             score = score + 1;
@@ -270,41 +270,41 @@ function feedback(){
     }else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
-        r9 = '您不給 Lipitor 20mg/tab 的理由：' + document.getElementById('Lipitor 20mg/tab r no').value;
+        r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
         document.getElementById('9 r').innerHTML = r9;
         correctness.push(0);
-        reason.push(document.getElementById('Lipitor 20mg/tab r no').value);
+        reason.push(document.getElementById('Primperan 5 mg/tab r no').value);
     
     }
 
 
     // 10
-    var img10 = document.getElementById('10 img');
+    // var img10 = document.getElementById('10 img');
     
-    if (!document.getElementById('check8').checked){
-        r10r = '您不給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r no').value;
-        reason.push(document.getElementById('Sandimmun neoral 100mg/tab r no').value);
-        cognition.push(1);
-        if (pill_detect['Sandimmunneoral'] == 0){
-            score = score + 1;
-            img10.src="pic/ok_w.png";
-            correctness.push(1);
+    // if (!document.getElementById('check8').checked){
+    //     r10r = '您不給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r no').value;
+    //     reason.push(document.getElementById('Sandimmun neoral 100mg/tab r no').value);
+    //     cognition.push(1);
+    //     if (pill_detect['Sandimmunneoral'] == 0){
+    //         score = score + 1;
+    //         img10.src="pic/ok_w.png";
+    //         correctness.push(1);
 
-        }else{
-            img10.src="pic/wrong_w.png";
-            r10r = r10r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-        }
+    //     }else{
+    //         img10.src="pic/wrong_w.png";
+    //         r10r = r10r + '\n -> 答錯原因：實際給藥錯誤';
+    //         correctness.push(0);
+    //     }
 
-        document.getElementById('10 r 10').innerHTML = r10r;
-    }else{
-        cognition.push(0);
-        img10.src="pic/wrong_w.png";
-        r10 = '您給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r').value;
-        document.getElementById('10 r').innerHTML = r10;
-        correctness.push(1);
-        reason.push(document.getElementById('Sandimmun neoral 100mg/tab r').value);
-    }
+    //     document.getElementById('10 r 10').innerHTML = r10r;
+    // }else{
+    //     cognition.push(0);
+    //     img10.src="pic/wrong_w.png";
+    //     r10 = '您給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r').value;
+    //     document.getElementById('10 r').innerHTML = r10;
+    //     correctness.push(1);
+    //     reason.push(document.getElementById('Sandimmun neoral 100mg/tab r').value);
+    // }
 
     
     // score

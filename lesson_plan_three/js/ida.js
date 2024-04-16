@@ -108,15 +108,15 @@ $(function(){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";
 
-                    pill_detect['Concor'] = data[1];
-                    pill_detect['Isoptin 40mg/tab'] = data[2];
-                    pill_detect['Sandimmunneoral'] = data[3];
-                    pill_detect['Nexium'] = data[4];
-                    pill_detect['Lipitor'] = data[5];
-                    pill_detect['Spironolactone'] = data[6];
-                    pill_detect['Metformin'] = data[7];
-                    pill_detect['Isoptin 240mg/tab'] = data[8];
-                    pill_detect['Cardilo'] = data[9];
+                    pill_detect['Apno 30mg/tab'] = data[1];
+                    pill_detect['Sennoside'] = data[2];
+                    pill_detect['Paramol'] = data[3];
+                    pill_detect['Primperan'] = data[4];
+                    pill_detect['Peace'] = data[5];
+                    pill_detect['Lanpo 30mg/tab'] = data[6];
+                    // pill_detect['Metformin'] = data[7];
+                    // pill_detect['Isoptin 240mg/tab'] = data[8];
+                    // pill_detect['Cardilo'] = data[9];
 
                     
                     $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';

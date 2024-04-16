@@ -38,9 +38,9 @@ function feedback(){
     var img2 = document.getElementById('2 img');
     if (!document.getElementById('check1').checked){
         // r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
-        reason.push(document.getElementById('Concor 5mg/tab r no').value);
+        reason.push(document.getElementById('Anpo 10mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Lanpo 30mg/tab'] == 0 ){ 
+        if (pill_detect['Lanpo 30mg/tab'] == 0 && pill_detect['Apno 30mg/tab'] == 0 ){ 
             score = score + 1;
             img2.src="pic/ok_w.png";
             correctness.push(1);
@@ -56,10 +56,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img2.src="pic/wrong_w.png";
-        r2 = '您給 Lanpo 30mg/tab 的理由：' + document.getElementById('Lanpo 30mg/tab r').value;
+        r2 = '您給 Anpo 10mg/tab 的理由：' + document.getElementById('Anpo 10mg/tab r').value;
         document.getElementById('2 r').innerHTML = r2;
         correctness.push(0);
-        reason.push(document.getElementById('Lanpo 30mg/tab r').value);
+        reason.push(document.getElementById('Anpo 10mg/tab r').value);
     
     }
     
@@ -132,7 +132,7 @@ function feedback(){
         // r5r = '您不給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r no').value;
         reason.push(document.getElementById('Sennoside 12mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Spironolactone'] == 0){ 
+        if (pill_detect['Sennoside'] == 0){ 
             score = score + 1;
             img5.src="pic/ok_w.png";
             correctness.push(1);
@@ -163,7 +163,7 @@ function feedback(){
         // r6r = '您不給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r no').value;
         reason.push(document.getElementById('Peace 2.5mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Metformin'] == 0){ 
+        if (pill_detect['Peace'] == 0){ 
             score = score + 1;
             img6.src="pic/ok_w.png";
             correctness.push(1);
@@ -224,7 +224,7 @@ function feedback(){
         // r8 = '您給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
         reason.push(document.getElementById('Paramol 500mg/tab r').value);
         cognition.push(1);
-        if (pill_detect['Nexium'] == 1){
+        if (pill_detect['Paramol'] == 1){
             score = score + 1;
             img8.src="pic/ok_w.png";
             correctness.push(1);
@@ -255,7 +255,7 @@ function feedback(){
         // r9r = '您給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r').value;
         reason.push(document.getElementById('Primperan 5 mg/tab r').value);
         cognition.push(1);
-        if (pill_detect['Lipitor'] == 1){ 
+        if (pill_detect['Primperan'] == 1){ 
             score = score + 1;
             img9.src="pic/ok_w.png";
             correctness.push(1);

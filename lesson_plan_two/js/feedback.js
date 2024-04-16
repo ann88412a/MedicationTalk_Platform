@@ -37,10 +37,10 @@ function feedback(){
     // 2
     var img2 = document.getElementById('2 img');
     if (!document.getElementById('check5').checked){
-        r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
+        // r2r = '您不給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r no').value;
         reason.push(document.getElementById('Concor 5mg/tab r no').value);
         cognition.push(1);
-        if (pill_detect['Concor'] == 0){ 
+        if (pill_detect['Cardilo'] == 0){ 
             score = score + 1;
             img2.src="pic/ok_w.png";
             correctness.push(1);
@@ -49,7 +49,6 @@ function feedback(){
             img2.src="pic/wrong_w.png";
             r2r = r2r + '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
-
         }
         document.getElementById('2 r 2').innerHTML = r2r;
 
@@ -98,7 +97,7 @@ function feedback(){
     // 4
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check1').checked){
-        r4r = '您不給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r no').value;
+        // r4r = '您不給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r no').value;
         reason.push(document.getElementById('Amikacin 250mg/vail r no').value);
         cognition.push(1);
         if (1==1){ 
@@ -129,7 +128,7 @@ function feedback(){
     var img5 = document.getElementById('5 img');
     
     if (!document.getElementById('check3').checked){
-        r5r = '您不給 Spironolactone 25mg/tab 的理由：' + document.getElementById('Spironolactone 25mg/tab r no').value;
+        // r5r = '您不給 Spironolactone 25mg/tab 的理由：' + document.getElementById('Spironolactone 25mg/tab r no').value;
         reason.push(document.getElementById('Spironolactone 25mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Spironolactone'] == 0){ 
@@ -160,7 +159,7 @@ function feedback(){
     var img6 = document.getElementById('6 img');
     
     if (!document.getElementById('check2').checked){
-        r6r = '您不給 Metformin 500mg/tab 的理由：' + document.getElementById('Metformin 500mg/tab r no').value;
+        // r6r = '您不給 Metformin 500mg/tab 的理由：' + document.getElementById('Metformin 500mg/tab r no').value;
         reason.push(document.getElementById('Metformin 500mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Metformin'] == 0){ 
@@ -252,7 +251,7 @@ function feedback(){
     var img9 = document.getElementById('9 img');
     
     if (document.getElementById('check7').checked){
-        r9r = '您給 Lipitor 20mg/tab 的理由：' + document.getElementById('Lipitor 20mg/tab r').value;
+        // r9r = '您給 Lipitor 20mg/tab 的理由：' + document.getElementById('Lipitor 20mg/tab r').value;
         reason.push(document.getElementById('Lipitor 20mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Lipitor'] == 1){ 
@@ -282,7 +281,7 @@ function feedback(){
     var img10 = document.getElementById('10 img');
     
     if (!document.getElementById('check8').checked){
-        r10r = '您不給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r no').value;
+        // r10r = '您不給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r no').value;
         reason.push(document.getElementById('Sandimmun neoral 100mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Sandimmunneoral'] == 0){

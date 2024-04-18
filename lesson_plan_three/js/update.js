@@ -98,22 +98,16 @@ for (let i=0; i<10; i++){
             sheet_no.style.display = 'block';
 
         }
-        if (i==0){ // "Amiodarone(Cordarone) 150mg/3ml/amp"
-            create_json('Amiodarone(Cordarone) 150mg/3ml/amp', check_list[i].checked);
+        if (i==1){ // "	Progesterone 25mg/ml"
+            create_json('Progesterone 25mg/ml', check_list[i].checked);
         }
-        else if(i == 1){ // "KCL (Potassium chloride) 20mEq/10mL/amp"
-            create_json('KCL (Potassium chloride) 20mEq/10mL/amp', check_list[i].checked);
+        else if(i == 2){ // "Clexane 60 U/ syringe"
+            create_json('Clexane 60 U/ syringe', check_list[i].checked);
         }
-        else if(i == 2){ // "Cefazolin 1000mg/vail"
-            create_json('Cefazolin 1000mg/vail', check_list[i].checked);
-        }
-        else if(i == 3){ // "Rolikan (Sodium bicarbonate) 7% 20mL/amp"
-            create_json('Rolikan (Sodium bicarbonate) 7% 20mL/amp', check_list[i].checked);
-        }
-        else if(i == 4){ // "Heparin 25000units/vail"
-            create_json('Heparin 25000units/vail', check_list[i].checked);
-        }
-        ;
+        else if(i == 5){ // "Cefazolin 1000mg/vail"
+            create_json('Ocillina 500mg/vail', check_list[i].checked);
+        };
+
 
 
 

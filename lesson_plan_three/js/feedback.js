@@ -66,11 +66,13 @@ function feedback(){
     // 3
     var img3 = document.getElementById('3 img');
     r3r = ''
-    if (!document.getElementById('check2').checked){
-        // r3r = '您不給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r no').value;
+    if (document.getElementById('check2').checked){
+        r3r = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value;
         reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
-        if (pill_detect['Progesterone 25mg/ml'] == 0){
+        if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 1.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=1.6 
+        && (medicines['Progesterone 25mg/ml']['way'][0] =='Three fingers below the acromion' || medicines['Progesterone 25mg/ml']['way'][0] == 'left upper hip' || medicines['Progesterone 25mg/ml']['way'][0] == 'right upper hip') 
+        && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection' && medicines['Progesterone 25mg/ml']['dilution']=="0"){
             score = score + 1;
             img3.src="pic/ok_w.png";
             correctness.push(1);
@@ -98,8 +100,8 @@ function feedback(){
     // 4
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check3').checked){
-        // r4r = '您不給 Clexane 60 U/ syringe 的理由：' + document.getElementById('Clexane 60 U/ syringe r no').value;
-        reason.push(document.getElementById('Clexane 60 U/ syringe r no').value);
+        r4r = '您不給 Clexane 6,000 anti-Xa IU/0.6 ml 的理由：' + document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r no').value;
+        reason.push(document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r no').value);
         cognition.push(1);
         if (1==1){ 
             score = score + 1;
@@ -117,10 +119,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img4.src="pic/wrong_w.png";
-        r4 = '您給 Clexane 60 U/ syringe 的理由：' + document.getElementById('Clexane 60 U/ syringe r').value;
+        r4 = '您給 Clexane 6,000 anti-Xa IU/0.6 ml 的理由：' + document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r').value;
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
-        reason.push(document.getElementById('Clexane 60 U/ syringe r').value);
+        reason.push(document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r').value);
     
     }
 
@@ -191,7 +193,7 @@ function feedback(){
     var img7 = document.getElementById('7 img');
     r7r = ''
     if (!document.getElementById('check6').checked){
-        // r7r = '您不給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r no').value;
+        r7r = '您不給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r no').value;
         reason.push(document.getElementById('Ocillina 500mg/vail r no').value);
         cognition.push(1);
         if (1==1){

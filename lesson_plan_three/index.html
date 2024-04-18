@@ -567,7 +567,7 @@
                                     </div>
 
                                     <div class="table-body-cell">
-                                        <a href="https://806.ngh.com.tw/ph/med_web/index_view.php?abc=detail&id=OSPIR" target="_blank">Clexane 60 U/ syringe</a> 
+                                        <a href="https://806.ngh.com.tw/ph/med_web/index_view.php?abc=detail&id=OSPIR" target="_blank">Clexane 6,000 anti-Xa IU/0.6 ml</a> 
                                     </div>
 
                                     <div class="table-body-cell">
@@ -868,7 +868,7 @@
                                     </div>
 
                                     <div class="table-body-cell">
-                                        <a href="https://zh-tw.sltung.com.tw/tung/OPD/DGDF/ST/TNEX/index.html" target="_blank">Ocillina 500mg/vail</a> 
+                                        <a href="https://zh-tw.sltung.com.tw/tung/OPD/DGDF/ST/TNEX/index.html" target="_blank">Oxacillin 1000mg/vail</a> 
                                     </div>
 
                                     <div class="table-body-cell">
@@ -1454,11 +1454,11 @@
 
                                     <div class="resp-table-row" style="display: none" id="sheet-yes3"> 
                                         <div class="table-body-cell">
-                                            Clexane 60 U/ syringe
+                                            Clexane 6,000 anti-Xa IU/0.6 ml
                                         </div>
     
-                                        <div class="table-body-cell" id = 'Clexane 60 U/ syringe' data-item="x">
-                                            <textarea id = 'Clexane 60 U/ syringe r' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
+                                        <div class="table-body-cell" id = 'Clexane 6,000 anti-Xa IU/0.6 ml' data-item="x">
+                                            <textarea id = 'Clexane 6,000 anti-Xa IU/0.6 ml r' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
                                         </div>
          
                                     </div>
@@ -1487,11 +1487,11 @@
             
                                     <div class="resp-table-row" style="display: none" id="sheet-yes6"> 
                                         <div class="table-body-cell">
-                                            Ocillina 500mg/vail
+                                            Oxacillin 1000mg/vail
                                         </div>
     
-                                        <div class="table-body-cell" id = 'Ocillina 500mg/vail' data-item="x">
-                                            <textarea id = 'Ocillina 500mg/vail r' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
+                                        <div class="table-body-cell" id = 'Oxacillin 1000mg/vail' data-item="x">
+                                            <textarea id = 'Oxacillin 1000mg/vail r' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
                                         </div>
          
                                     </div>
@@ -1599,11 +1599,11 @@
 
                                     <div class="resp-table-row" style="display: block" id="sheet-no3"> 
                                         <div class="table-body-cell">
-                                            Clexane 60 U/ syringe
+                                            Clexane 6,000 anti-Xa IU/0.6 ml
                                         </div>
     
-                                        <div class="table-body-cell" id = 'Clexane 60 U/ syringe' data-item="x">
-                                            <textarea id = 'Clexane 60 U/ syringe r no' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
+                                        <div class="table-body-cell" id = 'Clexane 6,000 anti-Xa IU/0.6 ml' data-item="x">
+                                            <textarea id = 'Clexane 6,000 anti-Xa IU/0.6 ml r no' value="" style="font-family:verdana;font-size:22px;width:100%;" rows="3"> </textarea>
                                         </div>
     
                                     </div>
@@ -1632,11 +1632,11 @@
             
                                     <div class="resp-table-row" style="display: block" id="sheet-no6"> 
                                         <div class="table-body-cell">
-                                            Ocillina 500mg/vail
+                                            Oxacillin 1000mg/vail
                                         </div>
     
-                                        <div class="table-body-cell" id = 'Ocillina 500mg/vail'>
-                                            <textarea id = 'Ocillina 500mg/vail r no' value="" style="font-family:verdana;font-size:22px;width:100%;"  rows="3"> </textarea>  
+                                        <div class="table-body-cell" id = 'Oxacillin 1000mg/vail'>
+                                            <textarea id = 'Oxacillin 1000mg/vail r no' value="" style="font-family:verdana;font-size:22px;width:100%;"  rows="3"> </textarea>  
                                         </div>
     
                                     </div>
@@ -2181,7 +2181,7 @@
                     </div>
 
                     <br><br><br>
-                    <button onclick="check_page(3)" style="color: white;font-family:verdana;font-size:44px;border-radius: 10px;background-color: #034b86;">送出</button>
+                    <button onclick="SyringeFeedback()" style="color: white;font-family:verdana;font-size:44px;border-radius: 10px;background-color: #034b86;">送出</button>
                 </center>
 
                 <br><br>
@@ -2330,7 +2330,8 @@
                                             「<b style="color: #228de5;">有給0.5ml</b>」Progesterone
                                         </div>
                                         <div class="table-body-cell300" >
-                                            你好棒棒
+                                            <!-- 你好棒棒 -->
+                                            <div id="VerificationDetail"></div>
                                             <font style="color: #00B050;"><br>醫囑正確劑量為0.5ml (12.5mg)；</font><b style="color: #228de5;">非一隻劑量1 ml (25mg)</b>
                                             <p id = '3 r' style="color: gray;"></p> 
                                             <p id = '3 r 3' style="color: gray;"></p>
@@ -2355,7 +2356,8 @@
                                             「<b style="color: #228de5;">不能給</b>」Clexane
                                         </div>
                                         <div class="table-body-cell300" >
-                                            錯誤原因:<b style="color: #f44336;">實際給藥錯誤</b><br>
+                                            <!-- 錯誤原因:<b style="color: #f44336;">實際給藥錯誤</b><br> -->
+                                            <div id="VerificationDetail2"></div>
                                             Clexane<b style="color: #228de5;">途徑非標準給藥方式</b>
                                             <p id = '4 r' style="color: gray;"></p> 
                                             <p id = '4 r 4' style="color: gray;"></p>
@@ -2429,7 +2431,7 @@
                                     <div class="resp-table-row" style="font-family:verdana;font-size:22px;color: black;"> 
 
                                         <div class="table-body-cell80">
-                                            7. 給藥前，您有先確認病人的「<b style="color: #228de5;">過敏史</b>」嗎? 您知道 <b style="color: #228de5;"> Ocillina 是盤尼西林Penicillin</b> 的藥物嗎?
+                                            7. 給藥前，您有先確認病人的「<b style="color: #228de5;">過敏史</b>」嗎? 您知道 <b style="color: #228de5;"> Oxacillin 是盤尼西林Penicillin</b> 的藥物嗎?
                                         </div>
                                         <div class="table-body-cell80">
                                             <img id="wrong_w_img" src="pic/wrong_w.png" width="72" style="background-color: transparent;"/>
@@ -2439,8 +2441,9 @@
                                             「<b style="color: #228de5;">不能給</b>」Ocillina
                                         </div>
                                         <div class="table-body-cell300" >
-                                            錯誤原因:<b style="color: #f44336;">MAR單錯誤</b><br>
-                                            Ocillina是「<font style="color: #228de5;">「盤尼西林」Penicillin</font>類藥物。此患者對<b style="color: #228de5;">盤尼西林Penicillin有過敏記錄</b>，若仍要給就需要做PST，因此不應該直接該給藥
+                                            <!-- 錯誤原因:<b style="color: #f44336;">MAR單錯誤</b><br> -->
+                                            <div id="VerificationDetail3"></div>
+                                            Oxacillin是「<font style="color: #228de5;">「盤尼西林」Penicillin</font>類藥物。此患者對<b style="color: #228de5;">盤尼西林Penicillin有過敏記錄</b>，若仍要給就需要做PST，因此不應該直接該給藥
                                             <p id = '7 r' style="color: gray;"></p> 
                                             <p id = '7 r 7' style="color: gray;"></p>
                                             <font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>

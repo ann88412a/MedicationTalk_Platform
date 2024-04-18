@@ -371,7 +371,7 @@ function SyringeFeedback(){
         }
 
         var VerificationDetail3 = document.getElementById("VerificationDetail3");
-        if (medicines['Ocillina 500mg/vail']){
+        if (medicines['Oxacillin 1000mg/vail']){
             VerificationDetail3.innerHTML = 
             "錯誤原因:MAR單錯誤";
         }

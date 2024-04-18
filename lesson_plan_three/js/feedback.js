@@ -193,8 +193,8 @@ function feedback(){
     var img7 = document.getElementById('7 img');
     r7r = ''
     if (!document.getElementById('check6').checked){
-        r7r = '您不給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r no').value;
-        reason.push(document.getElementById('Ocillina 500mg/vail r no').value);
+        r7r = '您不給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r no').value;
+        reason.push(document.getElementById('Oxacillin 1000mg/vail r no').value);
         cognition.push(1);
         if (1==1){
             score = score + 1;
@@ -212,11 +212,11 @@ function feedback(){
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
-        r7 = '您給 Ocillina 500mg/vail 的理由：' + document.getElementById('Ocillina 500mg/vail r').value;
+        r7 = '您給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r').value;
         document.getElementById('7 r').innerHTML = r7;
         r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Ocillina 500mg/vail r').value);
+        reason.push(document.getElementById('Oxacillin 1000mg/vail r').value);
     }
 
     // 8

@@ -47,7 +47,7 @@ function feedback(){
 
         }else{
             img2.src="pic/wrong_w.png";
-            r2r = r2r + '\n -> 答錯原因：實際給藥錯誤';
+            r2r = '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
 
         }
@@ -97,6 +97,7 @@ function feedback(){
 
     // 4
     var img4 = document.getElementById('4 img');
+    r4r = ''
     if (!document.getElementById('check3').checked){
         // r4r = '您不給 Clexane 60 U/ syringe 的理由：' + document.getElementById('Clexane 60 U/ syringe r no').value;
         reason.push(document.getElementById('Clexane 60 U/ syringe r no').value);
@@ -108,7 +109,7 @@ function feedback(){
 
         }else{
             img4.src="pic/wrong_w.png";
-            r4r = r4r + '\n -> 答錯原因：實際給藥錯誤';
+            r4r = '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
 
         }
@@ -139,7 +140,7 @@ function feedback(){
 
         }else{
             img5.src="pic/wrong_w.png";
-            r5r = r5r + '\n -> 答錯原因：實際給藥錯誤';
+            r5r = '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
 
         }
@@ -170,7 +171,7 @@ function feedback(){
 
         }else{
             img6.src="pic/wrong_w.png";
-            r6r = r6r + '\n -> 答錯原因：實際給藥錯誤';
+            r6r = '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
 
         }
@@ -262,7 +263,7 @@ function feedback(){
 
         }else{
             img9.src="pic/wrong_w.png";
-            r9r = r9r + '\n -> 答錯原因：實際給藥錯誤';
+            r9r = '\n -> 答錯原因：實際給藥錯誤';
             correctness.push(0);
         }
 

@@ -15,10 +15,10 @@ var way_dic = {
     "right lower abdomen" : "右下腹",
     "left upper abdomen" : "左上腹",
     "left lower abdomen" : "左下腹",
-    "left upper hip" : "左上臀",
-    "left lower hip" : "左下臀",
-    "right upper hip" : "右上臀",
-    "lower right hip" : "右下臀",
+    "left upper hip" : "左上內側臀",
+    "left lower hip" : "左下內側臀",
+    "right upper hip" : "右上內側臀",
+    "lower right hip" : "右下內側臀",
     "forearm" : "前臂"
 };
 
@@ -319,6 +319,68 @@ function GetOption(p){
 
     createtbl();
     }
+
+
+function SyringeFeedback(){
+    console.log('2:', document.getElementById('check2').checked);
+    console.log('3:', document.getElementById('check3').checked);
+    console.log('6:', document.getElementById('check2').checked);
+
+    if (medicines != {}){
+        var VerificationDetail = document.getElementById("VerificationDetail");
+        if (!medicines['Progesterone 25mg/ml']){ //沒給藥
+            VerificationDetail.innerHTML = "錯誤原因:必須給此藥";
+        }
+        else{ //有給藥，判斷細項
+            var errorMessage = '';
+            console.log(medicines['Progesterone 25mg/ml']['injection']);
+            console.log(medicines['Progesterone 25mg/ml']['way']);
+
+            if (medicines['Progesterone 25mg/ml']['verification']!='1234567890ABC'){
+                errorMessage += '驗證錯誤,<br>';
+            }
+            if (medicines['Progesterone 25mg/ml']['injection']!=1.5){
+                errorMessage += " 劑量錯誤, 您給的劑量為" + medicines['Progesterone 25mg/ml']['injection'] +"ml, <br>";
+            }
+            if ((medicines['Progesterone 25mg/ml']['way'][0] =='Three fingers below the acromion' || 
+                medicines['Progesterone 25mg/ml']['way'][0] == 'left upper hip' || 
+                medicines['Progesterone 25mg/ml']['way'][0] == 'right upper hip')
+                && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection'){
+
+                errorMessage += " 途徑錯誤, 您選擇的途徑為 " + way_dic[medicines['Progesterone 25mg/ml']['way'][0]] + "," + way_dic[medicines['Progesterone 25mg/ml']['way'][1]] + "<br>" + 
+                "正確途徑應為以下,<br>" + "注射部位:肩峰下三橫指,左上內側臀,右上內側臀(三擇一)" + "<br>" + "注射角度:肌肉注射" + "<br>";
+            
+            }
+
+            if (errorMessage !== '') { 
+                // errorMessage = errorMessage.slice(0, -2);
+                VerificationDetail.innerHTML = errorMessage;
+            } else {  //各項條件都符合
+                VerificationDetail.innerHTML = '很棒，您的給藥知識正確!';
+            }
+            
+        }
+
+        var VerificationDetail2 = document.getElementById("VerificationDetail2");
+        if (medicines['Clexane 6,000 anti-Xa IU/0.6 ml']){
+            VerificationDetail2.innerHTML = 
+            "錯誤原因:實際給藥錯誤";
+        }
+        else{  //給藥原因待判斷
+            VerificationDetail2.innerHTML = "很棒，您的給藥知識正確!";
+        }
+
+        var VerificationDetail3 = document.getElementById("VerificationDetail3");
+        if (medicines['Oxacillin 1000mg/vail']){
+            VerificationDetail3.innerHTML = 
+            "錯誤原因:MAR單錯誤";
+        }
+        else{ //給藥原因待判斷
+            VerificationDetail3.innerHTML = "很棒，您的給藥知識正確!";
+        }
+    }
+}
+
 
 function Barcode(on_off){
     dan.push('Barcode-I',[client_uid,'plan1_Device_Demo','syringe', on_off]);

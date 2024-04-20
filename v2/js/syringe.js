@@ -199,7 +199,7 @@ function ChangeTitle(i) {
             nobarElement.innerHTML = "指示 7<br>輸入瓶數、空針與稀釋溶液量";
             break;
         case 5:
-            nobarElement.innerHTML = "指示 8<br>系統判斷針劑數值";
+            nobarElement.innerHTML = "指示 8<br>判斷針劑數值";
             break;
         case 6:
             nobarElement.innerHTML = "指示 9<br>進行注射";
@@ -321,10 +321,10 @@ function GetOption(p){
     }
 
 function Barcode(on_off){
-    dan.push('Barcode-I',[client_uid,'Device_Demo','syringe', on_off]);
+    dan.push('Barcode-I',[client_uid,'plan1_Device_Demo','syringe', on_off]);
 }
 
 
 function Syringe_recognition(){
-    dan.push('Syringe-I',[client_uid,'Device_Demo', $("select[name='syringe_type']").val(), 1]);
+    dan.push('Syringe-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
 }

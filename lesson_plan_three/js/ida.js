@@ -22,7 +22,7 @@ var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "ROLIKAN INJECTION (SODIUM BICARBONATE)": -1,
                         "SODIUM BICARBONATE INJECTION 'CHI SHENG'": -1,
                         "Sirolac IV Injection 30 mg/ml 'ASTAR'": -1,};
-var patient_barcode = '1234567890FFF'
+var patient_barcode = '1234567890ABC'
 var cognition = []
 
 var client_uid = (Math.random() + 1).toString(36).substring(7) + (Math.random() + Math.random()).toString(36).substring(8);
@@ -35,9 +35,9 @@ $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
 		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
+			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
 			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'PlatformPlan2',
+		    'd_name': 'PlatformPlan3',
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
@@ -52,6 +52,9 @@ $(function(){
 
         function Syringe_I(data){
         // $('.ODF_value')[0].innerText=data[0];
+        }
+        function Lesson_Plan_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
         }
 
         // odf

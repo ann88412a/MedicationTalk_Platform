@@ -322,16 +322,16 @@ function check_page(n){
 function check_bt(f){
     if (f === 'barcode'){
         $('.patient_barcode_hint')[0].innerText = '請到Barcode機的螢幕上操作';
-        dan.push('Barcode-I', [client_uid, 'plan1_Device_Demo', 'patient', true]);
+        dan.push('Barcode-I', [client_uid, 'Device_Demo', 'patient', true]);
         dan.push('Lesson_Plan-I', ['3']);
         
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
     }
     else if(f === 'medicine_info'){
-        dan.push('Barcode-I', [client_uid, 'plan1_Device_Demo', 'syringe', true]);
+        dan.push('Barcode-I', [client_uid, 'Device_Demo', 'syringe', true]);
     }
     else if(f === 'pill'){
-        dan.push('Pill_Detect-I', [client_uid, 'plan1_Device_Demo', true]);
+        dan.push('Pill_Detect-I', [client_uid, 'Device_Demo', true]);
         output_pill_bt = output_pill_bt + 1;
         $('.pill_hint')[0].innerText = 'waiting...';
     }

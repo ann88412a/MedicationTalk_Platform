@@ -35,9 +35,9 @@ $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
 		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I],
+			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
 			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'PlatformPlan2',
+		    'd_name': 'PlatformPlan3',
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
@@ -52,6 +52,9 @@ $(function(){
 
         function Syringe_I(data){
         // $('.ODF_value')[0].innerText=data[0];
+        }
+        function Lesson_Plan_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
         }
 
         // odf

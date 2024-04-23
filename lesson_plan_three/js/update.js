@@ -324,6 +324,7 @@ function check_bt(f){
         $('.patient_barcode_hint')[0].innerText = '請到Barcode機的螢幕上操作';
         dan.push('Barcode-I', [client_uid, 'Device_Demo', 'patient', true]);
         dan.push('Lesson_Plan-I', 3);
+
         
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
     }

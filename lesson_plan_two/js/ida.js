@@ -126,7 +126,8 @@ $(function(){
 
                     
                     $('.pill_hint')[0].innerText = '★ 辨識完成請繼續執行下一步＾＿＾';
-
+                    console.log(data)
+                    console.log('123')
                     syringe_block = document.getElementById('syringe block');
                     syringe_block.style.display = "block";
 

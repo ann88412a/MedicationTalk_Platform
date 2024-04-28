@@ -31,6 +31,19 @@ i_name.addEventListener('change', function (e) {
         }
 }, false);
 
+const i_machine = document.getElementById('IDF_machine');
+i_machine.addEventListener('change', function (e) {
+    if (i_machine.value != "")
+        {
+            var img = document.getElementById('machine');
+            img.src="pic/ok1.jpeg";
+        }else
+        {
+            var img = document.getElementById('machine');
+            img.src="./pic/no.png";
+        }
+}, false);
+
 // page2
 const radio1 = document.getElementById('radio1');
 radio1.addEventListener('change', function (e) {
@@ -127,9 +140,13 @@ function check_page(n){
     if (n === 1){
         const idf_id = document.getElementById('IDF_ID');
         const idf_name = document.getElementById('IDF_name');
-        if (idf_id.value != "" && idf_name.value != ""){
+        const idf_machine = document.getElementById('IDF_machine');
+        if (idf_id.value != "" && idf_name.value != "" && idf_machine.value != ""){
             plusSlides(1);
             window.alert("您即將進入給藥情境\n [請依照指示操作]");
+            client_uid = idf_machine.value + client_uid;
+            console.log('client_uid');
+            console.log(client_uid);
 
             // set syringe URL 
             subFeature = document.getElementById('iframe_syringe')
@@ -142,12 +159,16 @@ function check_page(n){
             var img2 = document.getElementById('name');
             img2.src="pic/wrong.jpeg";
         }
-        else if(idf_id.value != ""){
+        else if(idf_id.value == ""){
+            var img = document.getElementById('id');
+            img.src="pic/wrong.jpeg";
+        }
+        else if(idf_name.value == ""){
             var img = document.getElementById('name');
             img.src="pic/wrong.jpeg";
         }
-        else if(idf_name.value != ""){
-            var img = document.getElementById('id');
+        else if(idf_machine.value == ""){
+            var img = document.getElementById('machine');
             img.src="pic/wrong.jpeg";
         }
     }
@@ -164,6 +185,8 @@ function check_page(n){
             img.src="pic/wrong.jpeg";
         }
         if ($('.patient_barcode_hint')[0].innerText == '請到Barcode機的螢幕上操作'){
+            console.log('client_uid');
+            console.log(client_uid);
             var img = document.getElementById('barcode_scanner');
             img.src="pic/wrong.jpeg";
         }
@@ -324,6 +347,7 @@ function check_bt(f){
         $('.patient_barcode_hint')[0].innerText = '請到Barcode機的螢幕上操作';
         dan.push('Barcode-I', [client_uid, 'Device_Demo', 'patient', true]);
         dan.push('Lesson_Plan-I', 3);
+    
 
         
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
@@ -334,7 +358,7 @@ function check_bt(f){
     else if(f === 'pill'){
         dan.push('Pill_Detect-I', [client_uid, 'Device_Demo', true]);
         output_pill_bt = output_pill_bt + 1;
-        $('.pill_hint')[0].innerText = 'waiting...';
+        $('.pill_hint')[0].innerText = 'waiting...我在這!! 我有近來';
     }
     else if(f === 'history'){
         loading_text = document.getElementById('history_loading')

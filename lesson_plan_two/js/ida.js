@@ -109,7 +109,12 @@ $(function(){
         }
 
         function Pill_Detect_Result_O(data){
-            
+            console.log('接下來data')
+            console.log(data[0])
+            console.log(data)
+            console.log(typeof data[0])
+            console.log('123wqewqewq')
+            console.log(client_uid)
             if (output_pill_bt > 0 && data[0] == client_uid){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";

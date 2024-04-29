@@ -112,9 +112,15 @@
 
                     <p align="center" style="font-family:verdana;font-size:36px;">機器</p>
     
-                    <div class="inputWithin">
+                    <div class="machinecontainer">
                         <img id = 'machine' src="./pic/no.png" width="34" background-color: transparent/>
-                        <input id = 'IDF_machine' value="" style="font-family:verdana;font-size:36px;">
+                        <select class="custom-select" id="IDF_machine">
+                            <option value="" disabled selected>請選擇機器</option>
+                            <option value="Device_A">Device_A</option>
+                            <option value="Device_B">Device_B</option>
+                            <option value="Device_C">Device_C</option>
+                            <option value="Device_D">Device_D</option>
+                        </select>
                     </div>
                 
                     <br><br><br><br>

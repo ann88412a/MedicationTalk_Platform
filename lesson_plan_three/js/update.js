@@ -363,7 +363,7 @@ function check_bt(f){
     else if(f === 'pill'){
         dan.push('Pill_Detect-I', [client_uid, machine_ID, true]);
         output_pill_bt = output_pill_bt + 1;
-        $('.pill_hint')[0].innerText = 'waiting...我在這!! 我有近來';
+        $('.pill_hint')[0].innerText = 'waiting...';
     }
     else if(f === 'history'){
         loading_text = document.getElementById('history_loading')

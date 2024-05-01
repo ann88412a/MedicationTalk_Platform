@@ -18,7 +18,7 @@ var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "ROLIKAN INJECTION (SODIUM BICARBONATE)": -1,
                         "SODIUM BICARBONATE INJECTION 'CHI SHENG'": -1,
                         "Sirolac IV Injection 30 mg/ml 'ASTAR'": -1,};
-var patient_barcode = '1234567890AAA'
+var patient_barcode = '1234567890BBB'
 var cognition = []
 
 var client_uid = (Math.random() + 1).toString(36).substring(7) + (Math.random() + Math.random()).toString(36).substring(8);
@@ -102,7 +102,7 @@ $(function(){
         }
 
         function Pill_Detect_Result_O(data){
-            
+            console.log(data)
             if (output_pill_bt > 0 && data[0] == client_uid){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";

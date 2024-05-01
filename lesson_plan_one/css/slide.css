@@ -163,6 +163,15 @@
   vertical-align: top;
   width: 300px;
 }
+.table-body-cell600{
+  
+  display: table-cell;
+  border: 1px solid #dddddd;
+  padding: 4px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  width: 600px;
+}
 .inputWithin {
   position: relative; 
   display: inline-block;
@@ -182,4 +191,36 @@
 
   margin-left: auto;
   margin-right: auto;
+}
+/* 機器下拉選單格式 */
+.custom-select {
+  position: relative;
+  font-family: Verdana;
+  font-size: 24px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f0f0f0; /* 背景色 */
+  cursor: pointer;
+}
+
+
+.custom-select:after {
+  content: '\25BC'; /* 使用Unicode字符為下拉箭頭 */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* 選項樣式 */
+.custom-select option {
+  font-family: Verdana;
+  font-size: 20px;
+}
+
+.machinecontainer {
+  text-align: center;
+  margin-left: -40px;
 }

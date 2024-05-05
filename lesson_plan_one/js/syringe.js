@@ -325,6 +325,14 @@ function Barcode(on_off){
 }
 
 
-function Syringe_recognition(){
-    dan.push('Syringe-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+function Syringe_classification(){
+    dan.push('Classification-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+
+    //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
 }
+
+
+function Volume_measurement(){   
+    dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+}
+

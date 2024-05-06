@@ -60,7 +60,7 @@ radio2.addEventListener('change', function (e) {
     var img = document.getElementById('bar');
     img.src="pic/ok1.jpeg";
 
-    $('.bar_no')[0].innerText = '已更換病人資訊為: 黃月里(女) 出生年月日: 62/02/26 病歷號: 02939563 身分證字號： F221022110';
+    $('.bar_no')[0].innerText = '已更換病人資訊為: 李雅蘭(女) 出生年月日: 28/12/11 病歷號: 04154212 身分證字號： F210873560';
 }, false);
 
 //page3

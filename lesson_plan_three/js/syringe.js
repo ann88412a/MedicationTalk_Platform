@@ -362,7 +362,7 @@ function SyringeFeedback(){
         }
 
         var VerificationDetail2 = document.getElementById("VerificationDetail2");
-        if (medicines['Clexane 6,000 anti-Xa IU/0.6 ml']){
+        if (medicines['Clexane 60mg/0.6ml']){
             VerificationDetail2.innerHTML = 
             "錯誤原因:實際給藥錯誤";
         }
@@ -386,7 +386,12 @@ function Barcode(on_off){
     dan.push('Barcode-I',[client_uid, machine_ID,'syringe', on_off]);
 }
 
+function Syringe_classification(){
+    dan.push('Classification-I',[client_uid,machine_ID, $("select[name='syringe_type']").val(), 1]);
 
-function Syringe_recognition(){
-    dan.push('Syringe-I',[client_uid, machine_ID, $("select[name='syringe_type']").val(), 1]);
+    //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+}
+
+function Volume_measurement(){   
+    dan.push('Volume-I',[client_uid,machine_ID, $("select[name='syringe_type']").val(), 1]);
 }

@@ -357,7 +357,6 @@ function check_bt(f){
         dan.push('Barcode-I', [client_uid, machine_ID, 'patient', true]);
         dan.push('Lesson_Plan-I', [client_uid, machine_ID, 1]);
 
-        
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
     }
     else if(f === 'medicine_info'){

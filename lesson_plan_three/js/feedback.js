@@ -101,8 +101,8 @@ function feedback(){
     var img4 = document.getElementById('4 img');
     r4r = ''
     if (!document.getElementById('check3').checked){
-        r4r = '您不給 Clexane 6,000 anti-Xa IU/0.6 ml 的理由：' + document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r no').value;
-        reason.push(document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r no').value);
+        r4r = '您不給 Clexane 60mg/0.6ml 的理由：' + document.getElementById('Clexane 60mg/0.6ml r no').value;
+        reason.push(document.getElementById('Clexane 60mg/0.6ml r no').value);
         cognition.push(1);
         if (1==1){ 
             score = score + 1;
@@ -120,10 +120,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img4.src="pic/wrong_w.png";
-        r4 = '您給 Clexane 6,000 anti-Xa IU/0.6 ml 的理由：' + document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r').value;
+        r4 = '您給 Clexane 60mg/0.6ml 的理由：' + document.getElementById('Clexane 60mg/0.6ml r').value;
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
-        reason.push(document.getElementById('Clexane 6,000 anti-Xa IU/0.6 ml r').value);
+        reason.push(document.getElementById('Clexane 60mg/0.6ml r').value);
     
     }
 

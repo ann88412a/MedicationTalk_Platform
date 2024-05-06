@@ -34,9 +34,9 @@ console.log(client_uid);
 $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
-		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
-			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
+		    'dm_name': 'Medication',      
+			  'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
+		  	'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
 		    'd_name': 'Platform',
 		    // 'd_name': 'Platform_Demo_anna',
         };
@@ -50,9 +50,14 @@ $(function(){
             // $('.ODF_value')[0].innerText=data[0];
          }
 
-        function Syringe_I(data){
-        // $('.ODF_value')[0].innerText=data[0];
+        function Classification_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+        } 
+
+        function Volume_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
         }
+        
         function Lesson_Plan_I(data){
             // $('.ODF_value')[0].innerText=data[0];
         }
@@ -134,9 +139,24 @@ $(function(){
             
         }
 
-        function Syringe_Result_O(data){
-            console.log('Syringe_Result_O', data);
-            console.log('Syringe_Result_O', data[2]);
+        function Classification_Result_O(data){
+            // console.log('Classification_Result_O', data);
+            console.log('Classification_Result_O', data[1]);
+            console.log("Chosen type:", $("select[name='syringe_type']").val());
+            
+            if ($("select[name='syringe_type']").val() == data[1]){
+                Volume_measurement()
+                //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+            }
+            else{
+                console.log("樣式錯誤!");
+                Reset_page2();
+                alert("選擇與放入樣式不同!");
+            }
+
+        }
+
+        function Volume_Result_O(data){
             if(data[0] == client_uid){
                 var Syringe_number = parseInt(medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['syringe_num']);
                 // medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];

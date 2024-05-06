@@ -114,8 +114,8 @@ for (let i=0; i<10; i++){
         if (i==1){ // "	Progesterone 25mg/ml"
             create_json('Progesterone 25mg/ml', check_list[i].checked);
         }
-        else if(i == 2){ // "Clexane 60 U/ syringe"
-            create_json('Clexane 60 U/ syringe', check_list[i].checked);
+        else if(i == 2){ // Clexane 60mg/0.6ml"
+            create_json('Clexane 60mg/0.6ml', check_list[i].checked);
         }
         else if(i == 5){ // "Cefazolin 1000mg/vail"
             create_json('Ocillina 500mg/vail', check_list[i].checked);

@@ -31,6 +31,19 @@ i_name.addEventListener('change', function (e) {
         }
 }, false);
 
+const i_machine = document.getElementById('IDF_machine');
+i_machine.addEventListener('change', function (e) {
+    if (i_machine.value != "")
+        {
+            var img = document.getElementById('machine');
+            img.src="pic/ok1.jpeg";
+        }else
+        {
+            var img = document.getElementById('machine');
+            img.src="./pic/no.png";
+        }
+}, false);
+
 // page2
 const radio1 = document.getElementById('radio1');
 radio1.addEventListener('change', function (e) {
@@ -127,13 +140,22 @@ for (let i=0; i<10; i++){
 
 var correctness = [];
 var reason = [];
+var machine_ID = "";
 
 
 function check_page(n){
     if (n === 1){
+        //選擇機器
+        var selectElement = document.getElementById("IDF_machine");
+        console.log(selectElement.value);
+        machine_ID = selectElement.value;
+
+
         const idf_id = document.getElementById('IDF_ID');
         const idf_name = document.getElementById('IDF_name');
-        if (idf_id.value != "" && idf_name.value != ""){
+        const idf_machine = document.getElementById('IDF_machine');
+        if (idf_id.value != "" && idf_name.value != "" && idf_machine.value != ""){
+        // if (idf_id.value != "" && idf_name.value != ""){
             plusSlides(1);
             window.alert("您即將進入給藥情境\n [請依照指示操作]");
 
@@ -148,12 +170,16 @@ function check_page(n){
             var img2 = document.getElementById('name');
             img2.src="pic/wrong.jpeg";
         }
-        else if(idf_id.value != ""){
+        else if(idf_id.value == ""){
+            var img = document.getElementById('id');
+            img.src="pic/wrong.jpeg";
+        }
+        else if(idf_name.value == ""){
             var img = document.getElementById('name');
             img.src="pic/wrong.jpeg";
         }
-        else if(idf_name.value != ""){
-            var img = document.getElementById('id');
+        else if(idf_machine.value == ""){
+            var img = document.getElementById('machine');
             img.src="pic/wrong.jpeg";
         }
     }
@@ -328,16 +354,16 @@ function check_page(n){
 function check_bt(f){
     if (f === 'barcode'){
         $('.patient_barcode_hint')[0].innerText = '請到Barcode機的螢幕上操作';
-        dan.push('Barcode-I', [client_uid, 'plan1_Device_Demo', 'patient', true]);
-        dan.push('Lesson_Plan-I', 1);
-        
+        dan.push('Barcode-I', [client_uid, machine_ID, 'patient', true]);
+        dan.push('Lesson_Plan-I', [client_uid, machine_ID, 1]);
+
         output_patient_barcode_bt = output_patient_barcode_bt + 1;
     }
     else if(f === 'medicine_info'){
-        dan.push('Barcode-I', [client_uid, 'plan1_Device_Demo', 'syringe', true]);
+        dan.push('Barcode-I', [client_uid, machine_ID, 'syringe', true]);
     }
     else if(f === 'pill'){
-        dan.push('Pill_Detect-I', [client_uid, 'plan1_Device_Demo', true]);
+        dan.push('Pill_Detect-I', [client_uid, machine_ID, true]);
         output_pill_bt = output_pill_bt + 1;
         $('.pill_hint')[0].innerText = 'waiting...';
     }

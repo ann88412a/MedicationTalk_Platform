@@ -22,7 +22,7 @@ var syringe_value = {"AMIKACIN INJECTION 250MG/ML 'TAI YU'": -1,
                         "ROLIKAN INJECTION (SODIUM BICARBONATE)": -1,
                         "SODIUM BICARBONATE INJECTION 'CHI SHENG'": -1,
                         "Sirolac IV Injection 30 mg/ml 'ASTAR'": -1,};
-var patient_barcode = '1234567890ABC'
+var patient_barcode = '1234567890FFF'
 var cognition = []
 
 var client_uid = (Math.random() + 1).toString(36).substring(7) + (Math.random() + Math.random()).toString(36).substring(8);
@@ -34,10 +34,10 @@ console.log(client_uid);
 $(function(){
         csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
-		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Classification_I, Volume_I, Lesson_Plan_I],
-			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Classification_Result_O, Volume_Result_O],
-		    'd_name': 'PlatformPlan3',
+		    'dm_name': 'Medication',      
+			  'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
+		  	'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
+		    'd_name': 'Platform',
 		    // 'd_name': 'Platform_Demo_anna',
         };
 
@@ -64,6 +64,9 @@ $(function(){
 
         // odf
         function Barcode_Result_O(data){
+            console.log('client_uid')
+            console.log(client_uid);
+
             console.log('Barcode_Result_O', data);
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
@@ -111,7 +114,7 @@ $(function(){
         }
 
         function Pill_Detect_Result_O(data){
-            
+            console.log(data)
             if (output_pill_bt > 0 && data[0] == client_uid){
                     var img = document.getElementById('pill_odf');
                     img.src="pic/ok1.jpeg";

@@ -50,7 +50,7 @@ function feedback(){
 
         }else{
             img2.src="pic/wrong_w.png";
-            r2r = '藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font><br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
+            r2r = '答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font><br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
 
         }
@@ -60,8 +60,9 @@ function feedback(){
     }else{
         cognition.push(0);
         img2.src="pic/wrong_w.png";
-        r2 = '您給 Anpo 10mg/tab 的理由：' + document.getElementById('Anpo 10mg/tab r').value;
-        document.getElementById('2 r').innerHTML = r2;
+        // r2 = '您給 Anpo 10mg/tab 的理由：' + document.getElementById('Anpo 10mg/tab r').value;
+        r2 = '答錯原因：MAR單認知錯誤<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font><br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
+        document.getElementById('2 r 2').innerHTML = r2;
         correctness.push(0);
         reason.push(document.getElementById('Anpo 10mg/tab r').value);
     
@@ -76,6 +77,7 @@ function feedback(){
         r3r = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value;
         reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
+        
         if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 1.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=1.6 
         && (medicines['Progesterone 25mg/ml']['way'][0] =='Three fingers below the acromion' || medicines['Progesterone 25mg/ml']['way'][0] == 'left upper hip' || medicines['Progesterone 25mg/ml']['way'][0] == 'right upper hip') 
         && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection' && medicines['Progesterone 25mg/ml']['dilution']=="0"){
@@ -99,7 +101,7 @@ function feedback(){
         document.getElementById('3 r').innerHTML = r3;
         r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
-        reason.push(document.getElementById('Progesterone 25mg/ml r').value);
+        reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
     }
 
 
@@ -163,8 +165,9 @@ function feedback(){
     }else{
         cognition.push(0);
         img5.src="pic/wrong_w.png";
-        r5 = '您給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r').value;
-        document.getElementById('5 r').innerHTML = r5;
+        // r5 = '您給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r').value;
+        r5 = '\n -> 答錯原因：MAR單認知錯誤<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
+        document.getElementById('5 r 5').innerHTML = r5;
         correctness.push(0);
         reason.push(document.getElementById('Sennoside 12mg/tab r').value);
     
@@ -192,14 +195,15 @@ function feedback(){
             correctness.push(0);
 
         }
-        document.getElementById('6 r 6').innerHTML = c6r;
+        document.getElementById('6 r').innerHTML = c6r;
         document.getElementById('6 r 6').innerHTML = r6r;
 
     }else{
         cognition.push(0);
         img6.src="pic/wrong_w.png";
-        r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
-        document.getElementById('6 r').innerHTML = r6;
+        r6 = '\n -> 答錯原因：MAR單認知錯誤<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
+        // r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
+        document.getElementById('6 r 6').innerHTML = r6;
         correctness.push(0);
         reason.push(document.getElementById('Peace 2.5mg/tab r').value);
     
@@ -233,7 +237,7 @@ function feedback(){
         img7.src="pic/wrong_w.png";
         r7 = '您給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r').value;
         document.getElementById('7 r').innerHTML = r7;
-        r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
+        // r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Oxacillin 1000mg/vail r').value);
     }
@@ -264,9 +268,10 @@ function feedback(){
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
-        r8r = '您不給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
+        // r8r = '您不給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
+        r8r = ' -> 答錯原因：MAR單認知錯誤<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
         document.getElementById('8 r 8').innerHTML = r8r;
-        r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
+        // r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
         reason.push(document.getElementById('Paramol 500mg/tab r no').value);
     }
@@ -297,8 +302,9 @@ function feedback(){
     }else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
-        r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
-        document.getElementById('9 r').innerHTML = r9;
+        // r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
+        r9 ='\n -> 答錯原因：MAR單認知錯誤<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
+        document.getElementById('9 r 9').innerHTML = r9;
         correctness.push(0);
         reason.push(document.getElementById('Primperan 5 mg/tab r no').value);
     

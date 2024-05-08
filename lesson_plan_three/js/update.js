@@ -200,7 +200,7 @@ function check_page(n){
     else if(n === 3){
         correctness = [];
         reason = [];
-        if (pill_detect['Tulip'] == -1){ // if get value it will not be -1 -> usually nothing is 0
+        if (pill_detect['Apno 30mg/tab'] == -1){ // if get value it will not be -1 -> usually nothing is 0
             var img = document.getElementById('pill_odf');
             img.src="pic/wrong.jpeg";
             // console.log(pill_detect)
@@ -223,7 +223,7 @@ function check_page(n){
         
         if (window.confirm("確定送出檢定?\n 送出後會給您一些建議與檢討並與後台做數據分析～～")) {
             feedback();
-        
+            
             let empty_textbox = 0;
 
             for(let i = 0; i < reason.length; i++){
@@ -236,11 +236,14 @@ function check_page(n){
                 }
             }   
             console.log(pill_detect);
-    
-            if (empty_textbox == 0 && pill_detect['Tulip'] != -1){
+            console.log('empty_textbox' )
+            console.log(empty_textbox)
+            console.log('Apno 30mg/tab' )
+            console.log(pill_detect['Apno 30mg/tab'] )
+            if (empty_textbox == 0 && pill_detect['Apno 30mg/tab'] != -1){
                 var img = document.getElementById('pill_text');
                 img.src="pic/ok1.jpeg";
-    
+                console.log('======================' )
                 pills_num = Object.values(pill_detect)
                 $.post(domain_name_url + "/api/_sheet_user", {  id: document.getElementById('IDF_ID').value,
                                                                         name: document.getElementById('IDF_name').value,
@@ -249,9 +252,9 @@ function check_page(n){
                                                                             pills_1: pills_num[0],
                                                                             pills_2: pills_num[1],
                                                                             pills_3: pills_num[2],
-                                                                            pills_4: 0,
-                                                                            pills_5: 0,
-                                                                            pills_6: 0,
+                                                                            pills_4: pills_num[3],
+                                                                            pills_5: pills_num[4],
+                                                                            pills_6: pills_num[5],
                                                                             pills_7: 0,
                                                                             pills_8: 0,
                                                                             pills_9: 0,
@@ -293,7 +296,7 @@ function check_page(n){
                                                                                             ans_10: correctness[9],
                                 },function(){
                                     $.post(domain_name_url + "/api/_sheet_syringe", { id: document.getElementById('IDF_ID').value,
-                                                                                lesson: 1,
+                                                                                lesson: 3,
                                                                                 record: JSON.stringify(medicines),
                                     })
                                 })

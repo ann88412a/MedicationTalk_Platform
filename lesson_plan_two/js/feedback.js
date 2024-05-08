@@ -150,6 +150,7 @@ function feedback(){
             correctness.push(0);
 
         }
+        document.getElementById('4 r').innerHTML = c4r;
         document.getElementById('4 r 4').innerHTML = r4r;
 
     }else{
@@ -287,6 +288,7 @@ function feedback(){
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
+
         // r7 = '您給 Keto 30mg/amp 的理由：' + document.getElementById('Keto 30mg/amp r').value;
         r7 = '你給Keto的理由為:' + document.getElementById('Keto 30mg/amp r').value + ' -> 答錯原因：MAR單認知錯誤<br>Keto 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Keto<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
         document.getElementById('7 r').innerHTML = r7;

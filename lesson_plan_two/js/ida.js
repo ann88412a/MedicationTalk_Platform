@@ -150,9 +150,15 @@ $(function(){
                 //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
             }
             else{
-                console.log("樣式錯誤!");
-                Reset_page2();
-                alert("選擇與放入樣式不同!");
+                //console.log($('#IDF_machine').val());
+                
+                //console.log(data[0]);
+                //console.log(client_uid);
+                if ( data[0] == client_uid){
+                    console.log("樣式錯誤!");
+                    Reset_page2();
+                    alert("選擇與放入樣式不同!");
+                }
             }
 
         }

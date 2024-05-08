@@ -22,12 +22,12 @@ function feedback(){
         cognition.push(1);
         score = score + 1;
         img1.src="pic/ok_w.png";
-        paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： Yes';
+        paitent_r = '您非常細心，有觀察到病人身分錯誤，繼續保持!' ;
         correctness.push(1);
     }else{
         cognition.push(0);
         img1.src="pic/wrong_w.png";
-        paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No';
+        paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No<br>同名陳志明；<b style="color: #228de5;">但出生年月日錯誤</b>(52/9/17)；正確為(37/6/17)<br><font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>';
         correctness.push(0);
     }
     
@@ -38,20 +38,24 @@ function feedback(){
     var img2 = document.getElementById('2 img');
     // if (pill_detect['Dilatrend25'] == 0 && pill_detect['Dilantin'] == 0) 
     if (!document.getElementById('check1').checked ){
+        c2r = ''
+        r2r = ''
         r2r = '您不給 Dilatrend 25mg/tab 的理由：' + document.getElementById('Dilatrend 25mg/tab r no').value;
         reason.push(document.getElementById('Dilatrend 25mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Dilatrend'] == 0 && pill_detect['Dilantin'] == 0){
             score = score + 1;
             correctness.push(1);
+            c2r = '你很棒，繼續保持!'
             img2.src="pic/ok_w.png";
 
         }else{
             img2.src="pic/wrong_w.png";
-            r2r = r2r + '\n -> 答錯原因：實際給藥錯誤';
+            r2r = r2r + '\n -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Dilantin)，<font style="color: #00B050;">正確藥物為 (Dilatrend)</font><br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Dila</font>trend 和 <font style="text-decoration:underline;">Dila</font>ntin乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
 
         }
+        document.getElementById('2 r').innerHTML = c2r;
         document.getElementById('2 r 2').innerHTML = r2r;
 
     }else{
@@ -69,20 +73,23 @@ function feedback(){
     var img3 = document.getElementById('3 img');
      
     if (!document.getElementById('check2').checked){
+        c3r = ''
         r3r = '您不給 Requip F.C 0.25mg/tab 的理由：' + document.getElementById('Requip F.C 0.25mg/tab r no').value;
         reason.push(document.getElementById('Requip F.C 0.25mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Requip'] == 0 && pill_detect['Requip1'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
+            c3r = '你是最棒的!'
             correctness.push(1);
 
         }else{
             img3.src="pic/wrong_w.png";
-            r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
+            r3r = r3r + '\n -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(1mg)，<font style="color: #00B050;">正確劑量為(0.25mg)</font><br><font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">單顆劑量</font>!</font>';
             correctness.push(0);
 
         }
+        document.getElementById('3 r').innerHTML = c3r;
         document.getElementById('3 r 3').innerHTML = r3r;
 
     }else{
@@ -133,21 +140,23 @@ function feedback(){
     var img5 = document.getElementById('5 img');
     
     if (!document.getElementById('check4').checked){
+        c5r = ''
         r5r = '您不給 Repaglinide 1mg/tab 的理由：' + document.getElementById('Repaglinide 1mg/tab r no').value;
         reason.push(document.getElementById('Repaglinide 1mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Repaglinide'] == 0){
             score = score + 1;
             img5.src="pic/ok_w.png";
+            c5r = '答對了，繼續保持!'
             correctness.push(1);
 
         }else{
             img5.src="pic/wrong_w.png";
-            r5r = r5r + '\n -> 答錯原因：實際給藥錯誤';
+            r5r = r5r + '\n -> 答錯原因：實際給藥錯誤<br>Repaglinide <b style="color: #228de5;">時間錯誤</b>，<font style="color: #00B050;">醫囑時間為 TID/AC</font> (7AM-11AM-16PM)。AC 指飯前給予，<font style="color: #00B050;">情境給藥時間是早上九點，故此藥已過給藥時間</font><br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下時間是否吻合</font>。血糖藥有分<b>飯前</b>給或<b>飯後</b>給，服用Repaglinide需要確認患者是否在吃「第一口飯之前」，尤其老年族群給飯前血糖藥後，要提醒與確認他有進食，以免血糖過低！</font>';
             correctness.push(0);
 
         }
-
+        document.getElementById('5 r').innerHTML = c5r;
         document.getElementById('5 r 5').innerHTML = r5r;
     }else{
         cognition.push(0);
@@ -163,20 +172,22 @@ function feedback(){
     var img6 = document.getElementById('6 img');
     
     if (!document.getElementById('check5').checked){
+        c6r = ''
         r6r = '您不給 Transamin 250mg/tab 的理由：' + document.getElementById('Transamin 250mg/tab r no').value;
         reason.push(document.getElementById('Transamin 250mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Transamin'] == 0){
             score = score + 1;
             img6.src="pic/ok_w.png";
+            c6r = '答對了，你很棒!'
             correctness.push(1);
 
         }else{
             img6.src="pic/wrong_w.png";
-            r6r = r6r + '\n -> 答錯原因：實際給藥錯誤';
+            r6r = r6r + '\n -> 答錯原因：實際給藥錯誤<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用 Transamin 的適應症</font>，應向醫師或專科護理師確認是否需要服用此藥<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>';
             correctness.push(0);
         }
-
+        document.getElementById('6 r').innerHTML = c6r;
         document.getElementById('6 r 6').innerHTML = r6r;
     }else{
         cognition.push(0);
@@ -223,22 +234,24 @@ function feedback(){
     var img8 = document.getElementById('8 img');
     
     if (document.getElementById('check7').checked ){
-        r8 = '您給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r').value;
+        c8r = ''
+        r8r = '您給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r').value;
         reason.push(document.getElementById('Bokey 100mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Bokey'] == 1){
             score = score + 1;
             img8.src="pic/ok_w.png";
+            c8r = '你很棒唷~'
             correctness.push(1);
 
         }else{
             img8.src="pic/wrong_w.png";
-            r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
+            r8r = r8r + '\n -> 答錯原因：實際給藥錯誤<br> 病人有心臟病， Bokey 可預防心肌梗塞和心栓性栓塞症<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
 
         }
-
-        document.getElementById('8 r').innerHTML = r8;
+        document.getElementById('8 r').innerHTML = c8r;
+        document.getElementById('8 r 8').innerHTML = r8r;
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
@@ -253,7 +266,8 @@ function feedback(){
     var img9 = document.getElementById('9 img');
     
     if (document.getElementById('check8').checked){
-        r9 = '您給 Simvahexal 20 mg/tab 的理由：' + document.getElementById('Simvahexal 20 mg/tab r').value;
+        c9r = ''
+        r9r = '您給 Simvahexal 20 mg/tab 的理由：' + document.getElementById('Simvahexal 20 mg/tab r').value;
         reason.push(document.getElementById('Simvahexal 20 mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Zocor'] == 1){
@@ -263,11 +277,11 @@ function feedback(){
 
         }else{
             img9.src="pic/wrong_w.png";
-            r9 = r9 + '\n -> 答錯原因：實際給藥錯誤';
+            r9 = r9 + '\n -> 答錯原因：實際給藥錯誤<br>病人有高血脂，Simvahexal可降低血液中的膽固醇和三酸甘油酯<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑 </font>';
             correctness.push(0);
         }
-
-        document.getElementById('9 r').innerHTML = r9;
+        document.getElementById('9 r').innerHTML = c9r;
+        document.getElementById('9 r 9').innerHTML = r9r;
     }else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
@@ -282,20 +296,22 @@ function feedback(){
     var img10 = document.getElementById('10 img');
     
     if (!document.getElementById('check9').checked){
+        c10r = ''
         r10r = '您不給 FLU-D (Fluconazole) 50mg/tab 的理由：' + document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value;
         reason.push(document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['FLU'] == 0){
             score = score + 1;
             img10.src="pic/ok_w.png";
+            c10r = '你很細心，請繼續保持!'
             correctness.push(1);
 
         }else{
             img10.src="pic/wrong_w.png";
-            r10r = r10r + '\n -> 答錯原因：實際給藥錯誤';
+            r10r = r10r + '\n -> 答錯原因：實際給藥錯誤<br> 病人有後天免疫缺乏症候群，有服用 <font style="color: #228de5;">FLU-D (Fluconazole)</font>的適應症，但它<font style="color: #228de5;">不能與 Simvahexal 合用</font>，會有藥物交互作用 DDI<br><font style="color: #f44336;">★ 藥物-藥物交互作用(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
             correctness.push(0);
         }
-
+        document.getElementById('10 r').innerHTML = c10r;
         document.getElementById('10 r 10').innerHTML = r10r;
     }else{
         cognition.push(0);

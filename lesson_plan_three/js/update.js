@@ -117,8 +117,8 @@ for (let i=0; i<10; i++){
         else if(i == 2){ // Clexane 60mg/0.6ml"
             create_json('Clexane 60mg/0.6ml', check_list[i].checked);
         }
-        else if(i == 5){ // "Cefazolin 1000mg/vail"
-            create_json('Ocillina 500mg/vail', check_list[i].checked);
+        else if(i == 5){ // "Oxacillin 1000mg/vail"
+            create_json('Oxacillin 1000mg/vail', check_list[i].checked);
         };
 
 

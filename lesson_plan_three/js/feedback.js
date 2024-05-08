@@ -74,8 +74,8 @@ function feedback(){
     if (document.getElementById('check2').checked){
         c3r = ''
         r3r = ''
-        r3r = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value;
-        reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
+        // r3r = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value;
+        reason.push(document.getElementById('Progesterone 25mg/ml r').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
         
         if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 1.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=1.6 

@@ -339,7 +339,7 @@ function SyringeFeedback(){
             if (medicines['Progesterone 25mg/ml']['verification']!='1234567890ABC'){
                 errorMessage += '驗證錯誤,<br>';
             }
-            if (medicines['Progesterone 25mg/ml']['injection']!=1.5){
+            if (medicines['Progesterone 25mg/ml']['injection'] >1.6 || medicines['Progesterone 25mg/ml']['injection']<1.4){
                 errorMessage += " 劑量錯誤, 您給的劑量為" + medicines['Progesterone 25mg/ml']['injection'] +"ml, <br>";
             }
             if ((medicines['Progesterone 25mg/ml']['way'][0] =='Three fingers below the acromion' || 

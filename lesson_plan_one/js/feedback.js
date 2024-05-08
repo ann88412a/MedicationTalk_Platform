@@ -22,12 +22,12 @@ function feedback(){
         cognition.push(1);
         score = score + 1;
         img1.src="pic/ok_w.png";
-        // paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： Yes';
+        paitent_r = '您非常細心，有觀察到病人身分錯誤，繼續保持!' ;
         correctness.push(1);
     }else{
         cognition.push(0);
         img1.src="pic/wrong_w.png";
-        paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No';
+        paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No <br>名字同音；<b style="color: #228de5;">但寫法錯誤</b>(黃岳禮)；<font style="color: #00B050;">正確為(黃月里)</font> <br><font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>';
         correctness.push(0);
     }
     
@@ -37,20 +37,24 @@ function feedback(){
     // 2
     var img2 = document.getElementById('2 img');
     if (!document.getElementById('check1').checked){
-        r2r = '您不給 Amiodarone(Cordarone) 150mg/3ml/amp 的理由：' + document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r no').value;
+        // r2r = '您不給 Amiodarone(Cordarone) 150mg/3ml/amp 的理由：' + document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r no').value;
+        c2r=''
+        r2r=''
         reason.push(document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r no').value);
         cognition.push(1);
         if (1==1){ 
             score = score + 1;
             img2.src="pic/ok_w.png";
+            c2r='答對了! 請繼續保持'
             correctness.push(1);
 
         }else{
             img2.src="pic/wrong_w.png";
-            r2r = r2r + '\n -> 答錯原因：實際給藥錯誤';
+            r2r = '藥袋內<b style="color: #228de5;">藥物錯誤</b> (Amikacin)，<font style="color: #00B050;">正確藥物為 (Amiodarone)</font> <br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Amiodarone</font> 和 <font style="text-decoration:underline;">Amikacin</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
 
         }
+        document.getElementById('2 r').innerHTML = c2r;
         document.getElementById('2 r 2').innerHTML = r2r;
 
     }else{
@@ -67,21 +71,25 @@ function feedback(){
     var img3 = document.getElementById('3 img');
     r3r = ''
     if (!document.getElementById('check6').checked){
+        c3r = ''
+        r3r = ''
         // r3r = '您不給 Plavix (Clopidogrel) 75mg/tab 的理由：' + document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value;
         reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value);
         cognition.push(1); // 實際藥物需要300mg 但實際藥丸只有225mg
         if (pill_detect['Clopidogrel'] == 0){
             score = score + 1;
             img3.src="pic/ok_w.png";
+            c3r = '你很棒!'
             correctness.push(1);
 
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
-            r3r = ' -> 答錯原因：實際給藥錯誤';
+            r3r = ' -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;"><br>正確劑量為300mg(共4顆)</font><br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
             correctness.push(0);
 
         }
+        document.getElementById('3 r').innerHTML = c3r;
         document.getElementById('3 r 3').innerHTML = r3r;
 
     }else{
@@ -98,6 +106,7 @@ function feedback(){
     // 4
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check2').checked){
+        c4r = ''
         r4r = '您不給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value;
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value);
         cognition.push(1);
@@ -129,6 +138,7 @@ function feedback(){
     var img5 = document.getElementById('5 img');
     
     if (!document.getElementById('check4').checked){
+        c5r = ''
         r5r = '您不給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value;
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value);
         cognition.push(1);
@@ -191,21 +201,24 @@ function feedback(){
     var img7 = document.getElementById('7 img');
     r7r = ''
     if (!document.getElementById('check7').checked){
+        c7r = ''
+        r7r = ''
         // r7r = '您不給 Aspirin 100mg/tab 的理由：' + document.getElementById('Aspirin 100mg/tab r no').value;
         reason.push(document.getElementById('Aspirin 100mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Aspirin'] == 0){
             score = score + 1;
             img7.src="pic/ok_w.png";
+            c7r = '你答對了~'
             correctness.push(1);
 
         }else{
             img7.src="pic/wrong_w.png";
             // r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
-            r7r = ' -> 答錯原因：實際給藥錯誤';
+            r7r = ' -> 答錯原因：實際給藥錯誤<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
             correctness.push(0);
         }
-
+        document.getElementById('7 r').innerHTML = c7r;
         document.getElementById('7 r 7').innerHTML = r7r;
     }else{
         cognition.push(0);
@@ -221,22 +234,25 @@ function feedback(){
     var img8 = document.getElementById('8 img');
     r8 = ''
     if (document.getElementById('check8').checked){
+        c8r = ''
+        r8r = ''
         // r8 = '您給 Tulip （Atorvastatin）20mg/tab 的理由：' + document.getElementById('Tulip （Atorvastatin）20mg/tab r').value;
         reason.push(document.getElementById('Tulip （Atorvastatin）20mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Tulip'] == 1){
             score = score + 1;
             img8.src="pic/ok_w.png";
+            c8r = '你是最棒的!'
             correctness.push(1);
 
         }else{
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
-            r8 = ' -> 答錯原因：實際給藥錯誤';
+            r8 = ' -> 答錯原因：實際給藥錯誤<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
         }
-
-        document.getElementById('8 r').innerHTML = r8;
+        document.getElementById('8 r').innerHTML = c8r;
+        document.getElementById('8 r r').innerHTML = r8r;
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";

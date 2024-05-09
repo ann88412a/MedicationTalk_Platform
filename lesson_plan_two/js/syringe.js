@@ -15,10 +15,14 @@ var way_dic = {
     "right lower abdomen" : "右下腹",
     "left upper abdomen" : "左上腹",
     "left lower abdomen" : "左下腹",
-    "left upper hip" : "左上臀",
-    "left lower hip" : "左下臀",
-    "right upper hip" : "右上臀",
-    "lower right hip" : "右下臀",
+    "left hip (upper left)" : "左臀 (左上)",
+    "left hip (lower left)" : "左臀 (左下)",
+    "left hip (upper right)" : "左臀 (右上)",
+    "left hip (lower right)" : "左臀 (右下)",
+    "right hip (upper left)" : "右臀 (左上)",
+    "right hip (lower left)" : "右臀 (左下)",
+    "right hip (upper right)" : "右臀 (右上)",
+    "right hip (lower right)" : "右臀 (右下)",
     "forearm" : "前臂"
 };
 

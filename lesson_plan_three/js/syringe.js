@@ -15,10 +15,14 @@ var way_dic = {
     "right lower abdomen" : "右下腹",
     "left upper abdomen" : "左上腹",
     "left lower abdomen" : "左下腹",
-    "left upper hip" : "左上內側臀",
-    "left lower hip" : "左下內側臀",
-    "right upper hip" : "右上內側臀",
-    "lower right hip" : "右下內側臀",
+    "left hip (upper left)" : "左臀 (左上)",
+    "left hip (lower left)" : "左臀 (左下)",
+    "left hip (upper right)" : "左臀 (右上)",
+    "left hip (lower right)" : "左臀 (右下)",
+    "right hip (upper left)" : "右臀 (左上)",
+    "right hip (lower left)" : "右臀 (左下)",
+    "right hip (upper right)" : "右臀 (右上)",
+    "right hip (lower right)" : "右臀 (右下)",
     "forearm" : "前臂"
 };
 
@@ -342,13 +346,12 @@ function SyringeFeedback(){
             if (medicines['Progesterone 25mg/ml']['injection'] >1.6 || medicines['Progesterone 25mg/ml']['injection']<1.4){
                 errorMessage += " 劑量錯誤, 您給的劑量為" + medicines['Progesterone 25mg/ml']['injection'] +"ml, <br>";
             }
-            if ((medicines['Progesterone 25mg/ml']['way'][0] =='Three fingers below the acromion' || 
-                medicines['Progesterone 25mg/ml']['way'][0] == 'left upper hip' || 
-                medicines['Progesterone 25mg/ml']['way'][0] == 'right upper hip')
-                && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection'){
+            if ((medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || 
+                medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)')
+                && medicines['Progesterone 25mg/ml']['way'][1] =='intramuscular injection'){
 
                 errorMessage += " 途徑錯誤, 您選擇的途徑為 " + way_dic[medicines['Progesterone 25mg/ml']['way'][0]] + "," + way_dic[medicines['Progesterone 25mg/ml']['way'][1]] + "<br>" + 
-                "正確途徑應為以下,<br>" + "注射部位:肩峰下三橫指,左上內側臀,右上內側臀(三擇一)" + "<br>" + "注射角度:肌肉注射" + "<br>";
+                "正確途徑應為以下,<br>" + "注射部位:左臀(左上區) 或 右臀(右上區)" + "<br>" + "注射角度:肌肉注射" + "<br>";
             
             }
 

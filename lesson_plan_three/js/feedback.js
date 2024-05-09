@@ -50,14 +50,14 @@ function feedback(){
             score = score + 1;
             img2.src="pic/ok_w.png";
             c2r ='你不給Anpo 10mg/tab的理由是因為「'
-            + document.getElementById('Anpo 10mg/tab r no').value
+            + document.getElementById('Anpo 10mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img2.src="pic/wrong_w.png";
             r2r = '你不給Anpo 10mg/tab的理由是因為「'
-            + document.getElementById('Anpo 10mg/tab r no').value
+            + document.getElementById('Anpo 10mg/tab r no').value.trim()
             +'」<br>-> 答錯原因：實際給藥錯誤'
             +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
@@ -72,7 +72,7 @@ function feedback(){
         img2.src="pic/wrong_w.png";
         // r2 = '您給 Anpo 10mg/tab 的理由：' + document.getElementById('Anpo 10mg/tab r').value;
         r2 = '你給Anpo 10mg/tab的理由是因為「'
-        + document.getElementById('Anpo 10mg/tab r').value
+        + document.getElementById('Anpo 10mg/tab r').value.trim()
         +'」<br> -> 答錯原因：MAR單認知錯誤'
         +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
         +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
@@ -176,14 +176,14 @@ function feedback(){
             score = score + 1;
             img5.src="pic/ok_w.png";
             c5r ='你不給Sennoside 12mg/tab的理由是因為「'
-            + document.getElementById('Sennoside 12mg/tab r no').value
+            + document.getElementById('Sennoside 12mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img5.src="pic/wrong_w.png";
             r5r = '你不給Sennoside 12mg/tab的理由是因為「'
-            + document.getElementById('Sennoside 12mg/tab r no').value
+            + document.getElementById('Sennoside 12mg/tab r no').value.trim()
             +'」<br>-> 答錯原因：實際給藥錯誤'
             +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
             +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
@@ -198,7 +198,7 @@ function feedback(){
         img5.src="pic/wrong_w.png";
         // r5 = '您給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r').value;
         r5 = '你給Sennoside 12mg/tab的理由是因為「'
-        + document.getElementById('Sennoside 12mg/tab r').value
+        + document.getElementById('Sennoside 12mg/tab r').value.trim()
         +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
         +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
@@ -223,14 +223,14 @@ function feedback(){
             score = score + 1;
             img6.src="pic/ok_w.png";
             c6r ='你不給Peace 2.5mg/tab的理由是因為「'
-            + document.getElementById('Peace 2.5mg/tab r no').value
+            + document.getElementById('Peace 2.5mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img6.src="pic/wrong_w.png";
             r6r = '你不給Peace 2.5mg/tab的理由是因為「'
-            + document.getElementById('Peace 2.5mg/tab r no').value
+            + document.getElementById('Peace 2.5mg/tab r no').value.trim()
             +'」<br>-> 答錯原因：實際給藥錯誤'
             +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認'
             +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
@@ -244,7 +244,7 @@ function feedback(){
         cognition.push(0);
         img6.src="pic/wrong_w.png";
         r6 = '你給Peace 2.5mg/tab的理由是因為「'
-        + document.getElementById('Peace 2.5mg/tab r').value
+        + document.getElementById('Peace 2.5mg/tab r').value.trim()
         +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認'
         +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
@@ -309,7 +309,7 @@ function feedback(){
             score = score + 1;
             img8.src="pic/ok_w.png";
             c8r ='你給Paramol 500mg/tab的理由是因為「'
-            + document.getElementById('Paramol 500mg/tab r').value
+            + document.getElementById('Paramol 500mg/tab r').value.trim()
             + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             correctness.push(1);
 
@@ -317,7 +317,7 @@ function feedback(){
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
             r8r = '你給Paramol 500mg/tab的理由是因為「'
-            + document.getElementById('Paramol 500mg/tab r').value
+            + document.getElementById('Paramol 500mg/tab r').value.trim()
             +'」<br> -> 答錯原因：實際給藥錯誤'
             +'<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
@@ -330,7 +330,7 @@ function feedback(){
         img8.src="pic/wrong_w.png";
         // r8r = '您不給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
         r8r ='你不給Paramol 500mg/tab的理由是因為「'
-        + document.getElementById('Paramol 500mg/tab r no').value 
+        + document.getElementById('Paramol 500mg/tab r no').value.trim() 
         +'」<br>  -> 答錯原因：MAR單認知錯誤'
         +'<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
@@ -355,14 +355,14 @@ function feedback(){
             score = score + 1;
             img9.src="pic/ok_w.png";
             c9r ='你給Primperan 5 mg/tab的理由是因為「'
-            + document.getElementById('Primperan 5 mg/tab r').value
+            + document.getElementById('Primperan 5 mg/tab r').value.trim()
             + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img9.src="pic/wrong_w.png";
             r9r ='你給Primperan 5 mg/tab的理由是因為「'
-            + document.getElementById('Primperan 5 mg/tab r').value
+            + document.getElementById('Primperan 5 mg/tab r').value.trim()
             + '」<br>  -> 答錯原因：實際給藥錯誤<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
@@ -374,7 +374,7 @@ function feedback(){
         img9.src="pic/wrong_w.png";
         // r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
         r9 ='你不給Primperan 5 mg/tab的理由是因為「'
-        + document.getElementById('Primperan 5 mg/tab r no').value
+        + document.getElementById('Primperan 5 mg/tab r no').value.trim()
         +'」<br>  -> 答錯原因：MAR單認知錯誤<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
         document.getElementById('9 r 9').innerHTML = r9;

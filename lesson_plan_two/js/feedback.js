@@ -49,14 +49,14 @@ function feedback(){
             score = score + 1;
             img2.src="pic/ok_w.png";
             c2r ='你不給Concor 5mg/tab的理由是因為「'
-            + document.getElementById('Concor 5mg/tab r no').value
+            + document.getElementById('Concor 5mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img2.src="pic/wrong_w.png";
             r2r ='你不給Concor 5mg/tab的理由是因為「'
-            + document.getElementById('Concor 5mg/tab r no').value
+            + document.getElementById('Concor 5mg/tab r no').value.trim()
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Cardio)，<font style="color: #00B050;">正確藥物為 (Concor)</font>'
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Concor</font> 和 <font style="text-decoration:underline;">Cardio</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
@@ -70,7 +70,7 @@ function feedback(){
         img2.src="pic/wrong_w.png";
         // r2 = '您給 Concor 5mg/tab 的理由：' + document.getElementById('Concor 5mg/tab r').value;
         r2 = '你給Concor 5mg/tab的理由是因為「'
-        + document.getElementById('Concor 5mg/tab r').value
+        + document.getElementById('Concor 5mg/tab r').value.trim()
         +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Cardio)，<font style="color: #00B050;">正確藥物為 (Concor)</font>'
         +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Concor</font> 和 <font style="text-decoration:underline;">Cardio</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
@@ -94,7 +94,7 @@ function feedback(){
             score = score + 1;
             img3.src="pic/ok_w.png";
             c3r ='你不給Isoptin 40 mg/tab的理由是因為「'
-            + document.getElementById('Isoptin 40 mg/tab r no').value
+            + document.getElementById('Isoptin 40 mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
@@ -102,8 +102,8 @@ function feedback(){
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
             r3r = '你不給Isoptin 40 mg/tab的理由是因為「'
-            + document.getElementById('Isoptin 40 mg/tab r no').value
-            +' 」<br>-> 答錯原因：實際給藥錯誤'
+            + document.getElementById('Isoptin 40 mg/tab r no').value.trim()
+            +'」<br>-> 答錯原因：實際給藥錯誤'
             +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(240mg)，<font style="color: #00B050;"><br>正確劑量為(40mg)</font>'
             +'<br><font style="color: #f44336;">★ 同一種藥物會有<font style="background-color: yellow;">不同劑量</font></font>';
             correctness.push(0);
@@ -117,8 +117,8 @@ function feedback(){
         img3.src="pic/wrong_w.png";
         // r3 = '您給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r').value;
         r3 ='不給Isoptin 40 mg/tab的理由是因為「'
-        + document.getElementById('Isoptin 40 mg/tab r').value
-        +' 」<br>-> 答錯原因：MAR單認知錯誤'
+        + document.getElementById('Isoptin 40 mg/tab r').value.trim()
+        +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(240mg)，<font style="color: #00B050;">'
         +'<br>正確劑量為(40mg)</font><br><font style="color: #f44336;">★ 同一種藥物會有<font style="background-color: yellow;">不同劑量</font></font>';
         document.getElementById('3 r').innerHTML = r3;
@@ -180,14 +180,14 @@ function feedback(){
             score = score + 1;
             img5.src="pic/ok_w.png";
             c5r ='你不給Spironolactone 25mg/tab的理由是因為「'
-            + document.getElementById('Spironolactone 25mg/tab r no').value
+            + document.getElementById('Spironolactone 25mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img5.src="pic/wrong_w.png";
             r5r = '你不給Spironolactone 25mg/tab的理由是因為「'
-            + document.getElementById('Spironolactone 25mg/tab r no').value
+            + document.getElementById('Spironolactone 25mg/tab r no').value.trim()
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br>Spironolactone <b style="color: #228de5;">時間錯誤</b>，醫囑時間為QD/AC (早餐飯前)。情境給藥時間是早上九點，<font style="color: #00B050;">已過給藥時間，</font>'
             +'<br>故此藥目前不能給<font style="color: #00B050;">，應告知醫師</font><br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
@@ -200,8 +200,8 @@ function feedback(){
         cognition.push(0);
         img5.src="pic/wrong_w.png";
         r5 ='你給Spironolactone 25mg/tab的理由是因為「'
-        + document.getElementById('Spironolactone 25mg/tab r').value 
-        +' 」<br>-> 答錯原因：MAR單認知錯誤'
+        + document.getElementById('Spironolactone 25mg/tab r').value.trim()
+        +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>Spironolactone <b style="color: #228de5;">時間錯誤</b>，醫囑時間為QD/AC (早餐飯前)。情境給藥時間是早上九點，<font style="color: #00B050;">已過給藥時間，</font>'
         +'<br>故此藥目前不能給<font style="color: #00B050;">，應告知醫師</font><br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
         // r5 = '您給 Spironolactone 25mg/tab 的理由：' + document.getElementById('Spironolactone 25mg/tab r').value;
@@ -226,14 +226,14 @@ function feedback(){
             score = score + 1;
             img6.src="pic/ok_w.png";
             c6r ='你不給Metformin 500mg/tab的理由是因為「'
-            + document.getElementById('Metformin 500mg/tab r no').value
+            + document.getElementById('Metformin 500mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img6.src="pic/wrong_w.png";
             r6r = '你不給Metformin 500mg/tab的理由是因為「'
-            + document.getElementById('Metformin 500mg/tab r no').value
+            + document.getElementById('Metformin 500mg/tab r no').value.trim()
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br><font style="color: #228de5;">適應症「暫時」不適合。</font>病人資訊提到<font style="color: #228de5;">「預計早上做注射顯影劑的電腦斷層」，</font>'
             +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
@@ -249,7 +249,7 @@ function feedback(){
         img6.src="pic/wrong_w.png";
         // r6 = '您給 Metformin 500mg/tab 的理由：' + document.getElementById('Metformin 500mg/tab r').value;
         r6 =  '你給Metformin 500mg/tab的理由是因為「'
-        + document.getElementById('Metformin 500mg/tab r').value
+        + document.getElementById('Metformin 500mg/tab r').value.trim()
         +'」<br> -> 答錯原因：MAR單認知錯誤'
         +'<br><font style="color: #228de5;">適應症「暫時」不適合。</font>病人資訊提到<font style="color: #228de5;">「預計早上做注射顯影劑的電腦斷層」，</font>'
         +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
@@ -312,7 +312,7 @@ function feedback(){
             score = score + 1;
             img8.src="pic/ok_w.png";
             c8r ='你給Nexium 40mg/tab的理由是因為「'
-            + document.getElementById('Nexium 40mg/tab r').value
+            + document.getElementById('Nexium 40mg/tab r').value.trim()
             + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             correctness.push(1);
 
@@ -320,8 +320,8 @@ function feedback(){
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
             r8r = '你給Nexium 40mg/tab的理由是因為「'
-            + document.getElementById('Nexium 40mg/tab r').value
-            +' 」<br>-> 答錯原因：實際給藥錯誤'
+            + document.getElementById('Nexium 40mg/tab r').value.trim()
+            +'」<br>-> 答錯原因：實際給藥錯誤'
             +'<br>病人有胃潰瘍，使用氫離子幫浦抑制劑PPI是抑制胃酸藥效最佳藥品，會不可逆的結合在鉀/ 氫離子交換幫浦上，完整抑制胃酸分泌'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
@@ -333,7 +333,7 @@ function feedback(){
         img8.src="pic/wrong_w.png";
         // r8r = '您不給 Nexium 40mg/tab 的理由：' + document.getElementById('Nexium 40mg/tab r').value;
         r8r = '你不給Nexium 40mg/tab的理由是因為「'
-        + document.getElementById('Nexium 40mg/tab r no').value
+        + document.getElementById('Nexium 40mg/tab r no').value.trim()
         +'」<br> -> 答錯原因：MAR單認知錯誤'
         +'<br>病人有胃潰瘍，使用氫離子幫浦抑制劑PPI是抑制胃酸藥效最佳藥品，會不可逆的結合在鉀/ 氫離子交換幫浦上，完整抑制胃酸分泌'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
@@ -358,14 +358,14 @@ function feedback(){
             score = score + 1;
             img9.src="pic/ok_w.png";
             c9r ='你給Lipitor 20mg/tab的理由是因為「'
-            + document.getElementById('Lipitor 20mg/tab r').value
+            + document.getElementById('Lipitor 20mg/tab r').value.trim()
             + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img9.src="pic/wrong_w.png";
             r9r = '你給Lipitor 20mg/tab的理由是因為「'
-            + document.getElementById('Lipitor 20mg/tab r').value
+            + document.getElementById('Lipitor 20mg/tab r').value.trim()
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br>病人有高血脂，服用Lipitor可降低血中過高之膽固醇及血脂，減少心血管疾病及中風的發作'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
@@ -378,7 +378,7 @@ function feedback(){
         img9.src="pic/wrong_w.png";
         // r9 = '您不給 Lipitor 20mg/tab 的理由：' + document.getElementById('Lipitor 20mg/tab r no').value;
         r9 ='你不給Lipitor 20mg/tab的理由是因為「'
-        + document.getElementById('Lipitor 20mg/tab r no').value
+        + document.getElementById('Lipitor 20mg/tab r no').value.trim()
         +'」<br> -> 答錯原因：MAR單認知錯誤'
         +'<br>病人有高血脂，服用Lipitor可降低血中過高之膽固醇及血脂，減少心血管疾病及中風的發作'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
@@ -404,14 +404,14 @@ function feedback(){
             score = score + 1;
             img10.src="pic/ok_w.png";
             c10r ='你不給Sandimmun neoral 100mg/tab的理由是因為「'
-            + document.getElementById('Sandimmun neoral 100mg/tab r no').value
+            + document.getElementById('Sandimmun neoral 100mg/tab r no').value.trim()
             + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
             img10.src="pic/wrong_w.png";
             r10r = '你不給Sandimmun neoral 100mg/tab的理由是因為「'
-            + document.getElementById('Sandimmun neoral 100mg/tab r no').value
+            + document.getElementById('Sandimmun neoral 100mg/tab r no').value.trim()
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br>病人有嚴重乾癬，有服用<b style="color: #228de5;">Sandimmun neoral</b>的適應症，它<b style="color: #228de5;">與 Lipitor (atorvastatin) 合用</b>，會有藥物交互作用 DDI，這兩種藥物合併使用可能會增加Lipitor在血液中的濃度，因此可能增加其副作用的風險，例如肌肉疼痛或肝臟問題'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物-藥物交互作用</font>(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
@@ -424,7 +424,7 @@ function feedback(){
         img10.src="pic/wrong_w.png";
         // r10 = '您給 Sandimmun neoral 100mg/tab 的理由：' + document.getElementById('Sandimmun neoral 100mg/tab r').value;
         r10 = '你給Sandimmun neoral 100mg/tab的理由是因為「'
-        + document.getElementById('Sandimmun neoral 100mg/tab r').value
+        + document.getElementById('Sandimmun neoral 100mg/tab r').value.trim()
         +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>病人有嚴重乾癬，有服用<b style="color: #228de5;">Sandimmun neoral</b>的適應症，它<b style="color: #228de5;">與 Lipitor (atorvastatin) 合用</b>，會有藥物交互作用 DDI，這兩種藥物合併使用可能會增加Lipitor在血液中的濃度，因此可能增加其副作用的風險，例如肌肉疼痛或肝臟問題'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物-藥物交互作用</font>(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';

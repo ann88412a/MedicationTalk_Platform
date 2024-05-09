@@ -237,7 +237,7 @@ function feedback(){
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br><font style="color: #228de5;">適應症「暫時」不適合。</font>病人資訊提到<font style="color: #228de5;">「預計早上做注射顯影劑的電腦斷層」，</font>'
             +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
-            +'<br><font style="color: #f44336;">★ ★	病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
+            +'<br><font style="color: #f44336;">★	病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
             correctness.push(0);
 
         }

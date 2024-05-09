@@ -158,7 +158,7 @@ function feedback(){
         img4.src="pic/wrong_w.png";
         r4 = '您給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r').value + "<br> -> 答錯原因:MAR單認知錯誤" +
         '<br>Amikacin<b style="color: #228de5;">途徑不洽當。</b><b style="color: #00B050;">藥物指引建議稀釋給予。</b>'
-        + '<br><font style="color: #f44336;">★</font>Amikacin<font style="color: #f44336;">建議稀釋由靜脈滴注給IV drip</font>100-200ml，且滴注30-60分鐘' + '<br><font style="color: #f44336;">★ 抗生素大多需要稀釋，並且滴注給予</font>';
+        + '<br><font style="color: #f44336;">★ </font>Amikacin<font style="color: #f44336;">建議稀釋由靜脈滴注給IV drip</font>100-200ml，且滴注30-60分鐘' + '<br><font style="color: #f44336;">★ 抗生素大多需要稀釋，並且滴注給予</font>';
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
         reason.push(document.getElementById('Amikacin 250mg/vail r').value);

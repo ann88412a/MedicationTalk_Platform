@@ -280,7 +280,6 @@ function feedback(){
         img7.src="pic/wrong_w.png";
         r7 = '您給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r').value + '<br> -> 答錯原因：MAR單認知錯誤'
         + '<br>Oxacillin是「<font style="color: #228de5;">「盤尼西林」Penicillin</font>類藥物。此患者對<b style="color: #228de5;">盤尼西林Penicillin有過敏記錄</b>，若仍要給就需要做PST，因此不應該直接該給藥'
-        + '<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>'
         + '<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
         document.getElementById('7 r').innerHTML = r7;
         // r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';

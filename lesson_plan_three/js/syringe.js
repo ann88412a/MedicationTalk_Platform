@@ -326,9 +326,7 @@ function GetOption(p){
 
 
 function SyringeFeedback(){
-    console.log('2:', document.getElementById('check2').checked);
-    console.log('3:', document.getElementById('check3').checked);
-    console.log('6:', document.getElementById('check2').checked);
+    //console.log('2:', document.getElementById('check2').checked);
 
     if (medicines != {}){
         var VerificationDetail = document.getElementById("VerificationDetail");
@@ -362,24 +360,6 @@ function SyringeFeedback(){
                 VerificationDetail.innerHTML = '很棒，您的給藥知識正確!' + " 你給藥的理由是:" + document.getElementById('Progesterone 25mg/ml r').value + "，你的給藥知識正確並且完全給藥正確，很棒~請繼續保持!";
             }
             
-        }
-
-        var VerificationDetail2 = document.getElementById("VerificationDetail2");
-        if (medicines['Clexane 60mg/0.6ml']){
-            // VerificationDetail2.innerHTML = 
-            // "錯誤原因:MAR單錯誤";
-        }
-        else{  //給藥原因待判斷
-            VerificationDetail2.innerHTML = "很棒，您的給藥知識正確!" + " 你不給藥理由是:" + document.getElementById('Clexane 60mg/0.6ml r no').value + "，你的給藥知識正確並且也沒有給病人，很棒~請繼續保持!";
-        }
-
-        var VerificationDetail3 = document.getElementById("VerificationDetail3");
-        if (medicines['Oxacillin 1000mg/vail']){
-            // VerificationDetail3.innerHTML = 
-            // "錯誤原因:MAR單錯誤";
-        }
-        else{ //給藥原因待判斷
-            VerificationDetail3.innerHTML = "很棒，您的給藥知識正確!" + " 你不給藥的理由是:" + document.getElementById('Oxacillin 1000mg/vail r no').value + "，你的給藥知識正確並且也沒有給病人，很棒~請繼續保持!"; 
         }
     }
 }

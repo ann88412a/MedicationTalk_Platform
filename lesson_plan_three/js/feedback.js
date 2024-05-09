@@ -134,6 +134,10 @@ function feedback(){
         if (1==1){ 
             score = score + 1;
             img4.src="pic/ok_w.png";
+
+            c4r ='你不給Clexane 60mg/0.6ml的理由是因為「'
+            + document.getElementById('Clexane 60mg/0.6ml r no').value
+            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{
@@ -265,6 +269,9 @@ function feedback(){
         if (1==1){
             score = score + 1;
             img7.src="pic/ok_w.png";
+            c7r = '你給Oxacillin 1000mg/vail的理由是因為「'
+            + document.getElementById('Oxacillin 1000mg/vail r no').value
+            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             correctness.push(1);
 
         }else{

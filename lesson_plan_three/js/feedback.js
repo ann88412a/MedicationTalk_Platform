@@ -146,6 +146,8 @@ function feedback(){
             correctness.push(0);
 
         }
+
+        document.getElementById('4 r').innerHTML = c4r;
         document.getElementById('4 r 4').innerHTML = r4r;
 
     }else{
@@ -281,6 +283,7 @@ function feedback(){
             correctness.push(0);
         }
 
+        document.getElementById('7 r').innerHTML = c7r;
         document.getElementById('7 r 7').innerHTML = r7r;
     }else{
         cognition.push(0);

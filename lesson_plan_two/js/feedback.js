@@ -237,7 +237,7 @@ function feedback(){
             + '」<br> -> 答錯原因：實際給藥錯誤'
             +'<br><font style="color: #228de5;">適應症「暫時」不適合。</font>病人資訊提到<font style="color: #228de5;">「預計早上做注射顯影劑的電腦斷層」，</font>'
             +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
-            +'<br><font style="color: #f44336;">★	病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
+            +'<br><font style="color: #f44336;">★病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
             correctness.push(0);
 
         }
@@ -253,7 +253,7 @@ function feedback(){
         +'」<br> -> 答錯原因：MAR單認知錯誤'
         +'<br><font style="color: #228de5;">適應症「暫時」不適合。</font>病人資訊提到<font style="color: #228de5;">「預計早上做注射顯影劑的電腦斷層」，</font>'
         +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
-        +'<br><font style="color: #f44336;">★ ★	病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
+        +'<br><font style="color: #f44336;">★病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
         document.getElementById('6 r 6').innerHTML = r6;
         correctness.push(0);
         reason.push(document.getElementById('Metformin 500mg/tab r').value);
@@ -429,7 +429,7 @@ function feedback(){
         +'<br>病人有嚴重乾癬，有服用<b style="color: #228de5;">Sandimmun neoral</b>的適應症，它<b style="color: #228de5;">與 Lipitor (atorvastatin) 合用</b>，會有藥物交互作用 DDI，這兩種藥物合併使用可能會增加Lipitor在血液中的濃度，因此可能增加其副作用的風險，例如肌肉疼痛或肝臟問題'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物-藥物交互作用</font>(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
         document.getElementById('10 r').innerHTML = r10;
-        correctness.push(1);
+        correctness.push(0);
         reason.push(document.getElementById('Sandimmun neoral 100mg/tab r').value);
     }
 

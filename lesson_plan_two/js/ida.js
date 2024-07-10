@@ -34,39 +34,55 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://class.iottalk.tw');
+        var iottalk_url = 'https://md.iottalk.tw';   // 'http://DomainName:port'; or 'https://DomainName';
+        var mqtt_url = 'wss://iot.iottalk.tw:8866/mqtts'; // 'ws://IP:port/mqtt'; or 'wss://DomainName:port/mqtts'; 
+        //var mqtt_url = 'wss://md.iottalk.tw:9997/mqtts';
+        var mqtt_user =  'iottalk';
+        var mqtt_password = 'iottalk2023';
+        //var mqtt_password = 'iot2019';
+        var exec_interval = 500;
+
+        //csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
 		    'dm_name': 'Medication',          
-            'idf_list':[Barcode_I, Pill_Detect_I, Classification_I, Volume_I, Lesson_Plan_I],
-            'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Classification_Result_O, Volume_Result_O],
-		    'd_name': 'Platform',
+			  'idf_list':[BarcodeScanCmd_I, PillDetect_I, ClaCmd_I, VolumeRecoCmd_I, LessonPlan_I],
+			  'odf_list':[BarcodeResult_O, PillDetectResult_O, ClassificationResult_O, VolumeResult_O],
+                // 'idf_list':[Dummy_Sensor],
+                // 'odf_list':[Dummy_Control],
+		    'd_name': 'Platform0708',
 		    // 'd_name': 'Platform_Demo_anna',
         };
-
+        // function Dummy_Sensor(data){
+        //     // $('.ODF_value')[0].innerText=data[0];
+        //  }
+        // function Dummy_Control(data){
+        //     // $('.ODF_value')[0].innerText=data[0];
+        //  }
 		// idf
-        function Barcode_I(data){
+        function BarcodeScanCmd_I(data){
             // $('.ODF_value')[0].innerText=data[0];
-         }
+        }
 
-        function Pill_Detect_I(data){
+        function PillDetect_I(data){
             // $('.ODF_value')[0].innerText=data[0];
-         }
+        }
 
-        function Classification_I(data){
+        function ClaCmd_I(data){
             // $('.ODF_value')[0].innerText=data[0];
         } 
 
-        function Volume_I(data){
+        function VolumeRecoCmd_I(data){
             // $('.ODF_value')[0].innerText=data[0];
         }
 
-        function Lesson_Plan_I(data){
-        // $('.ODF_value')[0].innerText=data[0];
+        function LessonPlan_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
         }
 
+
         // odf
-        function Barcode_Result_O(data){
-            console.log('Barcode_Result_O', data);
+        function BarcodeResult_O(data){
+            console.log('BarcodeResult_O', data);
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
                 console.log(data_value);
@@ -112,7 +128,7 @@ $(function(){
             
         }
 
-        function Pill_Detect_Result_O(data){
+        function PillDetectResult_O(data){
             console.log(data)
             if (output_pill_bt > 0 && data[0] == client_uid){
                     var img = document.getElementById('pill_odf');
@@ -140,9 +156,9 @@ $(function(){
         }
         
 
-        function Classification_Result_O(data){
+        function ClassificationResult_O(data){
             // console.log('Classification_Result_O', data);
-            console.log('Classification_Result_O', data[1]);
+            console.log('ClassificationResult_O', data[1]);
             console.log("Chosen type:", $("select[name='syringe_type']").val());
             
             if ($("select[name='syringe_type']").val() == data[1]){
@@ -163,7 +179,7 @@ $(function(){
 
         }
 
-        function Volume_Result_O(data){
+        function VolumeResult_O(data){
             console.log('Syringe_Result_O', data);
             console.log('Syringe_Result_O', data[2]);
             if(data[0] == client_uid){
@@ -220,10 +236,15 @@ $(function(){
       
 /*******************************************************************/                
         function ida_init(){
-	    console.log(profile.d_name);
-	}
+        console.log(profile.d_name);
+    }
         var ida = {
             'ida_init': ida_init,
+            'iottalk_url': iottalk_url,
+            'mqtt_url': mqtt_url,
+            'mqtt_user': mqtt_user,
+            'mqtt_password': mqtt_password,
+            'exec_interval': exec_interval,
         }; 
         dai(profile,ida);     
 });

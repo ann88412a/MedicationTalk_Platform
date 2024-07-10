@@ -2003,10 +2003,10 @@
                             
                             <font id="show_syringe_volume1" style="font-weight:bold; font-size: 1.8em;"  >針劑辨識數值:</font>
                             <br>
-                            <button id="recognition_1" style="color: white;font-family:verdana;font-size:1.8em;border-radius: 8px;background-color: lightgreen;" value="unclicked" onclick="clickCheck('recognition_1');disableButton('recognition_1');Syringe_recognition()" >辨識</button>
+                            <button id="recognition_1" style="color: white;font-family:verdana;font-size:1.8em;border-radius: 8px;background-color: lightgreen;" value="unclicked" onclick="clickCheck('recognition_1');disableButton('recognition_1');Syringe_classification()" >辨識</button>
                             <br>                
                             <font id="show_syringe_volume2" style="font-weight:bold; font-size: 1.8em; display: none;"  >第2支針 - 辨識數值:</font>
-                            <button id="recognition_2" style="color: white;font-family:verdana;font-size:1.8em;border-radius: 8px;background-color: lightgreen; display:none;" value="unclicked" onclick="clickCheck('recognition_2');disableButton('recognition_2');Syringe_recognition()" >辨識</button>
+                            <button id="recognition_2" style="color: white;font-family:verdana;font-size:1.8em;border-radius: 8px;background-color: lightgreen; display:none;" value="unclicked" onclick="clickCheck('recognition_2');disableButton('recognition_2');Syringe_classification()" >辨識</button>
                             
                             <hr>
                             <!-- <button style="float: right; background-color: #4CAF50;" onclick="Syringe_recognition()" >下一步</button> -->
@@ -2671,4 +2671,5 @@
 <!-- <script src="js/html5-qrcode-css.js"></script> -->
 <script src="js/feedback.js"></script>
 <script src="js/syringe.js"></script>
-<script src="js/ida.js"></script>
+<script src="js/mqtt-5.0.4.min.js"></script>
+<!-- <script src="js/ida.js"></script> -->

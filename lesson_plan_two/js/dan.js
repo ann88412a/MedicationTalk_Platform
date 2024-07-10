@@ -17,11 +17,14 @@ var dan = (function () {
     var _ctl_timestamp = '';
     var _password = '';	
 
-    function init (push, pull, endpoint, mac_addr, profile, callback) {
+    var _mqtturl = undefined;
+
+    function init (push, pull, endpoint, mac_addr, profile, callback, mqtturl, exec_interval=500) {
         _pull = pull;
 	    _push = push;
-        
-
+        _mac_addr = mac_addr;
+        _mqtturl = mqtturl;
+        POLLING_INTERVAL = exec_interval;
         function init_callback (result) {
             if (result) {
                 callback(csmapi.get_endpoint());
@@ -159,8 +162,27 @@ var dan = (function () {
         csmapi.pull(_mac_addr, _password,_odf_name, pull_odf_callback);
     }
 
-    function push_idf (index) {
-	if (!_registered) {
+    // 這裡是原版function push_idf (index) {
+    //     if (!_registered) {
+    //             return;
+    //         }
+    
+    //         if (_suspended || index >= _idf_list.length) {
+    //             setTimeout(pull_ctl, POLLING_INTERVAL);
+    //             return;
+    //         }
+            
+    //         var _idf_name = _idf_list[index];
+    //         if (!_df_selected[_idf_name]) {
+    //             push_idf(index + 1);
+    //             return;
+    //         }
+            
+    //         _push(_idf_list[index]);
+    //         setTimeout(push_idf, POLLING_INTERVAL, index + 1);
+    //     }	
+    function push_idf (index, data) {
+	if (!_registered || !data) {
             return;
         }
 
@@ -212,15 +234,29 @@ var dan = (function () {
         return true;
     }
 
-    function push(idf_name, data, callback) {
+    //這裡是原版 function push(idf_name, data, callback) {
         
-		if(!Array.isArray(data))
-			data = [data];
+	// 	if(!Array.isArray(data))
+	// 		data = [data];
+    //     if (idf_name == 'Control') {
+    //         idf_name = '__Ctl_I__';
+    //     }
+        
+    //     csmapi.push(_mac_addr, _password, idf_name, data, callback);
+    // }
+    function push(idf_name, data, callback) {
+        if(!Array.isArray(data)) data = [data];
+
         if (idf_name == 'Control') {
             idf_name = '__Ctl_I__';
+            csmapi.push(_mac_addr, _password, idf_name, data, callback);
         }
-        
         csmapi.push(_mac_addr, _password, idf_name, data, callback);
+        console.log('data:',data)
+        if (_df_selected[idf_name]){
+            if (_mqtturl == undefined) csmapi.push(_mac_addr, _password, idf_name, data, callback);
+            else _push(idf_name, data);
+        }
     }
 
     function deregister (callback) {

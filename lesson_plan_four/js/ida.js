@@ -34,33 +34,54 @@ console.log(client_uid);
 
 
 $(function(){
-        csmapi.set_endpoint ('https://class.iottalk.tw');
+        var iottalk_url = 'https://md.iottalk.tw';   // 'http://DomainName:port'; or 'https://DomainName';
+        var mqtt_url = 'wss://iot.iottalk.tw:8866/mqtts'; // 'ws://IP:port/mqtt'; or 'wss://DomainName:port/mqtts'; 
+        //var mqtt_url = 'wss://md.iottalk.tw:9997/mqtts';
+        var mqtt_user =  'iottalk';
+        var mqtt_password = 'iottalk2023';
+        //var mqtt_password = 'iot2019';
+        var exec_interval = 500;
+
+        //csmapi.set_endpoint ('https://class.iottalk.tw');
         var profile = {
-		    'dm_name': 'Medication',          
-			'idf_list':[Barcode_I, Pill_Detect_I, Syringe_I, Lesson_Plan_I],
-			'odf_list':[Barcode_Result_O, Pill_Detect_Result_O, Syringe_Result_O],
-		    'd_name': 'Platform',
-		    // 'd_name': 'Platform_Demo_anna',
+            'dm_name': 'Medication',          
+            'idf_list':[BarcodeScanCmd_I, PillDetect_I, ClaCmd_I, VolumeRecoCmd_I, LessonPlan_I],
+            'odf_list':[BarcodeResult_O, PillDetectResult_O, ClassificationResult_O, VolumeResult_O],
+                // 'idf_list':[Dummy_Sensor],
+                // 'odf_list':[Dummy_Control],
+            'd_name': 'Platform0708',
+            // 'd_name': 'Platform_Demo_anna',
         };
-
-		// idf
-        function Barcode_I(data){
-            // $('.ODF_value')[0].innerText=data[0];
-         }
-
-        function Pill_Detect_I(data){
-            // $('.ODF_value')[0].innerText=data[0];
-         }
-
-        function Syringe_I(data){
-        // $('.ODF_value')[0].innerText=data[0];
-        }
-        function Lesson_Plan_I(data){
+        // function Dummy_Sensor(data){
+        //     // $('.ODF_value')[0].innerText=data[0];
+        //  }
+        // function Dummy_Control(data){
+        //     // $('.ODF_value')[0].innerText=data[0];
+        //  }
+        // idf
+        function BarcodeScanCmd_I(data){
             // $('.ODF_value')[0].innerText=data[0];
         }
+
+        function PillDetect_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+        }
+
+        function ClaCmd_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+        } 
+
+        function VolumeRecoCmd_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+        }
+
+        function LessonPlan_I(data){
+            // $('.ODF_value')[0].innerText=data[0];
+        }
+
 
         // odf
-        function Barcode_Result_O(data){
+        function BarcodeResult_O(data){
             console.log('Barcode_Result_O', data);
             if (data[0] == client_uid){
                 var data_value = JSON.parse(data[1]);
@@ -105,7 +126,7 @@ $(function(){
             
         }
 
-        function Pill_Detect_Result_O(data){
+        function PillDetectResult_O(data){
             
             if (output_pill_bt > 0 && data[0] == client_uid){
                     var img = document.getElementById('pill_odf');
@@ -129,9 +150,26 @@ $(function(){
             
         }
 
-        function Syringe_Result_O(data){
-            console.log('Syringe_Result_O', data);
-            console.log('Syringe_Result_O', data[2]);
+        function ClassificationResult_O(data){
+            // console.log('ClassificationResult_O', data);
+            console.log('ClassificationResult_O', data[1]);
+            console.log("Chosen type:", $("select[name='syringe_type']").val());
+            
+            if ($("select[name='syringe_type']").val() == data[1]){
+                Volume_measurement()
+                //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
+            }
+            else{
+                console.log("樣式錯誤!");
+                Reset_page2();
+                alert("選擇與放入樣式不同!");
+            }
+
+        }
+
+        function VolumeResult_O(data){
+            console.log('VolumeResult_O', data);
+            console.log('VolumeResult_O', data[2]);
             if(data[0] == client_uid){
                 var Syringe_number = parseInt(medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['syringe_num']);
                 // medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] = data[2];
@@ -150,6 +188,7 @@ $(function(){
                         var fontElement2 = document.getElementById("show_syringe_volume2");
                         fontElement2.style.display = "block";
                         console.log("第1支針辨識完成");
+                        // console.log(data);
                     }
                     else{
                         medicines[medicine_keys[document.getElementsByName("injection_button_id").value]]['injection'] += data[2];
@@ -161,6 +200,7 @@ $(function(){
                         clickCheck('recognition_1');
                         clickCheck('recognition_2');
                         console.log("第2支針辨識完成");
+                        // console.log(data);
                     }
                 }
                 else{
@@ -176,6 +216,7 @@ $(function(){
             }
         }
 
+
         
 
 
@@ -184,10 +225,15 @@ $(function(){
       
 /*******************************************************************/                
         function ida_init(){
-	    console.log(profile.d_name);
-	}
+        console.log(profile.d_name);
+    }
         var ida = {
             'ida_init': ida_init,
+            'iottalk_url': iottalk_url,
+            'mqtt_url': mqtt_url,
+            'mqtt_user': mqtt_user,
+            'mqtt_password': mqtt_password,
+            'exec_interval': exec_interval,
         }; 
         dai(profile,ida);     
 });

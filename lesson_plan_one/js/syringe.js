@@ -325,19 +325,19 @@ function GetOption(p){
     }
 
 function Barcode(on_off){
-    dan.push('Barcode-I',[client_uid,machine_ID,'syringe', on_off]);
+    dan.push('BarcodeScanCmd-I',[client_uid,machine_ID,'syringe', on_off]);
 }
 
 
 
 function Syringe_classification(){
-    dan.push('Classification-I',[client_uid,machine_ID, $("select[name='syringe_type']").val(), 1]);
+    dan.push('ClaCmd-I',[client_uid, machine_ID, $("select[name='syringe_type']").val(), 1]);
 
     //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
 }
 
 
 function Volume_measurement(){   
-    dan.push('Volume-I',[client_uid,machine_ID, $("select[name='syringe_type']").val(), 1]);
+    dan.push('VolumeRecoCmd-I',[client_uid, machine_ID, $("select[name='syringe_type']").val(), 1]);
 }
 

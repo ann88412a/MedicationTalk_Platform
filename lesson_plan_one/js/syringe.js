@@ -34,7 +34,7 @@ function create_json(med, checked){
             dilution:-1,
             injection:-1,
             way:null,
-            after_dilution:null,
+            bottle_num:-1,
             syringe_num:-1
         }
     }
@@ -124,7 +124,7 @@ function createtbl() {
             row_2_data_3.appendChild(button);
         }
         else{
-            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');ChangeTitle(1);test('+i+');">驗證</button>';
+            row_2_data_3.innerHTML = '<button name="syringe_verification" style="color: white;font-family:verdana;font-size:18px;border-radius: 10px;background-color: green;text-align:center;" onclick="JumpToPage(1);Getbutton_id(1,'+i+');Getbutton_id(2, '+i+');Getbutton_id(6, '+i+');Getbutton_id(3, '+i+');ChangeTitle(1);">驗證</button>';
             row_2_data_3.style.textAlign = "center";
         }
         
@@ -178,9 +178,7 @@ function createtbl() {
 window.addEventListener("load",createtbl);
 
 
-function test(i){
-    console.log(i);
-}
+
 
 
 function ChangeTitle(i) {
@@ -289,20 +287,26 @@ function GetOption(p){
     }
     else if(p==6){
         // 防呆功能
-        var selectElement1 = document.getElementsByName("syringe_num")[0];
+        var selectElement1 = document.getElementsByName("syringe_bottle_num")[0];
         var selectedValue1 = selectElement1.value;
 
-        var selectElement2 = document.getElementsByName("syringe_type")[0];
+        var selectElement2 = document.getElementsByName("syringe_num")[0];
         var selectedValue2 = selectElement2.value;
+
+        var selectElement3 = document.getElementsByName("syringe_type")[0];
+        var selectedValue3 = selectElement3.value;
 
         var inputValue = document.getElementsByName("syringe_diluent_value")[0].value;
         // 使用正則表達式檢查輸入值是否為整數
         var isInteger = /^\d+$/.test(inputValue);
 
         if (selectedValue1 == ""){
+            alert("尚未選擇使用瓶數!");
+        }
+        else if (selectedValue2 == ""){
             alert("尚未選擇欲使用針筒數量!");
         }
-        else if (selectedValue2 == "") {
+        else if (selectedValue3 == "") {
             alert("尚未選擇空針樣式!");
         }
         else if (!isInteger){
@@ -312,8 +316,8 @@ function GetOption(p){
             JumpToPage(2);
         }
 
-
         medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['dilution'] = $('input[name="syringe_diluent_value"]').val();
+        medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['syringe_bottle_num'] = $('select[name="syringe_bottle_num"]').val();
         medicines[medicine_keys[document.getElementsByName("dilution_button_id").value]]['syringe_num'] = $('select[name="syringe_num"]').val();
         // console.log($('input[name="syringe_diluent_value"]').val());
     }

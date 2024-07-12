@@ -151,9 +151,9 @@ function check_page(n){
             window.alert("您即將進入給藥情境\n [請依照指示操作]");
 
             // set syringe URL 
-            subFeature = document.getElementById('iframe_syringe')
-            subFeature.src = subFeature.src + 'device_0/' + client_uid
-            console.log(subFeature.src)
+            // subFeature = document.getElementById('iframe_syringe')
+            // subFeature.src = subFeature.src + 'device_0/' + client_uid
+            // console.log(subFeature.src)
         }
         else if(idf_id.value == "" && idf_name.value == ""){
             var img1 = document.getElementById('id');
@@ -288,7 +288,7 @@ function check_page(n){
                                                                                             ans_10: correctness[9],
                                 },function(){
                                     $.post(domain_name_url + "/api/_sheet_syringe", { id: document.getElementById('IDF_ID').value,
-                                                                                lesson: 1,
+                                                                                lesson: 2,
                                                                                 record: JSON.stringify(medicines),
                                     })
                                 })

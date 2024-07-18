@@ -161,7 +161,7 @@ $(function(){
             console.log("Chosen type:", $("select[name='syringe_type']").val());
             
             if ($("select[name='syringe_type']").val() == data[1]){
-                Volume_measurement()
+                Volume_measurement();
                 //dan.push('Volume-I',[client_uid,'plan1_Device_Demo', $("select[name='syringe_type']").val(), 1]);
             }
             else{

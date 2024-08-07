@@ -18,7 +18,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-tw" lang="zh-tw">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 
     <head>
@@ -47,6 +47,36 @@
         <!-- <link href="css/html5-qrcode-css.css" rel="stylesheet"> -->
         <link href="css/figma.css" rel="stylesheet">
 
+        <style>
+            .btn {
+                background-color: #034b86;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 24px;
+                margin: 10px;
+                cursor: pointer;
+                border-radius: 12px;
+                box-shadow: 0 4px #999;
+                transition: all 0.3s ease;
+            }
+            .btn:hover {
+                background-color: #034b86;
+            }
+            .btn:active {
+                background-color: #034b86;
+                box-shadow: 0 2px #666;
+                transform: translateY(2px);
+            }
+        </style>
+        <script>
+            function openInNewWindow(url) {
+                window.open(url, '_blank', 'width=800,height=600');
+            }
+        </script>
     </head>
 
     <!-- Slideshow container -->
@@ -86,9 +116,17 @@
                 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
                  -->
                 <br><br><br><br><br>
-
+                
                 <h1 align="center" style="font-family:verdana;font-size:60px;">智能安全給藥訓練平台</h2>
                 <img src="pic/nycu1.jpeg"  style="display:block; margin:auto; width: 40%;"/>
+                <center>
+                    <br>
+                    <br>
+                    <br>
+                    <button class="btn" onclick="openInNewWindow('https://www.youtube.com/watch?v=CoBUZqHLodg')">示範影片</button>
+                    <br>
+                    <br>
+                </center>
                 <h2 align="center" style="font-family:verdana;font-size:44px;">請選擇教案</h2>
 
                 <br>

@@ -341,7 +341,9 @@ function check_page(n){
         500 // 回頂部時間為 500 毫秒
       );
 }
-
+function openInNewWindow(url) {
+    window.open(url, '_blank', 'width=800,height=600');
+}
 function check_bt(f){
     if (f === 'barcode'){
         $('.patient_barcode_hint')[0].innerText = '請到Barcode機的螢幕上操作';

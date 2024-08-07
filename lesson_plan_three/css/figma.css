@@ -303,3 +303,78 @@
 	background:#E5F2F1;
 	position: absolute;
 }
+    /* Floating button style */
+	#feedback-btn {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		width: 50px;
+		height: 50px;
+		background-color: #034b86;
+		color: white;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 50px;
+		cursor: pointer;
+		z-index: 1000;
+	}
+
+	/* Floating form style */
+	#feedback-form {
+		display: none;
+		position: fixed;
+		bottom: 80px;
+		right: 20px;
+		background-color: white;
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		padding: 20px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		z-index: 1000;
+	}
+
+	#feedback-form label {
+		display: block;
+		margin-bottom: 8px;
+	}
+
+	#feedback-form input,
+	#feedback-form textarea {
+		width: 100%;
+		padding: 8px;
+		margin-bottom: 12px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+
+	#feedback-form button {
+		background-color: #034b86;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.btn {
+		background-color: #008CBA;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 10px;
+		cursor: pointer;
+		border-radius: 12px;
+		box-shadow: 0 4px #999;
+		transition: all 0.3s ease;
+	}
+	.btn:hover {
+		background-color: #007bb5;
+	}
+	.btn:active {
+		background-color: #005f73;
+		box-shadow: 0 2px #666;
+		transform: translateY(2px);
+	}

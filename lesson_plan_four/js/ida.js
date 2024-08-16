@@ -49,7 +49,7 @@ $(function(){
             'odf_list':[BarcodeResult_O, PillDetectResult_O, ClassificationResult_O, VolumeResult_O],
                 // 'idf_list':[Dummy_Sensor],
                 // 'odf_list':[Dummy_Control],
-            'd_name': 'Platform0708',
+            'd_name': 'MDtalkWebPage',
             // 'd_name': 'Platform_Demo_anna',
         };
         // function Dummy_Sensor(data){

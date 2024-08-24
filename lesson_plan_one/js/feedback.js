@@ -1,6 +1,30 @@
 // 制定回饋規則 打分機制
 
 function feedback(){
+    function callOpenAI(rightanswer, userAnswer) {
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
+            ]
+          })
+        };
+      
+        return fetch('https://api.openai.com/v1/chat/completions', requestOptions)
+          .then(response => response.json())
+          .then(data => data.choices[0].message.content)
+          .catch(error => {
+            console.error('Error:', error);
+            return null;
+          });
+    }
     console.log(syringe_value);
     var wrong_syringe = 0;
     for (const [key, value] of Object.entries(syringe_value)) {
@@ -77,20 +101,33 @@ function feedback(){
         reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value);
         cognition.push(1); // 實際藥物需要300mg 但實際藥丸只有225mg
         if (pill_detect['Clopidogrel'] == 0){
-            score = score + 1;
-            img3.src="pic/ok_w.png";
-            c3r = '你很棒!'
-            correctness.push(1);
+            const userAnswer = document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value;
+            callOpenAI("劑量錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                        score += 1;
+                        img3.src = "pic/ok_w.png";
+                        c3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                        correctness.push(1);
+                    } else {
+                        img3.src = "pic/wrong_w.png";
+                        r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                        correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('3 r').innerHTML = c3r;
+                document.getElementById('3 r 3').innerHTML = r3r;
+            });
 
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
             r3r = ' -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;"><br>正確劑量為300mg(共4顆)</font><br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
             correctness.push(0);
-
+            document.getElementById('3 r 3').innerHTML = r3r;
         }
-        document.getElementById('3 r').innerHTML = c3r;
-        document.getElementById('3 r 3').innerHTML = r3r;
 
     }else{
         cognition.push(0);
@@ -207,19 +244,36 @@ function feedback(){
         reason.push(document.getElementById('Aspirin 100mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Aspirin'] == 0){
-            score = score + 1;
-            img7.src="pic/ok_w.png";
-            c7r = '你答對了~'
-            correctness.push(1);
-
+            // score = score + 1;
+            // img7.src="pic/ok_w.png";
+            // c7r = '你答對了~'
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Aspirin 100mg/tab r no').value;
+            callOpenAI("藥物過敏", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img7.src = "pic/ok_w.png";
+                      c7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img7.src = "pic/wrong_w.png";
+                      r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('7 r').innerHTML = c7r;
+                document.getElementById('7 r 7').innerHTML = r7r;
+            });
         }else{
             img7.src="pic/wrong_w.png";
             // r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
             r7r = ' -> 答錯原因：實際給藥錯誤<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
             correctness.push(0);
+            document.getElementById('7 r 7').innerHTML = r7r;
         }
-        document.getElementById('7 r').innerHTML = c7r;
-        document.getElementById('7 r 7').innerHTML = r7r;
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
@@ -240,23 +294,40 @@ function feedback(){
         reason.push(document.getElementById('Tulip （Atorvastatin）20mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Tulip'] == 1){
-            score = score + 1;
-            img8.src="pic/ok_w.png";
-            c8r = '你是最棒的!'
-            correctness.push(1);
-
+            // score = score + 1;
+            // img8.src="pic/ok_w.png";
+            // c8r = '你是最棒的!'
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Tulip （Atorvastatin）20mg/tab r').value;
+            callOpenAI("避免粥樣硬化造成栓塞或降低心肌梗塞風險", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img8.src = "pic/ok_w.png";
+                      c8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                  } else {
+                      img8.src = "pic/wrong_w.png";
+                      r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                  }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('8 r').innerHTML = c8r;
+                document.getElementById('8 r r').innerHTML = r8r;
+            });
         }else{
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
             r8 = ' -> 答錯原因：實際給藥錯誤<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
+            document.getElementById('8 r r').innerHTML = r8r;
         }
-        document.getElementById('8 r').innerHTML = c8r;
-        document.getElementById('8 r r').innerHTML = r8r;
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
-        r8r = '您不給 Tulip （Atorvastatin）20mg/tab 的理由：' + document.getElementById('Tulip （Atorvastatin）20mg/tab r').value;
+        r8r = '您不給 Tulip （Atorvastatin）20mg/tab 的理由：' + document.getElementById('Tulip （Atorvastatin）20mg/tab r no').value;
         document.getElementById('8 r 8').innerHTML = r8r;
         r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);

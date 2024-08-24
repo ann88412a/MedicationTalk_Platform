@@ -1,6 +1,32 @@
 // 制定回饋規則 打分機制
 
 function feedback(){
+    //GPT的部分
+    function callOpenAI(rightanswer, userAnswer) {
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
+            ]
+          })
+        };
+      
+        return fetch('https://api.openai.com/v1/chat/completions', requestOptions)
+          .then(response => response.json())
+          .then(data => data.choices[0].message.content)
+          .catch(error => {
+            console.error('Error:', error);
+            return null;
+          });
+    }
+
     console.log(syringe_value);
     var wrong_syringe = 0;
     for (const [key, value] of Object.entries(syringe_value)) {
@@ -46,12 +72,31 @@ function feedback(){
         reason.push(document.getElementById('Concor 5mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Cardilo'] == 0 && pill_detect['Concor'] == 0){ 
-            score = score + 1;
-            img2.src="pic/ok_w.png";
-            c2r ='你不給Concor 5mg/tab的理由是因為「'
-            + document.getElementById('Concor 5mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img2.src="pic/ok_w.png";
+            // c2r ='你不給Concor 5mg/tab的理由是因為「'
+            // + document.getElementById('Concor 5mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Concor 5mg/tab r no').value;
+            callOpenAI("藥物錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img2.src = "pic/ok_w.png";
+                      c2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img2.src = "pic/wrong_w.png";
+                      r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('2 r').innerHTML = c2r;
+                document.getElementById('2 r 2').innerHTML = r2r;
+            });
 
         }else{
             img2.src="pic/wrong_w.png";
@@ -61,9 +106,8 @@ function feedback(){
             +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Cardio)，<font style="color: #00B050;">正確藥物為 (Concor)</font>'
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Concor</font> 和 <font style="text-decoration:underline;">Cardio</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
+            document.getElementById('2 r 2').innerHTML = r2r;
         }
-        document.getElementById('2 r').innerHTML = c2r;
-        document.getElementById('2 r 2').innerHTML = r2r;
 
     }else{
         cognition.push(0);
@@ -91,13 +135,31 @@ function feedback(){
         reason.push(document.getElementById('Isoptin 40 mg/tab r no').value);
         cognition.push(1); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
         if (pill_detect['Isoptin 40mg/tab'] == 0){
-            score = score + 1;
-            img3.src="pic/ok_w.png";
-            c3r ='你不給Isoptin 40 mg/tab的理由是因為「'
-            + document.getElementById('Isoptin 40 mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img3.src="pic/ok_w.png";
+            // c3r ='你不給Isoptin 40 mg/tab的理由是因為「'
+            // + document.getElementById('Isoptin 40 mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Isoptin 40 mg/tab r no').value;
+            callOpenAI("劑量錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img3.src = "pic/ok_w.png";
+                      c3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img3.src = "pic/wrong_w.png";
+                      r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('3 r').innerHTML = c3r;
+                document.getElementById('3 r 3').innerHTML = r3r;
+            });
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
@@ -107,10 +169,8 @@ function feedback(){
             +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(240mg)，<font style="color: #00B050;"><br>正確劑量為(40mg)</font>'
             +'<br><font style="color: #f44336;">★ 同一種藥物會有<font style="background-color: yellow;">不同劑量</font></font>';
             correctness.push(0);
-
+            document.getElementById('3 r 3').innerHTML = r3r;
         }
-        document.getElementById('3 r').innerHTML = c3r;
-        document.getElementById('3 r 3').innerHTML = r3r;
 
     }else{
         cognition.push(0);
@@ -177,12 +237,31 @@ function feedback(){
         reason.push(document.getElementById('Spironolactone 25mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Spironolactone'] == 0){ 
-            score = score + 1;
-            img5.src="pic/ok_w.png";
-            c5r ='你不給Spironolactone 25mg/tab的理由是因為「'
-            + document.getElementById('Spironolactone 25mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img5.src="pic/ok_w.png";
+            // c5r ='你不給Spironolactone 25mg/tab的理由是因為「'
+            // + document.getElementById('Spironolactone 25mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Spironolactone 25mg/tab r no').value;
+            callOpenAI("時間錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img5.src = "pic/ok_w.png";
+                      c5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img5.src = "pic/wrong_w.png";
+                      r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('5 r').innerHTML = c5r;
+                document.getElementById('5 r 5').innerHTML = r5r;
+            });
 
         }else{
             img5.src="pic/wrong_w.png";
@@ -192,9 +271,8 @@ function feedback(){
             +'<br>Spironolactone <b style="color: #228de5;">時間錯誤</b>，醫囑時間為QD/AC (早餐飯前)。情境給藥時間是早上九點，<font style="color: #00B050;">已過給藥時間，</font>'
             +'<br>故此藥目前不能給<font style="color: #00B050;">，應告知醫師</font><br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
             correctness.push(0);
+            document.getElementById('5 r 5').innerHTML = r5r;
         }
-        document.getElementById('5 r').innerHTML = c5r;
-        document.getElementById('5 r 5').innerHTML = r5r;
 
     }else{
         cognition.push(0);
@@ -223,12 +301,32 @@ function feedback(){
         reason.push(document.getElementById('Metformin 500mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Metformin'] == 0){ 
-            score = score + 1;
-            img6.src="pic/ok_w.png";
-            c6r ='你不給Metformin 500mg/tab的理由是因為「'
-            + document.getElementById('Metformin 500mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img6.src="pic/ok_w.png";
+            // c6r ='你不給Metformin 500mg/tab的理由是因為「'
+            // + document.getElementById('Metformin 500mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Metformin 500mg/tab r no').value;
+            callOpenAI("適應症", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img6.src = "pic/ok_w.png";
+                      c6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img6.src = "pic/wrong_w.png";
+                      r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('6 r').innerHTML = c6r;
+                document.getElementById('6 r 6').innerHTML = r6r;
+            });
+
 
         }else{
             img6.src="pic/wrong_w.png";
@@ -239,10 +337,9 @@ function feedback(){
             +'<br><font style="color: #00B050;">使用Metformin ，要做注射顯影劑的電腦斷層，檢查前需停用 48 小時</font>'
             +'<br><font style="color: #f44336;">★病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
             correctness.push(0);
+            document.getElementById('6 r 6').innerHTML = r6r;
 
         }
-        document.getElementById('6 r').innerHTML = c6r;
-        document.getElementById('6 r 6').innerHTML = r6r;
 
     }else{
         cognition.push(0);
@@ -309,12 +406,31 @@ function feedback(){
         reason.push(document.getElementById('Nexium 40mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Nexium'] == 1){
-            score = score + 1;
-            img8.src="pic/ok_w.png";
-            c8r ='你給Nexium 40mg/tab的理由是因為「'
-            + document.getElementById('Nexium 40mg/tab r').value.trim()
-            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img8.src="pic/ok_w.png";
+            // c8r ='你給Nexium 40mg/tab的理由是因為「'
+            // + document.getElementById('Nexium 40mg/tab r').value.trim()
+            // + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Nexium 40mg/tab r').value;
+            callOpenAI("胃潰瘍，使用氫離子幫浦抑制劑PPI抑制胃酸分泌", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img8.src = "pic/ok_w.png";
+                      c8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img8.src = "pic/wrong_w.png";
+                      r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('8 r').innerHTML = c8r;
+                document.getElementById('8 r 8').innerHTML = r8r;
+            });
 
         }else{
             img8.src="pic/wrong_w.png";
@@ -325,9 +441,8 @@ function feedback(){
             +'<br>病人有胃潰瘍，使用氫離子幫浦抑制劑PPI是抑制胃酸藥效最佳藥品，會不可逆的結合在鉀/ 氫離子交換幫浦上，完整抑制胃酸分泌'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
+            document.getElementById('8 r 8').innerHTML = r8r;
         }
-        document.getElementById('8 r').innerHTML = c8r;
-        document.getElementById('8 r 8').innerHTML = r8r;
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
@@ -355,12 +470,31 @@ function feedback(){
         reason.push(document.getElementById('Lipitor 20mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Lipitor'] == 1){ 
-            score = score + 1;
-            img9.src="pic/ok_w.png";
-            c9r ='你給Lipitor 20mg/tab的理由是因為「'
-            + document.getElementById('Lipitor 20mg/tab r').value.trim()
-            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img9.src="pic/ok_w.png";
+            // c9r ='你給Lipitor 20mg/tab的理由是因為「'
+            // + document.getElementById('Lipitor 20mg/tab r').value.trim()
+            // + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Lipitor 20mg/tab r').value;
+            callOpenAI("高血脂，服用Lipitor可降低血中過高之膽固醇及血脂，減少心血管疾病及中風的發作", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img9.src = "pic/ok_w.png";
+                      c9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img9.src = "pic/wrong_w.png";
+                      r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('9 r').innerHTML = c9r;
+                document.getElementById('9 r 9').innerHTML = r9r;
+            });
 
         }else{
             img9.src="pic/wrong_w.png";
@@ -370,9 +504,8 @@ function feedback(){
             +'<br>病人有高血脂，服用Lipitor可降低血中過高之膽固醇及血脂，減少心血管疾病及中風的發作'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
+            document.getElementById('9 r 9').innerHTML = r9r;
         }
-        document.getElementById('9 r').innerHTML = c9r;
-        document.getElementById('9 r 9').innerHTML = r9r;
     }else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
@@ -401,12 +534,32 @@ function feedback(){
         reason.push(document.getElementById('Sandimmun neoral 100mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Sandimmunneoral'] == 0){
-            score = score + 1;
-            img10.src="pic/ok_w.png";
-            c10r ='你不給Sandimmun neoral 100mg/tab的理由是因為「'
-            + document.getElementById('Sandimmun neoral 100mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
+            // score = score + 1;
+            // img10.src="pic/ok_w.png";
+            // c10r ='你不給Sandimmun neoral 100mg/tab的理由是因為「'
+            // + document.getElementById('Sandimmun neoral 100mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Sandimmun neoral 100mg/tab r no').value;
+            callOpenAI("藥物交互作用", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img10.src = "pic/ok_w.png";
+                      c10r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img10.src = "pic/wrong_w.png";
+                      r10r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('10 r').innerHTML = c10r;
+                document.getElementById('10 r 10').innerHTML = r10r;
+            });
+
 
         }else{
             img10.src="pic/wrong_w.png";
@@ -416,9 +569,8 @@ function feedback(){
             +'<br>病人有嚴重乾癬，有服用<b style="color: #228de5;">Sandimmun neoral</b>的適應症，它<b style="color: #228de5;">與 Lipitor (atorvastatin) 合用</b>，會有藥物交互作用 DDI，這兩種藥物合併使用可能會增加Lipitor在血液中的濃度，因此可能增加其副作用的風險，例如肌肉疼痛或肝臟問題'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物-藥物交互作用</font>(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
             correctness.push(0);
+            document.getElementById('10 r 10').innerHTML = r10r;
         }
-        document.getElementById('10 r').innerHTML = c10r;
-        document.getElementById('10 r 10').innerHTML = r10r;
     }else{
         cognition.push(0);
         img10.src="pic/wrong_w.png";

@@ -5,6 +5,15 @@ window.alert("介面介紹\n ‘檢定：填完學號、姓名並按下開始檢
 
 var domain_name_url = "https://anna.iottalk.tw"
 
+
+// chatgpt api
+var apiKey = '';
+$.getJSON(domain_name_url + '/api/get_api_key', function(data) {
+    console.log(data);
+    apiKey = data['api_key'];
+    console.log('api----',apiKey);
+});
+
 const idf_id = document.getElementById('IDF_ID');
 idf_id.addEventListener('change', function (e) {
     if (idf_id.value != "")

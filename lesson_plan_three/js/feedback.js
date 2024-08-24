@@ -1,6 +1,31 @@
 // 制定回饋規則 打分機制
 
 function feedback(){
+    //GPT的部分
+    function callOpenAI(rightanswer, userAnswer) {
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
+            ]
+          })
+        };
+      
+        return fetch('https://api.openai.com/v1/chat/completions', requestOptions)
+          .then(response => response.json())
+          .then(data => data.choices[0].message.content)
+          .catch(error => {
+            console.error('Error:', error);
+            return null;
+          });
+    }
     console.log(syringe_value);
     var wrong_syringe = 0;
     for (const [key, value] of Object.entries(syringe_value)) {
@@ -47,13 +72,31 @@ function feedback(){
         reason.push(document.getElementById('Anpo 10mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Lanpo 30mg/tab'] == 0 && pill_detect['Apno 30mg/tab'] == 0 ){ 
-            score = score + 1;
-            img2.src="pic/ok_w.png";
-            c2r ='你不給Anpo 10mg/tab的理由是因為「'
-            + document.getElementById('Anpo 10mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img2.src="pic/ok_w.png";
+            // c2r ='你不給Anpo 10mg/tab的理由是因為「'
+            // + document.getElementById('Anpo 10mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Anpo 10mg/tab r no').value;
+            callOpenAI("藥物錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img2.src = "pic/ok_w.png";
+                      c2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img2.src = "pic/wrong_w.png";
+                      r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('2 r 2').innerHTML = r2r;
+                document.getElementById('2 r').innerHTML = c2r;
+            });
         }else{
             img2.src="pic/wrong_w.png";
             r2r = '你不給Anpo 10mg/tab的理由是因為「'
@@ -62,10 +105,9 @@ function feedback(){
             +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
-
+            document.getElementById('2 r 2').innerHTML = r2r;
         }
-        document.getElementById('2 r 2').innerHTML = r2r;
-        document.getElementById('2 r').innerHTML = c2r;
+
 
     }else{
         cognition.push(0);
@@ -175,13 +217,31 @@ function feedback(){
         reason.push(document.getElementById('Sennoside 12mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Sennoside'] == 0){ 
-            score = score + 1;
-            img5.src="pic/ok_w.png";
-            c5r ='你不給Sennoside 12mg/tab的理由是因為「'
-            + document.getElementById('Sennoside 12mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img5.src="pic/ok_w.png";
+            // c5r ='你不給Sennoside 12mg/tab的理由是因為「'
+            // + document.getElementById('Sennoside 12mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Sennoside 12mg/tab r no').value;
+            callOpenAI("時間錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img5.src = "pic/ok_w.png";
+                      c5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img5.src = "pic/wrong_w.png";
+                      r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('5 r').innerHTML = c5r;
+                document.getElementById('5 r 5').innerHTML = r5r;
+            });
         }else{
             img5.src="pic/wrong_w.png";
             r5r = '你不給Sennoside 12mg/tab的理由是因為「'
@@ -190,10 +250,8 @@ function feedback(){
             +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
             +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
             correctness.push(0);
-
+            document.getElementById('5 r 5').innerHTML = r5r;
         }
-        document.getElementById('5 r').innerHTML = c5r;
-        document.getElementById('5 r 5').innerHTML = r5r;
 
     }else{
         cognition.push(0);
@@ -222,13 +280,31 @@ function feedback(){
         reason.push(document.getElementById('Peace 2.5mg/tab r no').value);
         cognition.push(1);
         if (pill_detect['Peace'] == 0){ 
-            score = score + 1;
-            img6.src="pic/ok_w.png";
-            c6r ='你不給Peace 2.5mg/tab的理由是因為「'
-            + document.getElementById('Peace 2.5mg/tab r no').value.trim()
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img6.src="pic/ok_w.png";
+            // c6r ='你不給Peace 2.5mg/tab的理由是因為「'
+            // + document.getElementById('Peace 2.5mg/tab r no').value.trim()
+            // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Peace 2.5mg/tab r no').value;
+            callOpenAI("沒有適應症", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img6.src = "pic/ok_w.png";
+                      c6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img6.src = "pic/wrong_w.png";
+                      r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('6 r').innerHTML = c6r;
+                document.getElementById('6 r 6').innerHTML = r6r;
+            });
         }else{
             img6.src="pic/wrong_w.png";
             r6r = '你不給Peace 2.5mg/tab的理由是因為「'
@@ -237,10 +313,8 @@ function feedback(){
             +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認'
             +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
             correctness.push(0);
-
+            document.getElementById('6 r 6').innerHTML = r6r;
         }
-        document.getElementById('6 r').innerHTML = c6r;
-        document.getElementById('6 r 6').innerHTML = r6r;
 
     }else{
         cognition.push(0);
@@ -309,13 +383,31 @@ function feedback(){
         reason.push(document.getElementById('Paramol 500mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Paramol'] == 1){
-            score = score + 1;
-            img8.src="pic/ok_w.png";
-            c8r ='你給Paramol 500mg/tab的理由是因為「'
-            + document.getElementById('Paramol 500mg/tab r').value.trim()
-            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img8.src="pic/ok_w.png";
+            // c8r ='你給Paramol 500mg/tab的理由是因為「'
+            // + document.getElementById('Paramol 500mg/tab r').value.trim()
+            // + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Paramol 500mg/tab r').value;
+            callOpenAI("止痛", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img8.src = "pic/ok_w.png";
+                      c8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img8.src = "pic/wrong_w.png";
+                      r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('8 r').innerHTML = c8r;
+                document.getElementById('8 r 8').innerHTML = r8r;
+            });
         }else{
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
@@ -325,9 +417,9 @@ function feedback(){
             +'<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
+            document.getElementById('8 r 8').innerHTML = r8r;
         }
-        document.getElementById('8 r').innerHTML = c8r;
-        document.getElementById('8 r 8').innerHTML = r8r;
+        
     }else{
         cognition.push(0);
         img8.src="pic/wrong_w.png";
@@ -355,13 +447,31 @@ function feedback(){
         reason.push(document.getElementById('Primperan 5 mg/tab r').value);
         cognition.push(1);
         if (pill_detect['Primperan'] == 1){ 
-            score = score + 1;
-            img9.src="pic/ok_w.png";
-            c9r ='你給Primperan 5 mg/tab的理由是因為「'
-            + document.getElementById('Primperan 5 mg/tab r').value.trim()
-            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
-            correctness.push(1);
-
+            // score = score + 1;
+            // img9.src="pic/ok_w.png";
+            // c9r ='你給Primperan 5 mg/tab的理由是因為「'
+            // + document.getElementById('Primperan 5 mg/tab r').value.trim()
+            // + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
+            // correctness.push(1);
+            const userAnswer = document.getElementById('Primperan 5 mg/tab r').value;
+            callOpenAI("嘔吐", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img9.src = "pic/ok_w.png";
+                      c9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                    } else {
+                      img9.src = "pic/wrong_w.png";
+                      r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                    }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('9 r').innerHTML = c9r;
+                document.getElementById('9 r 9').innerHTML = r9r;
+            });
         }else{
             img9.src="pic/wrong_w.png";
             r9r ='你給Primperan 5 mg/tab的理由是因為「'
@@ -369,9 +479,8 @@ function feedback(){
             + '」<br>  -> 答錯原因：實際給藥錯誤<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
+            document.getElementById('9 r 9').innerHTML = r9r;
         }
-        document.getElementById('9 r').innerHTML = c9r;
-        document.getElementById('9 r 9').innerHTML = r9r;
     }else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";

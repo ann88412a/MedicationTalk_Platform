@@ -198,20 +198,26 @@ function feedback(){
         // r4r = '您不給 Amikacin 250mg/vail 的理由：' + document.getElementById('Amikacin 250mg/vail r no').value;
         reason.push(document.getElementById('Amikacin 250mg/vail r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img4.src="pic/ok_w.png";
-            correctness.push(1);
-            r4r = r4r + '\n -> 你不給Amikacin的理由為:' + document.getElementById('Amikacin 250mg/vail r no').value + "你的給藥知識正確並且也沒有給病人~很棒~繼續保持";
-        }else{
-            img4.src="pic/wrong_w.png";
-            r4r = r4r + '\n -> 答錯原因：實際給藥錯誤<br>Amikacin<b style="color: #228de5;">途徑不洽當。</b><b style="color: #00B050;">藥物指引建議稀釋給予。</b><br>';
-         
-            correctness.push(0);
 
-        }
-        document.getElementById('4 r').innerHTML = c4r;
-        document.getElementById('4 r 4').innerHTML = r4r;
+        const userAnswer = document.getElementById('Amikacin 250mg/vail r no').value;
+        callOpenAI("途徑錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img4.src = "pic/ok_w.png";
+                    c4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img4.src = "pic/wrong_w.png";
+                    r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('4 r').innerHTML = c4r;
+            document.getElementById('4 r 4').innerHTML = r4r;
+        });
 
     }else{
         cognition.push(0);
@@ -368,20 +374,27 @@ function feedback(){
         // r7r = '您不給 Keto 30mg/amp 的理由：' + document.getElementById('Keto 30mg/amp r no').value;
         reason.push(document.getElementById('Keto 30mg/amp r no').value);
         cognition.push(1);
-        if (1==1){
-            score = score + 1;
-            img7.src="pic/ok_w.png";
-            c7r = '\n -> 你不給Keto的理由為:' + document.getElementById('Keto 30mg/amp r no').value + "你的給藥知識正確並且也沒有給病人~很棒~繼續保持";
-            correctness.push(1);
 
-        }else{
-            img7.src="pic/wrong_w.png";
-            // r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
-            r7r = '\n -> 你不給Keto的理由為:' + document.getElementById('Keto 30mg/amp r no').value + '<br> -> 答錯原因：實際給藥錯誤<br>Keto 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Keto<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
-            correctness.push(0);
-        }
-        document.getElementById('7 r').innerHTML = c7r;
-        document.getElementById('7 r 7').innerHTML = r7r;
+        const userAnswer = document.getElementById('Keto 30mg/amp r no').value;
+        callOpenAI("藥物過敏", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img7.src = "pic/ok_w.png";
+                    c7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img7.src = "pic/wrong_w.png";
+                    r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('7 r').innerHTML = c7r;
+            document.getElementById('7 r 7').innerHTML = r7r;
+        });
+        
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";

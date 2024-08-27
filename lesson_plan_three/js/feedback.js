@@ -138,10 +138,29 @@ function feedback(){
         if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 1.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=1.6 
         && (medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)') 
         && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection' && medicines['Progesterone 25mg/ml']['dilution']=="0"){
-            score = score + 1;
-            img3.src="pic/ok_w.png";
-            correctness.push(1);
 
+            if (pill_detect['Clopidogrel'] == 0){
+                const userAnswer = document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value;
+                callOpenAI("必須給此藥", userAnswer).then(apiResponse => {
+                    if (apiResponse && typeof apiResponse === 'string') {
+                        if (apiResponse[0] == "1") {
+                            score += 1;
+                            img3.src = "pic/ok_w.png";
+                            c3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                            correctness.push(1);
+                        } else {
+                            img3.src = "pic/wrong_w.png";
+                            r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                            correctness.push(0);
+                        }
+                    } else {
+                    console.error('API response is not a valid string:', apiResponse);
+                    }
+                    document.getElementById('3 r').innerHTML = c3r;
+                    document.getElementById('3 r 3').innerHTML = r3r;
+                });
+    
+            }
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
@@ -173,24 +192,26 @@ function feedback(){
         //r4r = '您不給 Clexane 60mg/0.6ml 的理由：' + document.getElementById('Clexane 60mg/0.6ml r no').value;
         reason.push(document.getElementById('Clexane 60mg/0.6ml r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img4.src="pic/ok_w.png";
 
-            c4r ='你不給Clexane 60mg/0.6ml的理由是因為「'
-            + document.getElementById('Clexane 60mg/0.6ml r no').value
-            + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
-            correctness.push(1);
-
-        }else{
-            img4.src="pic/wrong_w.png";
-            r4r = '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-
-        document.getElementById('4 r').innerHTML = c4r;
-        document.getElementById('4 r 4').innerHTML = r4r;
+        const userAnswer = document.getElementById('Clexane 60mg/0.6ml r no').value;
+        callOpenAI("途徑錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img4.src = "pic/ok_w.png";
+                    c4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img4.src = "pic/wrong_w.png";
+                    r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('4 r').innerHTML = c4r;
+            document.getElementById('4 r 4').innerHTML = r4r;
+        });
 
     }else{
         cognition.push(0);
@@ -342,23 +363,27 @@ function feedback(){
         //r7r = '您不給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r no').value;
         reason.push(document.getElementById('Oxacillin 1000mg/vail r no').value);
         cognition.push(1);
-        if (1==1){
-            score = score + 1;
-            img7.src="pic/ok_w.png";
-            c7r = '你給Oxacillin 1000mg/vail的理由是因為「'
-            + document.getElementById('Oxacillin 1000mg/vail r no').value
-            + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
-            correctness.push(1);
+        
+        const userAnswer = document.getElementById('Oxacillin 1000mg/vail r no').value;
+        callOpenAI("藥物過敏", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img7.src = "pic/ok_w.png";
+                    c7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img7.src = "pic/wrong_w.png";
+                    r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('7 r').innerHTML = c7r;
+            document.getElementById('7 r 7').innerHTML = r7r;
+        });
 
-        }else{
-            img7.src="pic/wrong_w.png";
-            // r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
-            r7r = ' -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-        }
-
-        document.getElementById('7 r').innerHTML = c7r;
-        document.getElementById('7 r 7').innerHTML = r7r;
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";

@@ -66,26 +66,34 @@ function feedback(){
         r2r=''
         reason.push(document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img2.src="pic/ok_w.png";
-            c2r='答對了! 請繼續保持'
-            correctness.push(1);
-
-        }else{
-            img2.src="pic/wrong_w.png";
-            r2r = '藥袋內<b style="color: #228de5;">藥物錯誤</b> (Amikacin)，<font style="color: #00B050;">正確藥物為 (Amiodarone)</font> <br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Amiodarone</font> 和 <font style="text-decoration:underline;">Amikacin</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
-            correctness.push(0);
-
-        }
-        document.getElementById('2 r').innerHTML = c2r;
-        document.getElementById('2 r 2').innerHTML = r2r;
+        
+        const userAnswer = document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r no').value;
+        callOpenAI("藥物錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img2.src = "pic/ok_w.png";
+                    c2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img2.src = "pic/wrong_w.png";
+                    r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('2 r').innerHTML = c2r;
+            document.getElementById('2 r 2').innerHTML = r2r;
+        });
 
     }else{
         cognition.push(0);
         img2.src="pic/wrong_w.png";
         r2 = '您給 Amiodarone(Cordarone) 150mg/3ml/amp 的理由：' + document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r').value;
         document.getElementById('2 r').innerHTML = r2;
+        r2 = r2 + '\n -> 答錯原因：MAR單認知錯誤' + 
+        '<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Amiodarone</font> 和 <font style="text-decoration:underline;">Amikacin</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
         correctness.push(0);
         reason.push(document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r').value);
     
@@ -147,24 +155,34 @@ function feedback(){
         r4r = '您不給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value;
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img4.src="pic/ok_w.png";
-            correctness.push(1);
 
-        }else{
-            img4.src="pic/wrong_w.png";
-            r4r = r4r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-        document.getElementById('4 r 4').innerHTML = r4r;
+        const userAnswer = document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value;
+        callOpenAI("途徑錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img4.src = "pic/ok_w.png";
+                    c4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img4.src = "pic/wrong_w.png";
+                    r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('4 r').innerHTML = c4r;
+            document.getElementById('4 r 4').innerHTML = r4r;
+        });
 
     }else{
         cognition.push(0);
         img4.src="pic/wrong_w.png";
         r4 = '您給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r').value;
         document.getElementById('4 r').innerHTML = r4;
+        r4 = r4 + '\n -> 答錯原因：MAR單認知錯誤' +
+        '<br><font style="color: #f44336;">★ 直接注射KCL會導致致命心律不整等嚴重併發症。KCL須要經稀釋、緩慢輸注，並且需要監測患者的血鉀濃度確保維持在安全範圍內</font>';
         correctness.push(0);
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r').value);
     
@@ -179,24 +197,35 @@ function feedback(){
         r5r = '您不給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value;
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img5.src="pic/ok_w.png";
-            correctness.push(1);
 
-        }else{
-            img5.src="pic/wrong_w.png";
-            r5r = r5r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-        document.getElementById('5 r 5').innerHTML = r5r;
+        
+        const userAnswer = document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value;
+        callOpenAI("時間錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img5.src = "pic/ok_w.png";
+                    c5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img5.src = "pic/wrong_w.png";
+                    r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('5 r').innerHTML = c5r;
+            document.getElementById('5 r 5').innerHTML = r5r;
+        });
 
     }else{
         cognition.push(0);
         img5.src="pic/wrong_w.png";
         r5 = '您給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r').value;
         document.getElementById('5 r').innerHTML = r5;
+        r5 = r5 + '\n -> 答錯原因:MAR單認知錯誤' + 
+        '<br><font style="color: #f44336;">★ 注意醫囑給藥時間與當下病患狀況是否吻合。</font>';
         correctness.push(0);
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r').value);
     
@@ -210,24 +239,35 @@ function feedback(){
         r6r = '您不給 Cefazolin 1000mg/vail 的理由：' + document.getElementById('Cefazolin 1000mg/vail r no').value;
         reason.push(document.getElementById('Cefazolin 1000mg/vail r no').value);
         cognition.push(1);
-        if (1==1){ 
-            score = score + 1;
-            img6.src="pic/ok_w.png";
-            correctness.push(1);
 
-        }else{
-            img6.src="pic/wrong_w.png";
-            r6r = r6r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-        document.getElementById('6 r 6').innerHTML = r6r;
+        const userAnswer = document.getElementById('Cefazolin 1000mg/vail r no').value;
+        callOpenAI("沒有適應症", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img6.src = "pic/ok_w.png";
+                    c6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img6.src = "pic/wrong_w.png";
+                    r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('6 r').innerHTML = c6r;
+            document.getElementById('6 r 6').innerHTML = r6r;
+        });
 
     }else{
         cognition.push(0);
         img6.src="pic/wrong_w.png";
         r6 = '您給 Cefazolin 1000mg/vail 的理由：' + document.getElementById('Cefazolin 1000mg/vail r').value;
         document.getElementById('6 r').innerHTML = r6;
+        r6 = r6 + '\n -> 答錯原因:MAR單認知錯誤' + 
+        '從目前的病患資訊，'+ '<font style="color: #228de5;">病人沒有臨床證據使用 Cefazolin 的適應症</font>' + '，應向醫師或專科護理師確認是否需要服用此藥';
+        + '<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>';
         correctness.push(0);
         reason.push(document.getElementById('Cefazolin 1000mg/vail r').value);
     
@@ -315,14 +355,14 @@ function feedback(){
                 console.error('API response is not a valid string:', apiResponse);
                 }
                 document.getElementById('8 r').innerHTML = c8r;
-                document.getElementById('8 r r').innerHTML = r8r;
+                document.getElementById('8 r 8').innerHTML = r8r;
             });
         }else{
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
             r8 = ' -> 答錯原因：實際給藥錯誤<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
-            document.getElementById('8 r r').innerHTML = r8r;
+            document.getElementById('8 r 8').innerHTML = r8r;
         }
     }else{
         cognition.push(0);
@@ -343,23 +383,34 @@ function feedback(){
         reason.push(document.getElementById('Heparin 25000units/vail r').value);
         cognition.push(1);
         if (medicines['Heparin 25000units/vail']['verification']=='4710031297121' && 0.75<=medicines['Heparin 25000units/vail']['injection'] && medicines['Heparin 25000units/vail']['injection']<=0.85 && medicines['Heparin 25000units/vail']['way'][0]=='IVP' && medicines['Heparin 25000units/vail']['dilution']=="0"){ 
-            score = score + 1;
-            img9.src="pic/ok_w.png";
-            correctness.push(1);
+            const userAnswer = document.getElementById('Tulip （Atorvastatin）20mg/tab r').value;
+            callOpenAI("預防血栓", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                      score += 1;
+                      img9.src = "pic/ok_w.png";
+                      c9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(1);
+                  } else {
+                      img9.src = "pic/wrong_w.png";
+                      r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                      correctness.push(0);
+                  }
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('9 r').innerHTML = c9r;
+                document.getElementById('9 r 9').innerHTML = r9r;
+            });
 
-        }else{
-            img9.src="pic/wrong_w.png";
-            r9r = r9r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
+            document.getElementById('9 r 9').innerHTML = r9r;
+            console.log(medicines['Heparin 25000units/vail']['verification']!=null);
+            console.log(0.75<=medicines['Heparin 25000units/vail']['injection']<=0.85);
+            console.log(medicines['Heparin 25000units/vail']['way']==['IVP']);
+            console.log(medicines['Heparin 25000units/vail']['dilution']=="0");
         }
-        document.getElementById('9 r 9').innerHTML = r9r;
-        console.log(medicines['Heparin 25000units/vail']['verification']!=null);
-        console.log(0.75<=medicines['Heparin 25000units/vail']['injection']<=0.85);
-        console.log(medicines['Heparin 25000units/vail']['way']==['IVP']);
-        console.log(medicines['Heparin 25000units/vail']['dilution']=="0");
-
-    }else{
+    }
+    else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
         r9 = '您不給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r no').value;

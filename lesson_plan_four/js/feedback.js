@@ -169,26 +169,34 @@ function feedback(){
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
         cognition.push(1);
 
-
-        if (1==1){   
-
-            score = score + 1;
-            img4.src="pic/ok_w.png";
-            correctness.push(1);
-
-        }else{
-            img4.src="pic/wrong_w.png";
-            r4r = r4r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-        document.getElementById('4 r 4').innerHTML = r4r;
+        const userAnswer = document.getElementById('Millisrol inj 5mg/10ml/amp r no').value;
+        callOpenAI("途徑錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img4.src = "pic/ok_w.png";
+                    c4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img4.src = "pic/wrong_w.png";
+                    r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('4 r').innerHTML = c4r;
+            document.getElementById('4 r 4').innerHTML = r4r;
+        });
 
     }else{
         cognition.push(0);
         img4.src="pic/wrong_w.png";
         r4 = '您給 Millisrol inj 5mg/10ml/amp 的理由：' + document.getElementById('Millisrol inj 5mg/10ml/amp r').value;
         document.getElementById('4 r').innerHTML = r4;
+        r4 = r4 + ' -> 答錯原因：實際給藥錯誤' + 
+        '<br><font style="background-color: yellow;">★ 有些心血管藥物和濃度高的藥物不能直接靜脈推注IV push</font>，可能會造成嚴重低血壓或血管壞死等問題' +
+        '<br><font style="background-color: yellow;">★ 當藥物途徑為靜脈滴注IV drip，我們要特別注意是要用<b>精密輸液套 (IV bag)</b> 還是<b>點滴幫浦儀器 (IV pump)</b></font>';
         correctness.push(0);
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r').value);
     
@@ -299,24 +307,35 @@ function feedback(){
         r7r = '您不給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r no').value;
         reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r no').value);
         cognition.push(1);
-        if (1==1){
-            score = score + 1;
-            img7.src="pic/ok_w.png";
-            correctness.push(1);
-
-        }else{
-            img7.src="pic/wrong_w.png";
-            r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
-            correctness.push(0);
-
-        }
-        document.getElementById('7 r 7').innerHTML = r7r;
+        
+        const userAnswer = document.getElementById('Ampicillin 2000mg 500mg/vail r no').value;
+        callOpenAI("藥物錯誤", userAnswer).then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                if (apiResponse[0] == "1") {
+                    score += 1;
+                    img7.src = "pic/ok_w.png";
+                    c7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(1);
+                } else {
+                    img7.src = "pic/wrong_w.png";
+                    r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                    correctness.push(0);
+                }
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+            document.getElementById('7 r').innerHTML = c7r;
+            document.getElementById('7 r 7').innerHTML = r7r;
+        });
 
     }else{
         cognition.push(0);
         img7.src="pic/wrong_w.png";
         r7 = '您給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r').value;
         document.getElementById('7 r').innerHTML = r7;
+        r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤' + 'Ampicillin 是盤尼西林 Penicillin 類藥物。目前臨床上不需要常規做盤尼西林試驗 Penicillin test, PST。' +
+        '<br>但<font style="color: #228de5;">病人對盤尼西林 Penicillin 有過敏記錄，如果醫師仍要給就需要做 PST</font>，因此不應該直接該給藥';
+
         correctness.push(0);
         reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r').value);
     

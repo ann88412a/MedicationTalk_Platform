@@ -152,7 +152,8 @@ function feedback(){
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check2').checked){
         c4r = ''
-        r4r = '您不給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value;
+        r4r = ''
+        // r4r = '您不給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value;
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r no').value);
         cognition.push(1);
 
@@ -194,7 +195,8 @@ function feedback(){
     
     if (!document.getElementById('check4').checked){
         c5r = ''
-        r5r = '您不給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value;
+        r5r = ''
+        // r5r = '您不給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value;
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r no').value);
         cognition.push(1);
 
@@ -236,7 +238,9 @@ function feedback(){
     var img6 = document.getElementById('6 img');
     
     if (!document.getElementById('check3').checked){
-        r6r = '您不給 Cefazolin 1000mg/vail 的理由：' + document.getElementById('Cefazolin 1000mg/vail r no').value;
+        c6r = ''
+        r6r = ''
+        // r6r = '您不給 Cefazolin 1000mg/vail 的理由：' + document.getElementById('Cefazolin 1000mg/vail r no').value;
         reason.push(document.getElementById('Cefazolin 1000mg/vail r no').value);
         cognition.push(1);
 
@@ -379,7 +383,9 @@ function feedback(){
     var img9 = document.getElementById('9 img');
     
     if (document.getElementById('check5').checked){
-        r9r = '您給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r').value;
+        c8r = ''
+        r9r = ''
+        // r9r = '您給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r').value;
         reason.push(document.getElementById('Heparin 25000units/vail r').value);
         cognition.push(1);
         if (medicines['Heparin 25000units/vail']['verification']=='4710031297121' && 0.75<=medicines['Heparin 25000units/vail']['injection'] && medicines['Heparin 25000units/vail']['injection']<=0.85 && medicines['Heparin 25000units/vail']['way'][0]=='IVP' && medicines['Heparin 25000units/vail']['dilution']=="0"){ 

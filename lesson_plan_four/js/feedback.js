@@ -116,6 +116,7 @@ function feedback(){
      
     if (!document.getElementById('check2').checked){
         c3r = ''
+        r3r = ''
         // r3r = '您不給 Requip F.C 0.25mg/tab 的理由：' + document.getElementById('Requip F.C 0.25mg/tab r no').value;
         reason.push(document.getElementById('Requip F.C 0.25mg/tab r no').value);
         cognition.push(1);
@@ -165,6 +166,7 @@ function feedback(){
     // 4
     var img4 = document.getElementById('4 img');
     if (!document.getElementById('check3').checked){
+        c4r = ''
         r4r = '您不給 Millisrol inj 5mg/10ml/amp 的理由：' + document.getElementById('Millisrol inj 5mg/10ml/amp r no').value;
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r no').value);
         cognition.push(1);
@@ -208,6 +210,7 @@ function feedback(){
     
     if (!document.getElementById('check4').checked){
         c5r = ''
+        r5r = ''
         // r5r = '您不給 Repaglinide 1mg/tab 的理由：' + document.getElementById('Repaglinide 1mg/tab r no').value;
         reason.push(document.getElementById('Repaglinide 1mg/tab r no').value);
         cognition.push(1);
@@ -256,6 +259,7 @@ function feedback(){
     var img6 = document.getElementById('6 img');
     
     if (!document.getElementById('check5').checked){
+        r6r = ''
         c6r = ''
         // r6r = '您不給 Transamin 250mg/tab 的理由：' + document.getElementById('Transamin 250mg/tab r no').value;
         reason.push(document.getElementById('Transamin 250mg/tab r no').value);
@@ -304,7 +308,9 @@ function feedback(){
     var img7 = document.getElementById('7 img');
 
     if (!document.getElementById('check6').checked){
-        r7r = '您不給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r no').value;
+        c7r = ''
+        r7r = ''
+        // r7r = '您不給 Ampicillin 2000mg 500mg/vail 的理由：' + document.getElementById('Ampicillin 2000mg 500mg/vail r no').value;
         reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r no').value);
         cognition.push(1);
         
@@ -347,6 +353,7 @@ function feedback(){
     
     if (document.getElementById('check7').checked ){
         c8r = ''
+        r8r = ''
         // r8r = '您給 Bokey 100mg/tab 的理由：' + document.getElementById('Bokey 100mg/tab r').value;
         reason.push(document.getElementById('Bokey 100mg/tab r').value);
         cognition.push(1);
@@ -395,6 +402,7 @@ function feedback(){
     
     if (document.getElementById('check8').checked){
         c9r = ''
+        r9r = ''
         // r9r = '您給 Simvahexal 20 mg/tab 的理由：' + document.getElementById('Simvahexal 20 mg/tab r').value;
         reason.push(document.getElementById('Simvahexal 20 mg/tab r').value);
         cognition.push(1);
@@ -442,6 +450,7 @@ function feedback(){
     
     if (!document.getElementById('check9').checked){
         c10r = ''
+        r10r = ''
         // r10r = '您不給 FLU-D (Fluconazole) 50mg/tab 的理由：' + document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value;
         reason.push(document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value);
         cognition.push(1);

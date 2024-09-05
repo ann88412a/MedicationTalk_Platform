@@ -34,7 +34,7 @@ function feedback(){
       }
 
     var score = 0;
-    
+    var q_time=0;
     var id_name = 'ID：' + document.getElementById('IDF_ID').value + ' 姓名：' + document.getElementById('IDF_name').value;
     $('.ODF_ID')[0].innerText= id_name;
 
@@ -48,11 +48,13 @@ function feedback(){
         img1.src="pic/ok_w.png";
         paitent_r = '您非常細心，有觀察到病人身分錯誤，繼續保持!' ;
         correctness.push(1);
+        q_time = q_time + 1;
     }else{
         cognition.push(0);
         img1.src="pic/wrong_w.png";
         paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No <br>名字同音；<b style="color: #228de5;">但寫法錯誤</b>(黃岳禮)；<font style="color: #00B050;">正確為(黃月里)</font> <br><font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>';
         correctness.push(0);
+        q_time = q_time + 1;
     }
     
     document.getElementById('paitent r').innerHTML = paitent_r;
@@ -85,6 +87,7 @@ function feedback(){
             }
             document.getElementById('2 r').innerHTML = c2r;
             document.getElementById('2 r 2').innerHTML = r2r;
+            q_time = q_time + 1;
         });
 
     }else{
@@ -96,7 +99,7 @@ function feedback(){
         '<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Amiodarone</font> 和 <font style="text-decoration:underline;">Amikacin</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
         correctness.push(0);
         reason.push(document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r').value);
-    
+        q_time = q_time + 1;
     }
     
     // 3
@@ -127,6 +130,7 @@ function feedback(){
                 }
                 document.getElementById('3 r').innerHTML = c3r;
                 document.getElementById('3 r 3').innerHTML = r3r;
+                q_time = q_time + 1;
             });
 
         }else{
@@ -135,6 +139,7 @@ function feedback(){
             r3r = ' -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;"><br>正確劑量為300mg(共4顆)</font><br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
             correctness.push(0);
             document.getElementById('3 r 3').innerHTML = r3r;
+            q_time = q_time + 1;
         }
 
     }else{
@@ -145,6 +150,7 @@ function feedback(){
         r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r').value);
+        q_time = q_time + 1;
     }
 
 
@@ -175,6 +181,7 @@ function feedback(){
             }
             document.getElementById('4 r').innerHTML = c4r;
             document.getElementById('4 r 4').innerHTML = r4r;
+            q_time = q_time + 1;
         });
 
     }else{
@@ -186,7 +193,7 @@ function feedback(){
         '<br><font style="color: #f44336;">★ 直接注射KCL會導致致命心律不整等嚴重併發症。KCL須要經稀釋、緩慢輸注，並且需要監測患者的血鉀濃度確保維持在安全範圍內</font>';
         correctness.push(0);
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -219,6 +226,7 @@ function feedback(){
             }
             document.getElementById('5 r').innerHTML = c5r;
             document.getElementById('5 r 5').innerHTML = r5r;
+            q_time = q_time + 1;
         });
 
     }else{
@@ -230,6 +238,7 @@ function feedback(){
         '<br><font style="color: #f44336;">★ 注意醫囑給藥時間與當下病患狀況是否吻合。</font>';
         correctness.push(0);
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r').value);
+        q_time = q_time + 1;
     
     }
 
@@ -262,6 +271,7 @@ function feedback(){
             }
             document.getElementById('6 r').innerHTML = c6r;
             document.getElementById('6 r 6').innerHTML = r6r;
+            q_time = q_time + 1;
         });
 
     }else{
@@ -274,7 +284,7 @@ function feedback(){
         + '<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>';
         correctness.push(0);
         reason.push(document.getElementById('Cefazolin 1000mg/vail r').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -310,6 +320,7 @@ function feedback(){
                 }
                 document.getElementById('7 r').innerHTML = c7r;
                 document.getElementById('7 r 7').innerHTML = r7r;
+                q_time = q_time + 1;
             });
         }else{
             img7.src="pic/wrong_w.png";
@@ -317,6 +328,7 @@ function feedback(){
             r7r = ' -> 答錯原因：實際給藥錯誤<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
             correctness.push(0);
             document.getElementById('7 r 7').innerHTML = r7r;
+            q_time = q_time + 1;
         }
     }else{
         cognition.push(0);
@@ -326,6 +338,7 @@ function feedback(){
         r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Aspirin 100mg/tab r').value);
+        q_time = q_time + 1;
     }
 
     // 8
@@ -360,6 +373,7 @@ function feedback(){
                 }
                 document.getElementById('8 r').innerHTML = c8r;
                 document.getElementById('8 r 8').innerHTML = r8r;
+                q_time = q_time + 1;
             });
         }else{
             img8.src="pic/wrong_w.png";
@@ -367,6 +381,7 @@ function feedback(){
             r8r= ' -> 答錯原因：實際給藥錯誤<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('8 r 8').innerHTML = r8r;
+            q_time = q_time + 1;
         }
     }else{
         cognition.push(0);
@@ -376,6 +391,7 @@ function feedback(){
         r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
         reason.push(document.getElementById('Tulip （Atorvastatin）20mg/tab r no').value);
+        q_time = q_time + 1;
     }
 
 
@@ -407,6 +423,7 @@ function feedback(){
                 }
                 document.getElementById('9 r').innerHTML = c9r;
                 document.getElementById('9 r 9').innerHTML = r9r;
+                q_time = q_time + 1;
             });
 
             document.getElementById('9 r 9').innerHTML = r9r;
@@ -423,6 +440,7 @@ function feedback(){
         document.getElementById('9 r').innerHTML = r9;
         correctness.push(0);
         reason.push(document.getElementById('Heparin 25000units/vail r no').value);
+        q_time = q_time + 1;
     
     }
 
@@ -457,16 +475,23 @@ function feedback(){
 
     
     // score
-    document.getElementById('score').innerHTML = score;
-    if (score >= 7)
-    {
-        document.getElementById('review').innerHTML = '高等';
-    }else if(score >= 4)
-    {
-        document.getElementById('review').innerHTML = '中等';
-    }else
-    {
-        document.getElementById('review').innerHTML = '低等';
-    }
+    let checkQTimeInterval = setInterval(() => {
+        if (q_time >= 9) {
+            // 停止 setInterval
+            clearInterval(checkQTimeInterval);
+            
+            // 顯示分數
+            document.getElementById('score').innerHTML = score;
+    
+            // 根據分數顯示評語
+            if (score >= 7) {
+                document.getElementById('review').innerHTML = '高等';
+            } else if (score >= 4) {
+                document.getElementById('review').innerHTML = '中等';
+            } else {
+                document.getElementById('review').innerHTML = '低等';
+            }
+        }
+    }, 1000);// score
 
 }   

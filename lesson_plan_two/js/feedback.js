@@ -36,6 +36,7 @@ function feedback(){
       }
 
     var score = 0;
+    var q_time=0;
     
     var id_name = 'ID：' + document.getElementById('IDF_ID').value + ' 姓名：' + document.getElementById('IDF_name').value;
     $('.ODF_ID')[0].innerText= id_name;
@@ -51,11 +52,13 @@ function feedback(){
         paitent_r = '您非常細心，有觀察到病人身分錯誤，繼續保持!';
         // paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： Yes';
         correctness.push(1);
+        q_time = q_time + 1;
     }else{
         cognition.push(0);
         img1.src="pic/wrong_w.png";
         paitent_r = '掃描結果：' + $('.ODF_value')[0].innerText + ',   您判斷是否正確： No<br>同名李雅蘭，<b style="color: #228de5;">但出生年月日錯誤</b>(43/02/01)；<font style="color: #00B050;">正確為(28/12/11)</font><br> <font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>';
         correctness.push(0);
+        q_time = q_time + 1;
     }
     
     document.getElementById('paitent r').innerHTML = paitent_r;
@@ -96,6 +99,7 @@ function feedback(){
                 }
                 document.getElementById('2 r').innerHTML = c2r;
                 document.getElementById('2 r 2').innerHTML = r2r;
+                q_time = q_time + 1;
             });
 
         }else{
@@ -107,6 +111,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Concor</font> 和 <font style="text-decoration:underline;">Cardio</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
             document.getElementById('2 r 2').innerHTML = r2r;
+            q_time = q_time + 1;
         }
 
     }else{
@@ -121,7 +126,7 @@ function feedback(){
         document.getElementById('2 r 2').innerHTML = r2;
         correctness.push(0);
         reason.push(document.getElementById('Concor 5mg/tab r').value);
-    
+        q_time = q_time + 1;
     }
     
     // 3
@@ -159,6 +164,7 @@ function feedback(){
                 }
                 document.getElementById('3 r').innerHTML = c3r;
                 document.getElementById('3 r 3').innerHTML = r3r;
+                q_time = q_time + 1;
             });
         }else{
             img3.src="pic/wrong_w.png";
@@ -170,6 +176,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ 同一種藥物會有<font style="background-color: yellow;">不同劑量</font></font>';
             correctness.push(0);
             document.getElementById('3 r 3').innerHTML = r3r;
+            q_time = q_time + 1;
         }
 
     }else{
@@ -185,6 +192,7 @@ function feedback(){
         // r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Isoptin 40 mg/tab r').value);
+        q_time = q_time + 1;
     }
 
 
@@ -217,6 +225,7 @@ function feedback(){
             }
             document.getElementById('4 r').innerHTML = c4r;
             document.getElementById('4 r 4').innerHTML = r4r;
+            q_time = q_time + 1;
         });
 
     }else{
@@ -228,7 +237,7 @@ function feedback(){
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
         reason.push(document.getElementById('Amikacin 250mg/vail r').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -267,6 +276,7 @@ function feedback(){
                 }
                 document.getElementById('5 r').innerHTML = c5r;
                 document.getElementById('5 r 5').innerHTML = r5r;
+                q_time = q_time + 1;
             });
 
         }else{
@@ -278,6 +288,7 @@ function feedback(){
             +'<br>故此藥目前不能給<font style="color: #00B050;">，應告知醫師</font><br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
             correctness.push(0);
             document.getElementById('5 r 5').innerHTML = r5r;
+            q_time = q_time + 1;
         }
 
     }else{
@@ -292,7 +303,7 @@ function feedback(){
         document.getElementById('5 r 5').innerHTML = r5;
         correctness.push(0);
         reason.push(document.getElementById('Spironolactone 25mg/tab r').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -331,6 +342,7 @@ function feedback(){
                 }
                 document.getElementById('6 r').innerHTML = c6r;
                 document.getElementById('6 r 6').innerHTML = r6r;
+                q_time = q_time + 1;
             });
 
 
@@ -344,7 +356,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★病人服用 <font style="background-color: yellow;">Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時</font></font>。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒';
             correctness.push(0);
             document.getElementById('6 r 6').innerHTML = r6r;
-
+            q_time = q_time + 1;
         }
 
     }else{
@@ -360,7 +372,7 @@ function feedback(){
         document.getElementById('6 r 6').innerHTML = r6;
         correctness.push(0);
         reason.push(document.getElementById('Metformin 500mg/tab r').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -393,6 +405,7 @@ function feedback(){
             }
             document.getElementById('7 r').innerHTML = c7r;
             document.getElementById('7 r 7').innerHTML = r7r;
+            q_time = q_time + 1;
         });
         
     }else{
@@ -405,6 +418,7 @@ function feedback(){
         //r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Keto 30mg/amp r').value);
+        q_time = q_time + 1;
     }
 
     // 8
@@ -443,6 +457,7 @@ function feedback(){
                 }
                 document.getElementById('8 r').innerHTML = c8r;
                 document.getElementById('8 r 8').innerHTML = r8r;
+                q_time = q_time + 1;
             });
 
         }else{
@@ -455,6 +470,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('8 r 8').innerHTML = r8r;
+            q_time = q_time + 1;
         }
     }else{
         cognition.push(0);
@@ -469,6 +485,7 @@ function feedback(){
         // r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
         reason.push(document.getElementById('Nexium 40mg/tab r no').value);
+        q_time = q_time + 1;
     }
 
 
@@ -507,6 +524,7 @@ function feedback(){
                 }
                 document.getElementById('9 r').innerHTML = c9r;
                 document.getElementById('9 r 9').innerHTML = r9r;
+                q_time = q_time + 1;
             });
 
         }else{
@@ -518,6 +536,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('9 r 9').innerHTML = r9r;
+            q_time = q_time + 1;
         }
     }else{
         cognition.push(0);
@@ -531,7 +550,7 @@ function feedback(){
         document.getElementById('9 r').innerHTML = r9;
         correctness.push(0);
         reason.push(document.getElementById('Lipitor 20mg/tab r no').value);
-    
+        q_time = q_time + 1;
     }
 
 
@@ -571,6 +590,7 @@ function feedback(){
                 }
                 document.getElementById('10 r').innerHTML = c10r;
                 document.getElementById('10 r 10').innerHTML = r10r;
+                q_time = q_time + 1;
             });
 
 
@@ -583,6 +603,7 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物-藥物交互作用</font>(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
             correctness.push(0);
             document.getElementById('10 r 10').innerHTML = r10r;
+            q_time = q_time + 1;
         }
     }else{
         cognition.push(0);
@@ -596,20 +617,29 @@ function feedback(){
         document.getElementById('10 r').innerHTML = r10;
         correctness.push(0);
         reason.push(document.getElementById('Sandimmun neoral 100mg/tab r').value);
+        q_time = q_time + 1;
     }
 
     
     // score
-    document.getElementById('score').innerHTML = score;
-    if (score >= 7)
-    {
-        document.getElementById('review').innerHTML = '高等';
-    }else if(score >= 4)
-    {
-        document.getElementById('review').innerHTML = '中等';
-    }else
-    {
-        document.getElementById('review').innerHTML = '低等';
-    }
+    let checkQTimeInterval = setInterval(() => {
+        if (q_time >= 10) {
+            // 停止 setInterval
+            clearInterval(checkQTimeInterval);
+            
+            // 顯示分數
+            document.getElementById('score').innerHTML = score;
+    
+            // 根據分數顯示評語
+            if (score >= 7) {
+                document.getElementById('review').innerHTML = '高等';
+            } else if (score >= 4) {
+                document.getElementById('review').innerHTML = '中等';
+            } else {
+                document.getElementById('review').innerHTML = '低等';
+            }
+        }
+    }, 1000);// score
+        
 
 }   

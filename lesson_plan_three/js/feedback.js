@@ -1,5 +1,6 @@
 // 制定回饋規則 打分機制
 
+    
 function feedback(){
     //GPT的部分
     function callOpenAI(rightanswer, userAnswer) {
@@ -35,7 +36,7 @@ function feedback(){
       }
 
     var score = 0;
-    
+    var q_time=0;
     var id_name = 'ID：' + document.getElementById('IDF_ID').value + ' 姓名：' + document.getElementById('IDF_name').value;
     $('.ODF_ID')[0].innerText= id_name;
 
@@ -49,6 +50,9 @@ function feedback(){
         img1.src="pic/ok_w.png";
         paitent_r = '您非常細心，有觀察到病人身分錯誤，繼續保持!' ;
         correctness.push(1);
+        q_time = q_time + 1;
+        console.log('score1:',score)
+        console.log('q_time1:',q_time)
     }else{
         cognition.push(0);
         img1.src="pic/wrong_w.png";
@@ -56,6 +60,9 @@ function feedback(){
         +'<br>病人的名字與出生年月日皆錯誤。<b style="color: #228de5;">李翊菲82/11/04為錯誤</b>(43/02/01)；<font style="color: #00B050;">正確為李亦霏79/05/31</font>'
         +'<br><font style="color: #f44336;">★ 給藥之前，要先核對患者身份 。 <font style="background-color: yellow;">身份辨識方式</font>包括，詢問對方的「姓名」與「出生年月日」</font>';
         correctness.push(0);
+        q_time = q_time + 1;
+        console.log('score1:',score)
+        console.log('q_time1:',q_time)
     }
     
     document.getElementById('paitent r').innerHTML = paitent_r;
@@ -96,6 +103,9 @@ function feedback(){
                 }
                 document.getElementById('2 r 2').innerHTML = r2r;
                 document.getElementById('2 r').innerHTML = c2r;
+                q_time = q_time + 1;
+                console.log('score2:',score)
+                console.log('q_time2:',q_time)
             });
         }else{
             img2.src="pic/wrong_w.png";
@@ -106,6 +116,9 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
             correctness.push(0);
             document.getElementById('2 r 2').innerHTML = r2r;
+            q_time = q_time + 1;
+            console.log('score2:',score)
+            console.log('q_time2:',q_time)
         }
 
 
@@ -121,7 +134,9 @@ function feedback(){
         document.getElementById('2 r 2').innerHTML = r2;
         correctness.push(0);
         reason.push(document.getElementById('Anpo 10mg/tab r').value);
-    
+        q_time = q_time + 1;
+        console.log('score2:',score)
+        console.log('q_time2:',q_time)
     }
     
     // 3
@@ -158,15 +173,21 @@ function feedback(){
                     }
                     document.getElementById('3 r').innerHTML = c3r;
                     document.getElementById('3 r 3').innerHTML = r3r;
+                    q_time = q_time + 1;
+                    console.log('score3:',score)
+                    console.log('q_time3:',q_time)
                 });
     
             }
+            
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
             r3r = ' -> 答錯原因：實際給藥錯誤' + '<br><font style="color: #f44336;">★ 注意抽取劑量 (一隻或半隻)</font>';
             correctness.push(0);
-
+            q_time = q_time + 1;
+            console.log('score3:',score)
+            console.log('q_time3:',q_time)
         }
         document.getElementById('3 r 3').innerHTML = r3r;
 
@@ -179,6 +200,9 @@ function feedback(){
         //r3 = r3 + '\n ';
         correctness.push(0);
         reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
+        q_time = q_time + 1;
+        console.log('score3:',score)
+        console.log('q_time3:',q_time)
     }
 
 
@@ -211,6 +235,9 @@ function feedback(){
             }
             document.getElementById('4 r').innerHTML = c4r;
             document.getElementById('4 r 4').innerHTML = r4r;
+            q_time = q_time + 1;
+            console.log('score4:',score)
+            console.log('q_time4:',q_time)
         });
 
     }else{
@@ -223,7 +250,9 @@ function feedback(){
         document.getElementById('4 r').innerHTML = r4;
         correctness.push(0);
         reason.push(document.getElementById('Clexane 60mg/0.6ml r').value);
-    
+        q_time = q_time + 1;
+        console.log('score4:',score)
+        console.log('q_time4:',q_time)
     }
 
 
@@ -262,6 +291,9 @@ function feedback(){
                 }
                 document.getElementById('5 r').innerHTML = c5r;
                 document.getElementById('5 r 5').innerHTML = r5r;
+                q_time = q_time + 1;
+                console.log('score5:',score)
+                console.log('q_time5:',q_time)
             });
         }else{
             img5.src="pic/wrong_w.png";
@@ -272,6 +304,9 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
             correctness.push(0);
             document.getElementById('5 r 5').innerHTML = r5r;
+            q_time = q_time + 1;
+            console.log('score5:',score)
+            console.log('q_time5:',q_time)
         }
 
     }else{
@@ -286,8 +321,10 @@ function feedback(){
         document.getElementById('5 r 5').innerHTML = r5;
         correctness.push(0);
         reason.push(document.getElementById('Sennoside 12mg/tab r').value);
-    
-    }
+        q_time = q_time + 1;
+        console.log('score5:',score)
+        console.log('q_time5:',q_time)
+    }   
 
 
     // 6
@@ -325,6 +362,9 @@ function feedback(){
                 }
                 document.getElementById('6 r').innerHTML = c6r;
                 document.getElementById('6 r 6').innerHTML = r6r;
+                q_time = q_time + 1;
+                console.log('score6:',score)
+                console.log('q_time6:',q_time)
             });
         }else{
             img6.src="pic/wrong_w.png";
@@ -335,6 +375,9 @@ function feedback(){
             +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
             correctness.push(0);
             document.getElementById('6 r 6').innerHTML = r6r;
+            q_time = q_time + 1;
+            console.log('score6:',score)
+            console.log('q_time6:',q_time)
         }
 
     }else{
@@ -349,7 +392,9 @@ function feedback(){
         document.getElementById('6 r 6').innerHTML = r6;
         correctness.push(0);
         reason.push(document.getElementById('Peace 2.5mg/tab r').value);
-    
+        q_time = q_time + 1;
+        console.log('score6:',score)
+        console.log('q_time6:',q_time)
     }
 
 
@@ -382,6 +427,9 @@ function feedback(){
             }
             document.getElementById('7 r').innerHTML = c7r;
             document.getElementById('7 r 7').innerHTML = r7r;
+            q_time = q_time + 1;
+            console.log('score7:',score)
+            console.log('q_time7:',q_time)
         });
 
     }else{
@@ -394,6 +442,9 @@ function feedback(){
         // r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
         correctness.push(0);
         reason.push(document.getElementById('Oxacillin 1000mg/vail r').value);
+        q_time = q_time + 1;
+        console.log('score7:',score)
+        console.log('q_time7:',q_time)
     }
 
     // 8
@@ -432,6 +483,9 @@ function feedback(){
                 }
                 document.getElementById('8 r').innerHTML = c8r;
                 document.getElementById('8 r 8').innerHTML = r8r;
+                q_time = q_time + 1;
+                console.log('score8:',score)
+                console.log('q_time8:',q_time)
             });
         }else{
             img8.src="pic/wrong_w.png";
@@ -443,6 +497,9 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('8 r 8').innerHTML = r8r;
+            q_time = q_time + 1;
+            console.log('score8:',score)
+            console.log('q_time8:',q_time)
         }
         
     }else{
@@ -458,6 +515,9 @@ function feedback(){
         // r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
         correctness.push(0);
         reason.push(document.getElementById('Paramol 500mg/tab r no').value);
+        q_time = q_time + 1;
+        console.log('score8:',score)
+        console.log('q_time8:',q_time)
     }
 
 
@@ -496,6 +556,9 @@ function feedback(){
                 }
                 document.getElementById('9 r').innerHTML = c9r;
                 document.getElementById('9 r 9').innerHTML = r9r;
+                q_time = q_time + 1;
+                console.log('score9:',score)
+                console.log('q_time9:',q_time)
             });
         }else{
             img9.src="pic/wrong_w.png";
@@ -505,6 +568,9 @@ function feedback(){
             +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('9 r 9').innerHTML = r9r;
+            q_time = q_time + 1;
+            console.log('score9:',score)
+            console.log('q_time9:',q_time)
         }
     }else{
         cognition.push(0);
@@ -517,6 +583,9 @@ function feedback(){
         document.getElementById('9 r 9').innerHTML = r9;
         correctness.push(0);
         reason.push(document.getElementById('Primperan 5 mg/tab r no').value);
+        q_time = q_time + 1;
+        console.log('score9:',score)
+        console.log('q_time9:',q_time)
     
     }
 
@@ -548,19 +617,27 @@ function feedback(){
     //     correctness.push(1);
     //     reason.push(document.getElementById('Sandimmun neoral 100mg/tab r').value);
     // }
-
+    console.log('score:',score)
+    console.log('q_time:',q_time)
     
-    // score
-    document.getElementById('score').innerHTML = score;
-    if (score >= 7)
-    {
-        document.getElementById('review').innerHTML = '高等';
-    }else if(score >= 4)
-    {
-        document.getElementById('review').innerHTML = '中等';
-    }else
-    {
-        document.getElementById('review').innerHTML = '低等';
-    }
+    let checkQTimeInterval = setInterval(() => {
+        if (q_time >= 9) {
+            // 停止 setInterval
+            clearInterval(checkQTimeInterval);
+            
+            // 顯示分數
+            document.getElementById('score').innerHTML = score;
+    
+            // 根據分數顯示評語
+            if (score >= 7) {
+                document.getElementById('review').innerHTML = '高等';
+            } else if (score >= 4) {
+                document.getElementById('review').innerHTML = '中等';
+            } else {
+                document.getElementById('review').innerHTML = '低等';
+            }
+        }
+    }, 1000);// score
+        
 
-}   
+}       console.log('finalscore:',score)

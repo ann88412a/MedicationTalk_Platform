@@ -11,9 +11,9 @@ function feedback(){
             'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [
-              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何 已知的正確答案與定義如下:1.藥物錯誤 : 藥物種類2.劑量錯誤 : 藥丸、藥劑數量3.時間錯誤 : 病人使用藥物時間4.途徑錯誤 : 使用藥物的途徑5.藥物過敏 : 病人是否有過敏6.沒有適應症 : 是否有適應症7.其他症狀 : 其他症狀" },
               { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
             ]
           })
@@ -154,31 +154,31 @@ function feedback(){
         && (medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)') 
         && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection' && medicines['Progesterone 25mg/ml']['dilution']=="0"){
 
-            if (pill_detect['Clopidogrel'] == 0){
-                const userAnswer = document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value;
-                callOpenAI("必須給此藥", userAnswer).then(apiResponse => {
-                    if (apiResponse && typeof apiResponse === 'string') {
-                        if (apiResponse[0] == "1") {
-                            score += 1;
-                            img3.src = "pic/ok_w.png";
-                            c3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                            correctness.push(1);
-                        } else {
-                            img3.src = "pic/wrong_w.png";
-                            r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                            correctness.push(0);
-                        }
+            
+            const userAnswer = document.getElementById('Progesterone 25mg/ml r').value;
+            callOpenAI("劑量錯誤", userAnswer).then(apiResponse => {
+                if (apiResponse && typeof apiResponse === 'string') {
+                    if (apiResponse[0] == "1") {
+                        score += 1;
+                        img3.src = "pic/ok_w.png";
+                        c3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                        correctness.push(1);
                     } else {
-                    console.error('API response is not a valid string:', apiResponse);
+                        img3.src = "pic/wrong_w.png";
+                        r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
+                        correctness.push(0);
                     }
-                    document.getElementById('3 r').innerHTML = c3r;
-                    document.getElementById('3 r 3').innerHTML = r3r;
-                    q_time = q_time + 1;
-                    console.log('score3:',score)
-                    console.log('q_time3:',q_time)
-                });
+                } else {
+                console.error('API response is not a valid string:', apiResponse);
+                }
+                document.getElementById('3 r').innerHTML = c3r;
+                document.getElementById('3 r 3').innerHTML = r3r;
+                q_time = q_time + 1;
+                console.log('score3:',score)
+                console.log('q_time3:',q_time)
+            });
     
-            }
+            
             
         }else{
             img3.src="pic/wrong_w.png";
@@ -578,7 +578,8 @@ function feedback(){
         // r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
         r9 ='你不給Primperan 5 mg/tab的理由是因為「'
         + document.getElementById('Primperan 5 mg/tab r no').value.trim()
-        +'」<br>  -> 答錯原因：MAR單認知錯誤<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
+        +'」<br>-> 答錯原因：MAR單認知錯誤'
+        +'<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
         document.getElementById('9 r 9').innerHTML = r9;
         correctness.push(0);

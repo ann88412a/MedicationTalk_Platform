@@ -9,9 +9,7 @@ var domain_name_url = "https://anna.iottalk.tw"
 // chatgpt api
 var apiKey = '';
 $.getJSON(domain_name_url + '/api/get_api_key', function(data) {
-    console.log(data);
     apiKey = data['api_key'];
-    console.log('api----',apiKey);
 });
 
 const idf_id = document.getElementById('IDF_ID');

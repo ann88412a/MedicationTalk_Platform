@@ -9,9 +9,9 @@ function feedback(){
             'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [
-              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何 已知的正確答案與定義如下:1.藥物錯誤 : 藥物種類2.劑量錯誤 : 藥丸、藥劑數量3.時間錯誤 : 病人使用藥物時間4.途徑錯誤 : 使用藥物的途徑5.藥物過敏 : 病人是否有過敏6.沒有適應症 : 是否有適應症7.其他症狀 : 其他症狀" },
               { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
             ]
           })
@@ -94,10 +94,10 @@ function feedback(){
         cognition.push(0);
         img2.src="pic/wrong_w.png";
         r2 = '您給 Amiodarone(Cordarone) 150mg/3ml/amp 的理由：' + document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r').value;
-        document.getElementById('2 r').innerHTML = r2;
-        r2 = r2 + '\n -> 答錯原因：MAR單認知錯誤' + 
+        r2 = r2 + '<br> -> 答錯原因：MAR單認知錯誤' + 
         '<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Amiodarone</font> 和 <font style="text-decoration:underline;">Amikacin</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
         correctness.push(0);
+        document.getElementById('2 r').innerHTML = r2;
         reason.push(document.getElementById('Amiodarone(Cordarone) 150mg/3ml/amp r').value);
         q_time = q_time + 1;
     }
@@ -136,7 +136,11 @@ function feedback(){
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
-            r3r = ' -> 答錯原因：實際給藥錯誤<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;"><br>正確劑量為300mg(共4顆)</font><br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
+            r3r = '您不給 Plavix (Clopidogrel) 75mg/tab 的理由：' + document.getElementById('Plavix (Clopidogrel) 75mg/tab r no').value 
+            +'<br>-> 答錯原因：實際給藥錯誤'
+            +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;">'
+            +'<br>正確劑量為300mg(共4顆)</font>'
+            +'<br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
             correctness.push(0);
             document.getElementById('3 r 3').innerHTML = r3r;
             q_time = q_time + 1;
@@ -146,9 +150,12 @@ function feedback(){
         cognition.push(0);
         img3.src="pic/wrong_w.png";
         r3 = '您給 Plavix (Clopidogrel) 75mg/tab 的理由：' + document.getElementById('Plavix (Clopidogrel) 75mg/tab r').value;
-        document.getElementById('3 r').innerHTML = r3;
-        r3 = r3 + '\n -> 答錯原因：MAR單認知錯誤';
+        r3 = r3 + '<br> -> 答錯原因：MAR單認知錯誤'
+        +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>225mg(共3顆)，<font style="color: #00B050;">'
+        +'<br>正確劑量為300mg(共4顆)</font>'
+        +'<br> <font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">注意給藥的總劑量</font>!特別是當患者需要多種藥物治療或分次服藥時，確保總劑量不超過安全範圍是非常重要的</font>';
         correctness.push(0);
+        document.getElementById('3 r').innerHTML = r3;
         reason.push(document.getElementById('Plavix (Clopidogrel) 75mg/tab r').value);
         q_time = q_time + 1;
     }
@@ -188,10 +195,10 @@ function feedback(){
         cognition.push(0);
         img4.src="pic/wrong_w.png";
         r4 = '您給 KCL (Potassium chloride) 20mEq/10mL/amp 的理由：' + document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r').value;
-        document.getElementById('4 r').innerHTML = r4;
-        r4 = r4 + '\n -> 答錯原因：MAR單認知錯誤' +
+        r4 = r4 + '<br> -> 答錯原因：MAR單認知錯誤' +
         '<br><font style="color: #f44336;">★ 直接注射KCL會導致致命心律不整等嚴重併發症。KCL須要經稀釋、緩慢輸注，並且需要監測患者的血鉀濃度確保維持在安全範圍內</font>';
         correctness.push(0);
+        document.getElementById('4 r').innerHTML = r4;
         reason.push(document.getElementById('KCL (Potassium chloride) 20mEq/10mL/amp r').value);
         q_time = q_time + 1;
     }
@@ -233,10 +240,10 @@ function feedback(){
         cognition.push(0);
         img5.src="pic/wrong_w.png";
         r5 = '您給 Rolikan (Sodium bicarbonate) 7% 20mL/amp 的理由：' + document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r').value;
-        document.getElementById('5 r').innerHTML = r5;
-        r5 = r5 + '\n -> 答錯原因:MAR單認知錯誤' + 
+        r5 = r5 + '<br> -> 答錯原因:MAR單認知錯誤' + 
         '<br><font style="color: #f44336;">★ 注意醫囑給藥時間與當下病患狀況是否吻合。</font>';
         correctness.push(0);
+        document.getElementById('5 r').innerHTML = r5;
         reason.push(document.getElementById('Rolikan (Sodium bicarbonate) 7% 20mL/amp r').value);
         q_time = q_time + 1;
     
@@ -278,11 +285,11 @@ function feedback(){
         cognition.push(0);
         img6.src="pic/wrong_w.png";
         r6 = '您給 Cefazolin 1000mg/vail 的理由：' + document.getElementById('Cefazolin 1000mg/vail r').value;
-        document.getElementById('6 r').innerHTML = r6;
-        r6 = r6 + '\n -> 答錯原因:MAR單認知錯誤' + 
+        r6 = r6 + '<br>-> 答錯原因:MAR單認知錯誤' + 
         '從目前的病患資訊，'+ '<font style="color: #228de5;">病人沒有臨床證據使用 Cefazolin 的適應症</font>' + '，應向醫師或專科護理師確認是否需要服用此藥';
         + '<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>';
         correctness.push(0);
+        document.getElementById('6 r').innerHTML = r6;
         reason.push(document.getElementById('Cefazolin 1000mg/vail r').value);
         q_time = q_time + 1;
     }
@@ -325,7 +332,10 @@ function feedback(){
         }else{
             img7.src="pic/wrong_w.png";
             // r7r = r7r + '\n -> 答錯原因：實際給藥錯誤';
-            r7r = ' -> 答錯原因：實際給藥錯誤<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
+            r7r = '您不給 Aspirin 100mg/tab 的理由：' + document.getElementById('Aspirin 100mg/tab r no').value
+            +'<br>-> 答錯原因：實際給藥錯誤'
+            +'<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin'
+            +'<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
             correctness.push(0);
             document.getElementById('7 r 7').innerHTML = r7r;
             q_time = q_time + 1;
@@ -334,9 +344,11 @@ function feedback(){
         cognition.push(0);
         img7.src="pic/wrong_w.png";
         r7 = '您給 Aspirin 100mg/tab 的理由：' + document.getElementById('Aspirin 100mg/tab r').value;
-        document.getElementById('7 r').innerHTML = r7;
-        r7 = r7 + '\n -> 答錯原因：MAR單認知錯誤';
+        r7 = r7 + '<br>-> 答錯原因：MAR單認知錯誤'
+        +'<br>Aspirin 是「<font style="color: #228de5;">非類固醇抗炎藥物</font>」（Non-Steroidal Anti-Inflammatory Drugs，<b style="color: #228de5;"> NSAID </b>） 類藥物。此患者對<b style="color: #228de5;"> NSAID 過敏</b>，因此不能服用Aspirin'
+        +'<br><font style="color: #f44336;">★ 藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
         correctness.push(0);
+        document.getElementById('7 r').innerHTML = r7;
         reason.push(document.getElementById('Aspirin 100mg/tab r').value);
         q_time = q_time + 1;
     }
@@ -378,7 +390,11 @@ function feedback(){
         }else{
             img8.src="pic/wrong_w.png";
             // r8 = r8 + '\n -> 答錯原因：實際給藥錯誤';
-            r8r= ' -> 答錯原因：實際給藥錯誤<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
+            r8r= '您給 Tulip （Atorvastatin）20mg/tab 的理由：' + document.getElementById('Tulip （Atorvastatin）20mg/tab r').value
+            +'<br> -> 答錯原因：實際給藥錯誤'
+            +'<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。'
+            +'<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度'
+            +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
             correctness.push(0);
             document.getElementById('8 r 8').innerHTML = r8r;
             q_time = q_time + 1;
@@ -387,9 +403,12 @@ function feedback(){
         cognition.push(0);
         img8.src="pic/wrong_w.png";
         r8r = '您不給 Tulip （Atorvastatin）20mg/tab 的理由：' + document.getElementById('Tulip （Atorvastatin）20mg/tab r no').value;
-        document.getElementById('8 r 8').innerHTML = r8r;
-        r8r = r8r + '\n -> 答錯原因：MAR單認知錯誤'
+        r8r = r8r + '<br>-> 答錯原因：MAR單認知錯誤'
+        +'<br>Tulip（學名為Atorva<font style="text-decoration:underline; color: #f44336;">statin</font>）屬於Statin類藥物。'
+        +'<br>病人是急性心肌梗塞（Acute Myocardial Infarction, AMI），研究已證實<b style="color: #228de5;"> AMI </b>患者，使用Statin藥物能明顯有助於改善預後，像是：穩定動脈粥樣硬化斑塊、降低血栓形成的風險，還能減少心肌梗塞的大小和心肌損傷的程度'
+        +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';
         correctness.push(0);
+        document.getElementById('8 r 8').innerHTML = r8r;
         reason.push(document.getElementById('Tulip （Atorvastatin）20mg/tab r no').value);
         q_time = q_time + 1;
     }
@@ -399,7 +418,7 @@ function feedback(){
     var img9 = document.getElementById('9 img');
     
     if (document.getElementById('check5').checked){
-        c8r = ''
+        c9r = ''
         r9r = ''
         // r9r = '您給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r').value;
         reason.push(document.getElementById('Heparin 25000units/vail r').value);
@@ -436,7 +455,9 @@ function feedback(){
     else{
         cognition.push(0);
         img9.src="pic/wrong_w.png";
-        r9 = '您不給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r no').value;
+        r9 = '您不給 Heparin 25000units/vail 的理由：' + document.getElementById('Heparin 25000units/vail r no').value + '<br> -> 答錯原因：MAR單認知錯誤'
+        +'<br>病人是急性心肌梗塞（AMI），肝素（Heparin）為抗凝血藥物，在急性冠心症發生時，為class I的適應症'
+        +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑 </font>';
         document.getElementById('9 r').innerHTML = r9;
         correctness.push(0);
         reason.push(document.getElementById('Heparin 25000units/vail r no').value);

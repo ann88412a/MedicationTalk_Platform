@@ -10,9 +10,9 @@ function feedback(){
             'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [
-              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何" },
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的答案是否正確，請根據問題使用繁體中文回覆，並且回答的格式為:1/0(1是對0是錯)，答對的話給鼓勵的話，答錯的話告訴他正確答案為何 已知的正確答案與定義如下:1.藥物錯誤 : 藥物種類2.劑量錯誤 : 藥丸、藥劑數量3.時間錯誤 : 病人使用藥物時間4.途徑錯誤 : 使用藥物的途徑5.藥物過敏 : 病人是否有過敏6.沒有適應症 : 是否有適應症7.其他症狀 : 其他症狀" },
               { role: "user", content: "正確答案為(" + rightanswer + ")，學生回答(" + userAnswer + ")" }
             ]
           })
@@ -183,7 +183,7 @@ function feedback(){
         cognition.push(0);
         img3.src="pic/wrong_w.png";
         // r3 = '您給 Isoptin 40 mg/tab 的理由：' + document.getElementById('Isoptin 40 mg/tab r').value;
-        r3 ='不給Isoptin 40 mg/tab的理由是因為「'
+        r3 ='你給Isoptin 40 mg/tab的理由是因為「'
         + document.getElementById('Isoptin 40 mg/tab r').value.trim()
         +'」<br>-> 答錯原因：MAR單認知錯誤'
         +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(240mg)，<font style="color: #00B050;">'

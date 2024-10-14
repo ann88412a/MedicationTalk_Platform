@@ -569,7 +569,7 @@ function feedback(){
             
             // 顯示分數
             document.getElementById('score').innerHTML = score;
-    
+            console.log("correctness----",correctness);
             // 根據分數顯示評語
             if (score >= 7) {
                 document.getElementById('review').innerHTML = '高等';

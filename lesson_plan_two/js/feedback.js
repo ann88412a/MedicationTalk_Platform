@@ -12,7 +12,7 @@ function feedback(){
           body: JSON.stringify({
             model: "gpt-4o",
             messages: [
-              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的給藥理由與給藥行為是否正確，請根據問題使用繁體中文回覆，回饋會根據學習者給藥行為是否正確，給藥理由是否正確，給學習者回饋建議\n 因此，有四種可能結果\n 1.給藥理由正確，給藥行為正確\n 2.給藥理由錯誤，給藥行為錯誤\n 3.給藥理由正確，給藥行為錯誤\n 4.給藥理由錯誤，給藥行為正確\n 根據這四種可能結果，並加入學習者的理由以及這顆藥的學習重點()內的文字，如果學生的給藥行為和給藥行為皆為正確就算是正確，如果正確就先回覆數字1再繼續產生回應" },
+              { role: "assistant", content: "你是一個專業的護理老師，判斷學生給出的給藥理由與給藥行為是否正確，請根據問題使用繁體中文回覆，回饋會根據學習者給藥行為是否正確，給藥理由是否正確，給學習者回饋建議\n 因此，有四種可能結果\n 1.給藥理由正確，給藥行為正確\n 2.給藥理由錯誤，給藥行為錯誤\n 3.給藥理由正確，給藥行為錯誤\n 4.給藥理由錯誤，給藥行為正確\n 根據這四種可能結果，並加入學習者的理由以及這顆藥的學習重點()內的文字，如果學生的給藥行為和給藥行為皆為正確就算是正確，如果正確就先回覆數字1再繼續產生回應，回應格式如下:1or0，你的給藥理由xx是正確or錯誤的，給藥行為是正確or錯誤的....." },
               { role: "user", content: "正確的給藥行為為(" + rightact + ")，學生給藥的行為為(" + useract + ")，正確給藥理由答案為(" + rightanswer + ")，學生回答的給藥理由為(" + useranswer + ")，學習重點:(" + learnpoint + ")" }
             ]
           })
@@ -364,7 +364,7 @@ function feedback(){
             // + '」你的給藥知識正確並且你實際也沒給病人~很棒~繼續保持';
             // correctness.push(1);
             const userAnswer = document.getElementById('Metformin 500mg/tab r no').value;
-            callOpenAI("不給藥", "不給藥", "適應症", userAnswer, "病人服用 Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒").then(apiResponse => {
+            callOpenAI("不給藥", "不給藥", "「做電腦斷層」「注射顯影劑」「打顯影劑」", userAnswer, "病人服用 Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒").then(apiResponse => {
                 if (apiResponse && typeof apiResponse === 'string') {
                     if (apiResponse[0] == "1") {
                       score += 1;
@@ -397,7 +397,7 @@ function feedback(){
             // document.getElementById('6 r 6').innerHTML = r6r;
             // q_time = q_time + 1;
             const userAnswer = document.getElementById('Metformin 500mg/tab r no').value;
-            callOpenAI("不給藥", "給藥", "適應症", userAnswer, "病人服用 Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒").then(apiResponse => {
+            callOpenAI("不給藥", "給藥", "「做電腦斷層」「注射顯影劑」「打顯影劑」", userAnswer, "病人服用 Metformin ，要注射顯影劑的電腦斷層，其檢查前後需停用 48 小時。由於注射顯影劑會暫時加重腎臟過濾雜質的工作負擔，而Metformin的代謝廢物必須經由腎臟排出，一旦藥物的代謝廢物排不出去，可能會引起身體內乳酸中毒").then(apiResponse => {
                 if (apiResponse && typeof apiResponse === 'string') {
                     img6.src = "pic/wrong_w.png";
                     r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');

@@ -251,7 +251,10 @@ var dan = (function () {
             idf_name = '__Ctl_I__';
             csmapi.push(_mac_addr, _password, idf_name, data, callback);
         }
-        csmapi.push(_mac_addr, _password, idf_name, data, callback);
+        if (idf_name != '') {
+            csmapi.push(_mac_addr, _password, idf_name, data, callback);
+        }
+        // csmapi.push(_mac_addr, _password, idf_name, data, callback);
         console.log('data:',data)
         if (_df_selected[idf_name]){
             if (_mqtturl == undefined) csmapi.push(_mac_addr, _password, idf_name, data, callback);

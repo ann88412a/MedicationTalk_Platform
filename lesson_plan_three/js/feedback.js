@@ -165,7 +165,7 @@ function feedback(){
         reason.push(document.getElementById('Progesterone 25mg/ml r').value);
         cognition.push(31); // 藥袋內劑量錯誤(240mg)，正確劑量為(40mg)
         
-        if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 1.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=1.6 
+        if (medicines['Progesterone 25mg/ml']['verification']=='4710031297121' && 0.4<=medicines['Progesterone 25mg/ml']['injection'] && medicines['Progesterone 25mg/ml']['injection']<=0.6 
         && (medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)') 
         && medicines['Progesterone 25mg/ml']['way'][1]=='intramuscular injection' && medicines['Progesterone 25mg/ml']['dilution']=="0"){
 

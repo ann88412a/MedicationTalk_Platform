@@ -171,7 +171,7 @@ function feedback(){
 
             
             const userAnswer = document.getElementById('Progesterone 25mg/ml r').value;
-            callOpenAI("給藥", "給藥", "劑量錯誤", userAnswer, "注意抽取劑量 (一隻或半隻)").then(apiResponse => {
+            callOpenAI("給藥", "給藥", "降低早產風險or安胎or穩定子宮環境or延長妊娠時間", userAnswer, "根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 )").then(apiResponse => {
                 if (apiResponse && typeof apiResponse === 'string') {
                     if (apiResponse[0] == "1") {
                         score += 1;
@@ -198,7 +198,7 @@ function feedback(){
         }else{
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
-            r3r = ' -> 答錯原因：實際給藥錯誤' + '<br><font style="color: #f44336;">★ 注意抽取劑量 (一隻或半隻)</font>';
+            r3r = ' -> 答錯原因：實際給藥錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
             correctness.push(302);
             q_time = q_time + 1;
             console.log('score3:',score)
@@ -210,7 +210,7 @@ function feedback(){
         cognition.push(30);
         img3.src="pic/wrong_w.png";
         r3 = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value 
-        + '<br> -> 答錯原因：「三讀五對」認知錯誤' + '<br><font style="color: #f44336;">★ 注意抽取劑量 (一隻或半隻)</font>';
+        + '<br> -> 答錯原因：「三讀五對」認知錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
         document.getElementById('3 r').innerHTML = r3;
         //r3 = r3 + '\n ';
         correctness.push(303);

@@ -21,7 +21,7 @@ const dai = function (profile, ida) {
     //     localStorage.setItem('mqtt_password', password);
     //     localStorage.setItem('mac_addr', mac_addr);
     // }
-
+    console.log("client_uid:", client_uid);
     csmapi.set_endpoint(ida.iottalk_url);
 
     if (mqtturl != undefined){
@@ -96,11 +96,13 @@ const dai = function (profile, ida) {
     if (mqtturl != undefined){
         
         const options = {
-          clean: true, 
-          connectTimeout: 4000, 
-          clientId: mac_addr,
-          username: user,
-          password: password,
+            clean: false, 
+            connectTimeout: 4000, 
+            clientId: client_uid,
+            username: user,
+            password: password,
+            keepalive: 60,
+            reconnectPeriod: 100
         }
 
         mqtt_client = mqtt.connect(mqtturl, options);

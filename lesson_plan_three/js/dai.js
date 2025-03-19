@@ -21,7 +21,7 @@ const dai = function (profile, ida) {
     //     localStorage.setItem('mqtt_password', password);
     //     localStorage.setItem('mac_addr', mac_addr);
     // }
-
+    console.log("client_uid:", client_uid);
     csmapi.set_endpoint(ida.iottalk_url);
 
     if (mqtturl != undefined){
@@ -96,20 +96,18 @@ const dai = function (profile, ida) {
     if (mqtturl != undefined){
         
         const options = {
-          clean: true, 
+          clean: false, 
           connectTimeout: 4000, 
-          clientId: mac_addr,
+          clientId: client_uid,
           username: user,
           password: password,
+          keepalive: 60,
+          reconnectPeriod: 100
         }
 
         mqtt_client = mqtt.connect(mqtturl, options);
 
-        mqtt_client.on('error', function(err){
-            console.log('mqtt error:', err);
-            mqtt_client.end();
-            mqtt_client.reconnect();
-        });
+
 
         mqtt_client.on('connect', function(connack){
             console.log('MQTT Broker connected.');
@@ -130,6 +128,7 @@ const dai = function (profile, ida) {
 
         mqtt_client.on('disconnect', function (packet) {
             console.log(packet);
+            console.log('disconnect');
             mqtt_client.reconnect();
         });
     }

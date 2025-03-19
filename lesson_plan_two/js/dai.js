@@ -6,7 +6,7 @@ const dai = function (profile, ida) {
     var password = ida.mqtt_password || localStorage.getItem('mqtt_password');
     var mqtt_client = undefined;
     var mac_addr = 'abcd1234'
-    // var mac_addr = localStorage.getItem('mac_addr') || (function () {
+    // var clientId = localStorage.getItem('clientId') || (function () {
     //     function s () {
     //         return Math.floor((1 + Math.random()) * 0x10000)
     //             .toString(16)
@@ -15,12 +15,13 @@ const dai = function (profile, ida) {
     //     return s() + s() + s();
     // })();
 
-    // if (!localStorage.getItem('mac_addr')) {
-    //     localStorage.setItem('mqtturl', mqtturl);
-    //     localStorage.setItem('mqtt_user', user);
-    //     localStorage.setItem('mqtt_password', password);
-    //     localStorage.setItem('mac_addr', mac_addr);
+    // if (!localStorage.getItem('clientId')) {
+    //     // localStorage.setItem('mqtturl', mqtturl);
+    //     // localStorage.setItem('mqtt_user', user);
+    //     // localStorage.setItem('mqtt_password', password);
+    //     localStorage.setItem('clientId', clientId);
     // }
+    console.log("client_uid:", client_uid);
 
     csmapi.set_endpoint(ida.iottalk_url);
 
@@ -96,20 +97,17 @@ const dai = function (profile, ida) {
     if (mqtturl != undefined){
         
         const options = {
-          clean: true, 
+          clean: false, 
           connectTimeout: 4000, 
-          clientId: mac_addr,
+          clientId: client_uid,
           username: user,
           password: password,
+          keepalive: 60,
+          reconnectPeriod: 100
         }
 
         mqtt_client = mqtt.connect(mqtturl, options);
 
-        mqtt_client.on('error', function(err){
-            console.log('mqtt error:', err);
-            mqtt_client.end();
-            mqtt_client.reconnect();
-        });
 
         mqtt_client.on('connect', function(connack){
             console.log('MQTT Broker connected.');
@@ -130,6 +128,7 @@ const dai = function (profile, ida) {
 
         mqtt_client.on('disconnect', function (packet) {
             console.log(packet);
+            console.log('disconnect');
             mqtt_client.reconnect();
         });
     }

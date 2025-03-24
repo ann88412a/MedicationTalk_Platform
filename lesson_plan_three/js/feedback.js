@@ -1,6 +1,6 @@
 // 制定回饋規則 打分機制
 
-    
+var q_time=0;
 function feedback(){
     //GPT的部分
     function callOpenAI(rightact, useract, rightanswer, useranswer, learnpoint) {
@@ -36,7 +36,7 @@ function feedback(){
       }
 
     var score = 0;
-    var q_time=0;
+    // var q_time=0;
     var id_name = 'ID：' + document.getElementById('IDF_ID').value + ' 姓名：' + document.getElementById('IDF_name').value;
     $('.ODF_ID')[0].innerText= id_name;
 
@@ -697,6 +697,7 @@ function feedback(){
     console.log('q_time:',q_time)
     
     let checkQTimeInterval = setInterval(() => {
+        console.log('q_time!!!!!',q_time)
         if (q_time >= 9) {
             // 停止 setInterval
             clearInterval(checkQTimeInterval);

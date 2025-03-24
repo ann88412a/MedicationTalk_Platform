@@ -248,9 +248,11 @@ function check_page(n){
             console.log('Apno 30mg/tab' )
             console.log(pill_detect['Apno 30mg/tab'] )
 
-            var q_time;
+            // var q_time;
             console.log(pill_detect);
+            console.log("q_time~", q_time);
             let checkQTimeInterval = setInterval(() => {
+                console.log("q_time~~~", q_time);
                 if (q_time >= 9) {
                     // 停止 setInterval
                     clearInterval(checkQTimeInterval);

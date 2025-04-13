@@ -1,5 +1,6 @@
 // 制定回饋規則 打分機制
 
+var q_time=0;
 function feedback(){
     //GPT的部分
     function callOpenAI(rightact, useract, rightanswer, useranswer, learnpoint) {
@@ -36,7 +37,7 @@ function feedback(){
       }
 
     var score = 0;
-    var q_time=0;
+    // var q_time=0;
     var id_name = 'ID：' + document.getElementById('IDF_ID').value + ' 姓名：' + document.getElementById('IDF_name').value;
     $('.ODF_ID')[0].innerText= id_name;
 
@@ -87,7 +88,7 @@ function feedback(){
                     } else {
                       img2.src = "pic/wrong_w.png";
                       r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(201);
+                      correctness.push(20);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -110,7 +111,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img2.src = "pic/wrong_w.png";
                     r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(202);
+                    correctness.push(20);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -159,7 +160,7 @@ function feedback(){
                     } else {
                       img3.src = "pic/wrong_w.png";
                       r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(301);
+                      correctness.push(30);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -182,7 +183,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img3.src = "pic/wrong_w.png";
                     r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(302);
+                    correctness.push(30);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -201,7 +202,7 @@ function feedback(){
         +'<br>藥袋內<b style="color: #228de5;">劑量錯誤</b>(1mg)，<font style="color: #00B050;">正確劑量為(0.25mg)</font>'
         +'<br><font style="color: #f44336;">★ 同一種藥物會有「不同的劑量」，因此需要注意<font style="background-color: yellow;">單顆劑量</font>!</font>';
         document.getElementById('3 r').innerHTML = r3;
-        correctness.push(303);
+        correctness.push(30);
         reason.push(document.getElementById('Requip F.C 0.25mg/tab r').value);
         q_time = q_time + 1;
     }
@@ -226,7 +227,7 @@ function feedback(){
                 } else {
                     img4.src = "pic/wrong_w.png";
                     r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(402);
+                    correctness.push(40);
                 }
             } else {
             console.error('API response is not a valid string:', apiResponse);
@@ -243,7 +244,7 @@ function feedback(){
         r4 = r4 + ' -> 答錯原因：實際給藥錯誤' + 
         '<br><font style="background-color: yellow;">★ 有些心血管藥物和濃度高的藥物不能直接靜脈推注IV push</font>，可能會造成嚴重低血壓或血管壞死等問題' +
         '<br><font style="background-color: yellow;">★ 當藥物途徑為靜脈滴注IV drip，我們要特別注意是要用<b>精密輸液套 (IV bag)</b> 還是<b>點滴幫浦儀器 (IV pump)</b></font>';
-        correctness.push(403);
+        correctness.push(40);
         document.getElementById('4 r').innerHTML = r4;
         reason.push(document.getElementById('Millisrol inj 5mg/10ml/amp r').value);
         q_time = q_time + 1;
@@ -275,7 +276,7 @@ function feedback(){
                     } else {
                       img5.src = "pic/wrong_w.png";
                       r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(501);
+                      correctness.push(50);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -299,7 +300,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img5.src = "pic/wrong_w.png";
                     r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(502);
+                    correctness.push(50);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -316,7 +317,7 @@ function feedback(){
         +'<br>Repaglinide <b style="color: #228de5;">時間錯誤</b>，<font style="color: #00B050;">醫囑時間為 TID/AC</font> (7AM-11AM-16PM)。AC 指飯前給予，<font style="color: #00B050;">情境給藥時間是早上九點，故此藥已過給藥時間</font>'
         +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下時間是否吻合</font>。血糖藥有分<b>飯前</b>給或<b>飯後</b>給，服用Repaglinide需要確認患者是否在吃「第一口飯之前」，尤其老年族群給飯前血糖藥後，要提醒與確認他有進食，以免血糖過低！</font>';
         document.getElementById('5 r').innerHTML = r5;
-        correctness.push(503);
+        correctness.push(50);
         reason.push(document.getElementById('Repaglinide 1mg/tab r').value);
         q_time = q_time + 1;
     }
@@ -347,7 +348,7 @@ function feedback(){
                     } else {
                       img6.src = "pic/wrong_w.png";
                       r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(601);
+                      correctness.push(60);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -370,7 +371,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img6.src = "pic/wrong_w.png";
                     r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(602);
+                    correctness.push(60);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -387,7 +388,7 @@ function feedback(){
         +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用 Transamin 的適應症</font>，應向醫師或專科護理師確認是否需要服用此藥'
         +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>';
         document.getElementById('6 r').innerHTML = r6;
-        correctness.push(603);
+        correctness.push(60);
         reason.push(document.getElementById('Transamin 250mg/tab r').value);
         q_time = q_time + 1;
     }
@@ -410,11 +411,11 @@ function feedback(){
                     score += 1;
                     img7.src = "pic/ok_w.png";
                     c7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(1);
+                    correctness.push(71);
                 } else {
                     img7.src = "pic/wrong_w.png";
                     r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(0);
+                    correctness.push(70);
                 }
             } else {
             console.error('API response is not a valid string:', apiResponse);
@@ -432,7 +433,7 @@ function feedback(){
         r7 = r7 + '<br> -> 答錯原因：「三讀五對」認知錯誤' + 'Ampicillin 是盤尼西林 Penicillin 類藥物。目前臨床上不需要常規做盤尼西林試驗 Penicillin test, PST。' +
         '<br>但<font style="color: #228de5;">病人對盤尼西林 Penicillin 有過敏記錄，如果醫師仍要給就需要做 PST</font>，因此不應該直接該給藥';
         document.getElementById('7 r').innerHTML = r7;
-        correctness.push(0);
+        correctness.push(70);
         reason.push(document.getElementById('Ampicillin 2000mg 500mg/vail r').value);
         q_time = q_time + 1;
     
@@ -464,7 +465,7 @@ function feedback(){
                     } else {
                       img8.src = "pic/wrong_w.png";
                       r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(801);
+                      correctness.push(80);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -487,7 +488,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img8.src = "pic/wrong_w.png";
                     r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(802);
+                    correctness.push(80);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -504,7 +505,7 @@ function feedback(){
         +'<br> 病人有心臟病， Bokey 可預防心肌梗塞和心栓性栓塞症'
         +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑</font>';        
         document.getElementById('8 r 8').innerHTML = r8r;
-        correctness.push(803);
+        correctness.push(80);
         reason.push(document.getElementById('Bokey 100mg/tab r no').value);
         q_time = q_time + 1;
     }
@@ -534,7 +535,7 @@ function feedback(){
                     } else {
                       img9.src = "pic/wrong_w.png";
                       r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(901);
+                      correctness.push(90);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -557,7 +558,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img9.src = "pic/wrong_w.png";
                     r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(902);
+                    correctness.push(90);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -574,7 +575,7 @@ function feedback(){
         +'<br>病人有高血脂，Simvahexal可降低血液中的膽固醇和三酸甘油酯'
         +'<br><font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑 </font>';    
         document.getElementById('9 r 9').innerHTML = r9r;
-        correctness.push(903);
+        correctness.push(90);
         reason.push(document.getElementById('Simvahexal 20 mg/tab r no').value);
         q_time = q_time + 1;
     }
@@ -588,7 +589,7 @@ function feedback(){
         r10r = ''
         // r10r = '您不給 FLU-D (Fluconazole) 50mg/tab 的理由：' + document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value;
         reason.push(document.getElementById('FLU-D (Fluconazole) 50mg/tab r no').value);
-        cognition.push(991);
+        cognition.push(101);
         if (pill_detect['FLU'] == 0){
             // score = score + 1;
             // img10.src="pic/ok_w.png";
@@ -601,11 +602,11 @@ function feedback(){
                       score += 1;
                       img10.src = "pic/ok_w.png";
                       c10r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(991);
+                      correctness.push(101);
                     } else {
                       img10.src = "pic/wrong_w.png";
                       r10r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(9901);
+                      correctness.push(100);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -629,7 +630,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img10.src = "pic/wrong_w.png";
                     r10r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(9902);
+                    correctness.push(100);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -639,14 +640,14 @@ function feedback(){
             });
         }
     }else{
-        cognition.push(990);
+        cognition.push(100);
         img10.src="pic/wrong_w.png";
         r10 = '您給 FLU-D (Fluconazole) 50mg/tab 的理由：' + document.getElementById('FLU-D (Fluconazole) 50mg/tab r').value
         +'<br>-> 答錯原因：「三讀五對」認知錯誤'
         +'<br> 病人有後天免疫缺乏症候群，有服用 <font style="color: #228de5;">FLU-D (Fluconazole)</font>的適應症，但它<font style="color: #228de5;">不能與 Simvahexal 合用</font>，會有藥物交互作用 DDI'
         +'<br><font style="color: #f44336;">★ 藥物-藥物交互作用(drug-drug interaction, DDI)，A藥與B藥一起使用，其相互作用後可能會造成藥效作用延遲、減少或增強任一藥物的吸收而引起不良反應 </font>';
         document.getElementById('10 r').innerHTML = r10;
-        correctness.push(9903);
+        correctness.push(100);
         reason.push(document.getElementById('FLU-D (Fluconazole) 50mg/tab r').value);
         q_time = q_time + 1;
     }

@@ -185,6 +185,7 @@ function check_page(n){
         }
     }
     else if(n === 2){
+        console.log(document.getElementById('IDF_ID').value);
         const radios = document.getElementsByName('barcode');
         if ((radios[0].checked || radios[1].checked) && $('.patient_barcode_hint')[0].innerText == '★ 辨識完成請繼續執行下一步＾＿＾')
         {
@@ -214,7 +215,7 @@ function check_page(n){
             console.log('003');
         }
 
-        feedback();
+        // feedback();
 
         let empty_textbox = 0;
 
@@ -274,9 +275,12 @@ function check_page(n){
                                                                                     pills_7: 0,
                                                                                     pills_8: 0,
                                                                                     pills_9: 0,
-                                                                                    pic: client_uid,
+                                                                                    pic: document.getElementById('IDF_name').value,
+                                                                                    lesson: 3,
                             }, function(){
-                                $.post(domain_name_url + "/api/_sheet_feedback", {  reason_1: reason[0],
+                                $.post(domain_name_url + "/api/_sheet_feedback", {  user: document.getElementById('IDF_name').value,
+                                                                                            lesson: 3,
+                                                                                            reason_1: reason[0],
                                                                                             reason_2: reason[1],
                                                                                             reason_3: reason[2],
                                                                                             reason_4: reason[3],
@@ -284,8 +288,8 @@ function check_page(n){
                                                                                             reason_6: reason[5],
                                                                                             reason_7: reason[6],
                                                                                             reason_8: reason[7],
-                                                                                            reason_9: reason[8],
-                                                                                            reason_10: reason[9],
+                                                                                            reason_9: '無',
+                                                                                            reason_10: '無',
                                 }, function(){
                                     $.post(domain_name_url + "/api/_sheet_cognition", { patient_barcode: patient_barcode,
                                                                                                 student_cognition_1: cognition[0],
@@ -297,7 +301,9 @@ function check_page(n){
                                                                                                 student_cognition_7: cognition[6],
                                                                                                 student_cognition_8: cognition[7],
                                                                                                 student_cognition_9: cognition[8],
-                                                                                                student_cognition_10: cognition[9],                                 
+                                                                                                student_cognition_10: 0, 
+                                                                                                user: document.getElementById('IDF_name').value,
+                                                                                                lesson: 3,                                
                                     }, function(){
                                         $.post(domain_name_url + "/api/_sheet_record", {  id: document.getElementById('IDF_ID').value,
                                                                                                     ans_1: correctness[0],
@@ -309,7 +315,9 @@ function check_page(n){
                                                                                                     ans_7: correctness[6],
                                                                                                     ans_8: correctness[7],
                                                                                                     ans_9: correctness[8],
-                                                                                                    ans_10: correctness[9],
+                                                                                                    ans_10: 0,
+                                                                                                    user: document.getElementById('IDF_name').value,
+                                                                                                    lesson: 3,
                                         },function(){
                                             $.post(domain_name_url + "/api/_sheet_syringe", { id: document.getElementById('IDF_ID').value,
                                                                                         lesson: 3,

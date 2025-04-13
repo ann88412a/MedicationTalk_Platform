@@ -96,7 +96,7 @@ function feedback(){
                     } else {
                       img2.src = "pic/wrong_w.png";
                       r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(201);
+                      correctness.push(20);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -124,7 +124,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img2.src = "pic/wrong_w.png";
                     r2r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(202);
+                    correctness.push(20);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -147,7 +147,7 @@ function feedback(){
         +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
         +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
         document.getElementById('2 r 2').innerHTML = r2;
-        correctness.push(203);
+        correctness.push(20);
         reason.push(document.getElementById('Anpo 10mg/tab r').value);
         q_time = q_time + 1;
         console.log('score2:',score)
@@ -181,7 +181,7 @@ function feedback(){
                     } else {
                         img3.src = "pic/wrong_w.png";
                         r3r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                        correctness.push(301);
+                        correctness.push(30);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -199,7 +199,7 @@ function feedback(){
             img3.src="pic/wrong_w.png";
             // r3r = r3r + '\n -> 答錯原因：實際給藥錯誤';
             r3r = ' -> 答錯原因：實際給藥錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
-            correctness.push(302);
+            correctness.push(30);
             q_time = q_time + 1;
             console.log('score3:',score)
             console.log('q_time3:',q_time)
@@ -213,7 +213,7 @@ function feedback(){
         + '<br> -> 答錯原因：「三讀五對」認知錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
         document.getElementById('3 r').innerHTML = r3;
         //r3 = r3 + '\n ';
-        correctness.push(303);
+        correctness.push(30);
         reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
         q_time = q_time + 1;
         console.log('score3:',score)
@@ -243,7 +243,7 @@ function feedback(){
                 } else {
                     img4.src = "pic/wrong_w.png";
                     r4r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(401);
+                    correctness.push(40);
                 }
             } else {
             console.error('API response is not a valid string:', apiResponse);
@@ -263,7 +263,7 @@ function feedback(){
         + '<br><font style="color: #f44336;">★ 肌肉注射不是低分子量肝素的標準給藥方式，主要是因為肌肉注射可能會導致血腫的形成</font>' + '<br><font style="color: #f44336;">★ 低分子量肝素，建議皮下或靜脈注射，以確保藥物緩慢而持續地釋放到血液中，達到預期的治療效果</font>'
         + '<br><font style="color: #f44336;">★ </font>施打部位為患者的左右腹壁、手臂或大腿等不同部位，而大腿部位的生體可用率最差';
         document.getElementById('4 r').innerHTML = r4;
-        correctness.push(402);
+        correctness.push(40);
         reason.push(document.getElementById('Clexane 60mg/0.6ml r').value);
         q_time = q_time + 1;
         console.log('score4:',score)
@@ -299,7 +299,7 @@ function feedback(){
                     } else {
                       img5.src = "pic/wrong_w.png";
                       r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(501);
+                      correctness.push(50);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -327,7 +327,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img5.src = "pic/wrong_w.png";
                     r5r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(502);
+                    correctness.push(50);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -349,7 +349,7 @@ function feedback(){
         +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
         +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
         document.getElementById('5 r 5').innerHTML = r5;
-        correctness.push(503);
+        correctness.push(50);
         reason.push(document.getElementById('Sennoside 12mg/tab r').value);
         q_time = q_time + 1;
         console.log('score5:',score)
@@ -385,7 +385,7 @@ function feedback(){
                     } else {
                       img6.src = "pic/wrong_w.png";
                       r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(601);
+                      correctness.push(60);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -413,7 +413,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img6.src = "pic/wrong_w.png";
                     r6r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(602);
+                    correctness.push(60);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -435,7 +435,7 @@ function feedback(){
         +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
         // r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
         document.getElementById('6 r 6').innerHTML = r6;
-        correctness.push(603);
+        correctness.push(60);
         reason.push(document.getElementById('Peace 2.5mg/tab r').value);
         q_time = q_time + 1;
         console.log('score6:',score)
@@ -465,7 +465,7 @@ function feedback(){
                 } else {
                     img7.src = "pic/wrong_w.png";
                     r7r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(701);
+                    correctness.push(70);
                 }
             } else {
             console.error('API response is not a valid string:', apiResponse);
@@ -485,7 +485,7 @@ function feedback(){
         + '<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
         document.getElementById('7 r').innerHTML = r7;
         // r7 = r7 + '\n -> 答錯原因：「三讀五對」認知錯誤';
-        correctness.push(702);
+        correctness.push(70);
         reason.push(document.getElementById('Oxacillin 1000mg/vail r').value);
         q_time = q_time + 1;
         console.log('score7:',score)
@@ -521,7 +521,7 @@ function feedback(){
                     } else {
                       img8.src = "pic/wrong_w.png";
                       r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(801);
+                      correctness.push(80);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -550,7 +550,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {            
                     img8.src = "pic/wrong_w.png";
                     r8r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(802);
+                    correctness.push(80);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -573,7 +573,7 @@ function feedback(){
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
         document.getElementById('8 r 8').innerHTML = r8r;
         // r8r = r8r + '\n -> 答錯原因：「三讀五對」認知錯誤'
-        correctness.push(803);
+        correctness.push(80);
         reason.push(document.getElementById('Paramol 500mg/tab r no').value);
         q_time = q_time + 1;
         console.log('score8:',score)
@@ -609,7 +609,7 @@ function feedback(){
                     } else {
                       img9.src = "pic/wrong_w.png";
                       r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                      correctness.push(901);
+                      correctness.push(90);
                     }
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
@@ -636,7 +636,7 @@ function feedback(){
                 if (apiResponse && typeof apiResponse === 'string') {
                     img9.src = "pic/wrong_w.png";
                     r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');
-                    correctness.push(902);
+                    correctness.push(90);
                 } else {
                 console.error('API response is not a valid string:', apiResponse);
                 }
@@ -657,7 +657,7 @@ function feedback(){
         +'<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
         +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
         document.getElementById('9 r 9').innerHTML = r9;
-        correctness.push(903);
+        correctness.push(90);
         reason.push(document.getElementById('Primperan 5 mg/tab r no').value);
         q_time = q_time + 1;
         console.log('score9:',score)

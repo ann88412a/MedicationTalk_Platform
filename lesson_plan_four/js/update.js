@@ -203,7 +203,7 @@ function check_page(n){
             // console.log(pill_detect)
         }
 
-        feedback();
+        // feedback();
 
         let empty_textbox = 0;
 
@@ -230,7 +230,7 @@ function check_page(n){
                 }
             }   
             // console.log(pill_detect);
-            var q_time;
+            // var q_time;
             console.log(pill_detect);
             let checkQTimeInterval = setInterval(() => {
                 if (q_time >= 10) {
@@ -254,9 +254,12 @@ function check_page(n){
                                                                                     pills_7: pills_num[6],
                                                                                     pills_8: pills_num[7],
                                                                                     pills_9: pills_num[8],
-                                                                                    pic: client_uid,
+                                                                                    pic: document.getElementById('IDF_name').value,
+                                                                                    lesson: 4,
                             }, function(){
-                                $.post(domain_name_url + "/api/_sheet_feedback", {  reason_1: reason[0],
+                                $.post(domain_name_url + "/api/_sheet_feedback", {  user: document.getElementById('IDF_name').value,
+                                                                                            lesson: 4,
+                                                                                            reason_1: reason[0],
                                                                                             reason_2: reason[1],
                                                                                             reason_3: reason[2],
                                                                                             reason_4: reason[3],
@@ -265,7 +268,7 @@ function check_page(n){
                                                                                             reason_7: reason[6],
                                                                                             reason_8: reason[7],
                                                                                             reason_9: reason[8],
-                                                                                            reason_10: reason[9],
+                                                                                            reason_10: '無',
                                 }, function(){
                                     $.post(domain_name_url + "/api/_sheet_cognition", { patient_barcode: patient_barcode,
                                                                                                 student_cognition_1: cognition[0],
@@ -277,7 +280,9 @@ function check_page(n){
                                                                                                 student_cognition_7: cognition[6],
                                                                                                 student_cognition_8: cognition[7],
                                                                                                 student_cognition_9: cognition[8],
-                                                                                                student_cognition_10: cognition[9],                                 
+                                                                                                student_cognition_10: cognition[9],          
+                                                                                                user: document.getElementById('IDF_name').value,
+                                                                                                lesson: 4,                         
                                     }, function(){
                                         $.post(domain_name_url + "/api/_sheet_record", {  id: document.getElementById('IDF_ID').value,
                                                                                                     ans_1: correctness[0],
@@ -290,6 +295,8 @@ function check_page(n){
                                                                                                     ans_8: correctness[7],
                                                                                                     ans_9: correctness[8],
                                                                                                     ans_10: correctness[9],
+                                                                                                    user: document.getElementById('IDF_name').value,
+                                                                                                    lesson: 4,
                                         }, function(){
                                             $.post(domain_name_url + "/api/_sheet_syringe", { id: document.getElementById('IDF_ID').value,
                                                                                         lesson: 4,

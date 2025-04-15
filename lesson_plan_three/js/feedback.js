@@ -599,7 +599,7 @@ function feedback(){
             // + '」你的給藥知識正確並且你實際也給病人~很棒~繼續保持';
             // correctness.push(1);
             const userAnswer = document.getElementById('Primperan 5 mg/tab r').value;
-            callOpenAI("給藥", "給藥", "嘔吐", userAnswer, "給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑").then(apiResponse => {
+            callOpenAI("給藥", "給藥", "止吐", userAnswer, "給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑").then(apiResponse => {
                 if (apiResponse && typeof apiResponse === 'string') {
                     if (apiResponse[0] == "1") {
                       score += 1;
@@ -632,7 +632,7 @@ function feedback(){
             // console.log('score9:',score)
             // console.log('q_time9:',q_time)
             const userAnswer = document.getElementById('Primperan 5 mg/tab r').value;
-            callOpenAI("給藥", "不給藥", "嘔吐", userAnswer, "給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑").then(apiResponse => {
+            callOpenAI("給藥", "不給藥", "止吐", userAnswer, "給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑").then(apiResponse => {
                 if (apiResponse && typeof apiResponse === 'string') {
                     img9.src = "pic/wrong_w.png";
                     r9r = apiResponse.replace(/^[^\u4e00-\u9fa5]+/, '');

@@ -332,44 +332,44 @@ function GetOption(p){
     }
 
 
-function SyringeFeedback(){
-    //console.log('2:', document.getElementById('check2').checked);
+// function SyringeFeedback(){
+//     //console.log('2:', document.getElementById('check2').checked);
 
-    if (medicines != {}){
-        var VerificationDetail = document.getElementById("VerificationDetail");
-        if (!medicines['Progesterone 25mg/ml']){ //沒給藥
-            //VerificationDetail.innerHTML = "錯誤原因:必須給此藥";
-        }
-        else{ //有給藥，判斷細項
-            var errorMessage = '';
-            console.log(medicines['Progesterone 25mg/ml']['injection']);
-            console.log(medicines['Progesterone 25mg/ml']['way']);
+//     if (medicines != {}){
+//         var VerificationDetail = document.getElementById("VerificationDetail");
+//         if (!medicines['Progesterone 25mg/ml']){ //沒給藥
+//             //VerificationDetail.innerHTML = "錯誤原因:必須給此藥";
+//         }
+//         else{ //有給藥，判斷細項
+//             var errorMessage = '';
+//             console.log(medicines['Progesterone 25mg/ml']['injection']);
+//             console.log(medicines['Progesterone 25mg/ml']['way']);
 
-            if (medicines['Progesterone 25mg/ml']['verification']!='1234567890ABC'){
-                errorMessage += '驗證錯誤,<br>';
-            }
-            if (medicines['Progesterone 25mg/ml']['injection'] >1.6 || medicines['Progesterone 25mg/ml']['injection']<1.4){
-                errorMessage += " 劑量錯誤, 您給的劑量為" + medicines['Progesterone 25mg/ml']['injection'] +"ml, <br>";
-            }
-            if ((medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || 
-                medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)')
-                && medicines['Progesterone 25mg/ml']['way'][1] =='intramuscular injection'){
+//             if (medicines['Progesterone 25mg/ml']['verification']!='1234567890ABC'){
+//                 errorMessage += '驗證錯誤,<br>';
+//             }
+//             if (medicines['Progesterone 25mg/ml']['injection'] >1.6 || medicines['Progesterone 25mg/ml']['injection']<1.4){
+//                 errorMessage += " 劑量錯誤, 您給的劑量為" + medicines['Progesterone 25mg/ml']['injection'] +"ml, <br>";
+//             }
+//             if ((medicines['Progesterone 25mg/ml']['way'][0] == 'left hip (upper left)' || 
+//                 medicines['Progesterone 25mg/ml']['way'][0] == 'right hip (upper right)')
+//                 && medicines['Progesterone 25mg/ml']['way'][1] =='intramuscular injection'){
 
-                errorMessage += " 途徑錯誤, 您選擇的途徑為 " + way_dic[medicines['Progesterone 25mg/ml']['way'][0]] + "," + way_dic[medicines['Progesterone 25mg/ml']['way'][1]] + "<br>" + 
-                "正確途徑應為以下,<br>" + "注射部位:左臀(左上區) 或 右臀(右上區)" + "<br>" + "注射角度:肌肉注射" + "<br>";
+//                 errorMessage += " 途徑錯誤, 您選擇的途徑為 " + way_dic[medicines['Progesterone 25mg/ml']['way'][0]] + "," + way_dic[medicines['Progesterone 25mg/ml']['way'][1]] + "<br>" + 
+//                 "正確途徑應為以下,<br>" + "注射部位:左臀(左上區) 或 右臀(右上區)" + "<br>" + "注射角度:肌肉注射" + "<br>";
             
-            }
+//             }
 
-            if (errorMessage !== '') { 
-                // errorMessage = errorMessage.slice(0, -2);
-                VerificationDetail.innerHTML = errorMessage;
-            } else {  //各項條件都符合
-                VerificationDetail.innerHTML = '很棒，您的給藥知識正確!' + " 你給藥的理由是:" + document.getElementById('Progesterone 25mg/ml r').value + "，你的給藥知識正確並且完全給藥正確，很棒~請繼續保持!";
-            }
+//             if (errorMessage !== '') { 
+//                 // errorMessage = errorMessage.slice(0, -2);
+//                 VerificationDetail.innerHTML = errorMessage;
+//             } else {  //各項條件都符合
+//                 VerificationDetail.innerHTML = '很棒，您的給藥知識正確!' + " 你給藥的理由是:" + document.getElementById('Progesterone 25mg/ml r').value + "，你的給藥知識正確並且完全給藥正確，很棒~請繼續保持!";
+//             }
             
-        }
-    }
-}
+//         }
+//     }
+// }
 
 
 function Barcode(on_off){

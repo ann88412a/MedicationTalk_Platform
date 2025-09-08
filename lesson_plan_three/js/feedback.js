@@ -27,6 +27,30 @@ function feedback(){
             return null;
           });
     }
+    function callOpenAI2(learnpoint) {
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-4o",
+            messages: [
+                { role: "assistant", content: "你是一個專業的護理老師。學生在判斷是否給藥時出現了問題，請用繁體中文回覆，根據提供的學習重點給學生**簡短鼓勵回饋 (2~3 句)**，並且要指出學生在是否給藥的判斷上出了錯誤。" },
+                { role: "user", content: "學習重點:(" + learnpoint + ")" }
+            ]
+          })
+        };
+      
+        return fetch('https://api.openai.com/v1/chat/completions', requestOptions)
+          .then(response => response.json())
+          .then(data => data.choices[0].message.content)
+          .catch(error => {
+            console.error('Error:', error);
+            return null;
+          });
+    }
     console.log(syringe_value);
     var wrong_syringe = 0;
     for (const [key, value] of Object.entries(syringe_value)) {
@@ -141,13 +165,20 @@ function feedback(){
         cognition.push(20);
         img2.src="pic/wrong_w.png";
         // r2 = '您給 Anpo 10mg/tab 的理由：' + document.getElementById('Anpo 10mg/tab r').value;
-        r2 = '你給Anpo 10mg/tab的理由是因為「'
-        + document.getElementById('Anpo 10mg/tab r').value.trim()
-        +'」<br> -> 答錯原因：「三讀五對」認知錯誤'
-        +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
-        +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
-        document.getElementById('2 r 2').innerHTML = r2;
+        // r2 = '你給Anpo 10mg/tab的理由是因為「'
+        // + document.getElementById('Anpo 10mg/tab r').value.trim()
+        // +'」<br> -> 答錯原因：「三讀五對」認知錯誤'
+        // +'<br>藥袋內<b style="color: #228de5;">藥物錯誤</b> (Lanpo)，<font style="color: #00B050;">正確藥物為 (Anpo)</font>'
+        // +'<br><font style="color: #f44336;">★ 核對不僅是藥袋名稱，還要注意<font style="background-color: yellow;">藥袋內的藥名</font>，<font style="text-decoration:underline;">Lanpo</font> 和 <font style="text-decoration:underline;">Anpo</font>乍看前面的英文字很像，因此需要小心辨識！</font>';
+        // document.getElementById('2 r 2').innerHTML = r2;
         correctness.push(20);
+        callOpenAI2("核對不僅是藥袋名稱，還要注意藥袋內的藥名，Lanpo 和Anpo乍看英文字很像，因此需要小心辨識!").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('2 r 2').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         reason.push(document.getElementById('Anpo 10mg/tab r').value);
         q_time = q_time + 1;
         console.log('score2:',score)
@@ -213,10 +244,17 @@ function feedback(){
     }else{
         cognition.push(30);
         img3.src="pic/wrong_w.png";
-        r3 = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value 
-        + '<br> -> 答錯原因：「三讀五對」認知錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
-        document.getElementById('3 r').innerHTML = r3;
+        // r3 = '您不給 Progesterone 25mg/ml 的理由：' + document.getElementById('Progesterone 25mg/ml r no').value 
+        // + '<br> -> 答錯原因：「三讀五對」認知錯誤' + '<br><font style="color: #f44336;">根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。 </font>';
+        // document.getElementById('3 r').innerHTML = r3;
         //r3 = r3 + '\n ';
+        callOpenAI2("根據超音波檢查結果，顯示子宮頸縮短至20 mm。雖然胎膜完整且未進入活躍產程，但基於早產風險的考量，使用Progesterone可穩定子宮環境，延長妊娠時間，從而降低早產風險，具有安胎效果。").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('3 r').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(30);
         reason.push(document.getElementById('Progesterone 25mg/ml r no').value);
         q_time = q_time + 1;
@@ -262,11 +300,18 @@ function feedback(){
     }else{
         cognition.push(40);
         img4.src="pic/wrong_w.png";
-        r4 = '您給 Clexane 60mg/0.6ml 的理由：' + document.getElementById('Clexane 60mg/0.6ml r').value + '<br> -> 答錯原因：「三讀五對」認知錯誤' +
-        '<br>Clexane<b style="color: #228de5;">途徑非標準給藥方式</b>'
-        + '<br><font style="color: #f44336;">★ 肌肉注射不是低分子量肝素的標準給藥方式，主要是因為肌肉注射可能會導致血腫的形成</font>' + '<br><font style="color: #f44336;">★ 低分子量肝素，建議皮下或靜脈注射，以確保藥物緩慢而持續地釋放到血液中，達到預期的治療效果</font>'
-        + '<br><font style="color: #f44336;">★ </font>施打部位為患者的左右腹壁、手臂或大腿等不同部位，而大腿部位的生體可用率最差';
-        document.getElementById('4 r').innerHTML = r4;
+        // r4 = '您給 Clexane 60mg/0.6ml 的理由：' + document.getElementById('Clexane 60mg/0.6ml r').value + '<br> -> 答錯原因：「三讀五對」認知錯誤' +
+        // '<br>Clexane<b style="color: #228de5;">途徑非標準給藥方式</b>'
+        // + '<br><font style="color: #f44336;">★ 肌肉注射不是低分子量肝素的標準給藥方式，主要是因為肌肉注射可能會導致血腫的形成</font>' + '<br><font style="color: #f44336;">★ 低分子量肝素，建議皮下或靜脈注射，以確保藥物緩慢而持續地釋放到血液中，達到預期的治療效果</font>'
+        // + '<br><font style="color: #f44336;">★ </font>施打部位為患者的左右腹壁、手臂或大腿等不同部位，而大腿部位的生體可用率最差';
+        // document.getElementById('4 r').innerHTML = r4;
+        callOpenAI2("肌肉注射不是低分子量肝素的標準給藥方式，主要是因為肌肉注射可能會導致血腫的形成低分子量肝素，建議皮下或靜脈注射，以確保藥物緩慢而持續地釋放到血液中，達到預期的治療效果施打部位為患者的左右腹壁、手臂或大腿等不同部位，而大腿部位的生體可用率最差").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('4 r').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(40);
         reason.push(document.getElementById('Clexane 60mg/0.6ml r').value);
         q_time = q_time + 1;
@@ -347,12 +392,19 @@ function feedback(){
         cognition.push(50);
         img5.src="pic/wrong_w.png";
         // r5 = '您給 Sennoside 12mg/tab 的理由：' + document.getElementById('Sennoside 12mg/tab r').value;
-        r5 = '你給Sennoside 12mg/tab的理由是因為「'
-        + document.getElementById('Sennoside 12mg/tab r').value.trim()
-        +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
-        +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
-        +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
-        document.getElementById('5 r 5').innerHTML = r5;
+        // r5 = '你給Sennoside 12mg/tab的理由是因為「'
+        // + document.getElementById('Sennoside 12mg/tab r').value.trim()
+        // +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
+        // +'<br>Sennoside<b style="color: #228de5;">時間錯誤</b>，醫囑時間為HS (睡前)，情境給藥時間是早上九點，故此藥目前不給。釐清若是前一晚沒吃到應告知醫師或專科護理師'
+        // +'<br><font style="color: #f44336;">★ 注意<font style="background-color: yellow;">醫囑給藥時間與當下病患狀況是否吻合</font>。</font>';
+        // document.getElementById('5 r 5').innerHTML = r5;
+        callOpenAI2("注意醫囑給藥時間與當下病患狀況是否吻合。").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('5 r 5').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(50);
         reason.push(document.getElementById('Sennoside 12mg/tab r').value);
         q_time = q_time + 1;
@@ -432,13 +484,20 @@ function feedback(){
     }else{
         cognition.push(60);
         img6.src="pic/wrong_w.png";
-        r6 = '你給Peace 2.5mg/tab的理由是因為「'
-        + document.getElementById('Peace 2.5mg/tab r').value.trim()
-        +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
-        +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認'
-        +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
-        // r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
-        document.getElementById('6 r 6').innerHTML = r6;
+        // r6 = '你給Peace 2.5mg/tab的理由是因為「'
+        // + document.getElementById('Peace 2.5mg/tab r').value.trim()
+        // +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
+        // +'<br>從目前的病患資訊，<font style="color: #228de5;">病人沒有臨床證據使用Peace的適應症</font>，應向醫師或專科護理師確認'
+        // +'<br> <font style="color: #f44336;">★ 給藥前，必須先確定患者臨床上<font style="background-color: yellow;">有服用該藥物的適應症</font></font>';
+        // // r6 = '您給 Peace 2.5mg/tab 的理由：' + document.getElementById('Peace 2.5mg/tab r').value;
+        // document.getElementById('6 r 6').innerHTML = r6;
+        callOpenAI2("給藥前，必須先確定患者臨床上有服用該藥物的適應症").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('6 r 6').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(60);
         reason.push(document.getElementById('Peace 2.5mg/tab r').value);
         q_time = q_time + 1;
@@ -484,11 +543,18 @@ function feedback(){
     }else{
         cognition.push(70);
         img7.src="pic/wrong_w.png";
-        r7 = '您給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r').value + '<br> -> 答錯原因：「三讀五對」認知錯誤'
-        + '<br>Oxacillin是「<font style="color: #228de5;">「盤尼西林」Penicillin</font>類藥物。此患者對<b style="color: #228de5;">盤尼西林Penicillin有過敏記錄</b>，若仍要給就需要做PST，因此不應該直接該給藥'
-        + '<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
-        document.getElementById('7 r').innerHTML = r7;
+        // r7 = '您給 Oxacillin 1000mg/vail 的理由：' + document.getElementById('Oxacillin 1000mg/vail r').value + '<br> -> 答錯原因：「三讀五對」認知錯誤'
+        // + '<br>Oxacillin是「<font style="color: #228de5;">「盤尼西林」Penicillin</font>類藥物。此患者對<b style="color: #228de5;">盤尼西林Penicillin有過敏記錄</b>，若仍要給就需要做PST，因此不應該直接該給藥'
+        // + '<br><font style="color: #f44336;">★ <font style="background-color: yellow;">藥物過敏是嚴重可致死</font> (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄</font>';
+        // document.getElementById('7 r').innerHTML = r7;
         // r7 = r7 + '\n -> 答錯原因：「三讀五對」認知錯誤';
+        callOpenAI2("藥物過敏是嚴重可致死 (過敏性休克)，因此給藥前要確認病人是否有藥物過敏，方式包括：問病人藥名、當時過敏反應情形或查詢健保卡和病歷系統記錄 ").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('7 r').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(70);
         reason.push(document.getElementById('Oxacillin 1000mg/vail r').value);
         q_time = q_time + 1;
@@ -570,13 +636,20 @@ function feedback(){
         cognition.push(80);
         img8.src="pic/wrong_w.png";
         // r8r = '您不給 Paramol 500mg/tab 的理由：' + document.getElementById('Paramol 500mg/tab r').value;
-        r8r ='你不給Paramol 500mg/tab的理由是因為「'
-        + document.getElementById('Paramol 500mg/tab r no').value.trim() 
-        +'」<br>  -> 答錯原因：「三讀五對」認知錯誤'
-        +'<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)'
-        +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
-        document.getElementById('8 r 8').innerHTML = r8r;
+        // r8r ='你不給Paramol 500mg/tab的理由是因為「'
+        // + document.getElementById('Paramol 500mg/tab r no').value.trim() 
+        // +'」<br>  -> 答錯原因：「三讀五對」認知錯誤'
+        // +'<br>病人有腹痛，懷孕用藥分級屬於B (通常安全)'
+        // +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
+        // document.getElementById('8 r 8').innerHTML = r8r;
         // r8r = r8r + '\n -> 答錯原因：「三讀五對」認知錯誤'
+        callOpenAI2("給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑 ").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('8 r 8').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(80);
         reason.push(document.getElementById('Paramol 500mg/tab r no').value);
         q_time = q_time + 1;
@@ -655,12 +728,19 @@ function feedback(){
         cognition.push(90);
         img9.src="pic/wrong_w.png";
         // r9 = '您不給 Primperan 5 mg/tab 的理由：' + document.getElementById('Primperan 5 mg/tab r no').value;
-        r9 ='你不給Primperan 5 mg/tab的理由是因為「'
-        + document.getElementById('Primperan 5 mg/tab r no').value.trim()
-        +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
-        +'<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
-        +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
-        document.getElementById('9 r 9').innerHTML = r9;
+        // r9 ='你不給Primperan 5 mg/tab的理由是因為「'
+        // + document.getElementById('Primperan 5 mg/tab r no').value.trim()
+        // +'」<br>-> 答錯原因：「三讀五對」認知錯誤'
+        // +'<br>病人有嘔吐，懷孕用藥分級屬於B(通常安全)'
+        // +'<br><font style="color: #f44336;">★ <font style="background-color: yellow;">給藥前，必須先確定患者臨床上有服用該藥物的適應症</font>，並且執行給藥醫囑</font>';
+        // document.getElementById('9 r 9').innerHTML = r9;
+        callOpenAI2("給藥前，必須先確定患者臨床上有服用該藥物的適應症，並且執行給藥醫囑").then(apiResponse => {
+            if (apiResponse && typeof apiResponse === 'string') {
+                document.getElementById('9 r 9').innerHTML = apiResponse;
+            } else {
+            console.error('API response is not a valid string:', apiResponse);
+            }
+        });
         correctness.push(90);
         reason.push(document.getElementById('Primperan 5 mg/tab r no').value);
         q_time = q_time + 1;

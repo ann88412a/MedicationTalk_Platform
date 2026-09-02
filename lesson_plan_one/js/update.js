@@ -101,7 +101,6 @@ for (let i=0; i<10; i++){
 var listener_list = [];
 
 for (let i=0; i<10; i++){
-
     listener_list.push(check_list[i].addEventListener('change', function(e){
         
         let sheet = document.getElementById('sheet-yes' + (i+1));
